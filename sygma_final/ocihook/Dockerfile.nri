@@ -1,0 +1,45 @@
+# syntax=docker/dockerfile:1
+FROM golang:1.24.7-alpine AS builder
+
+RUN apk add --no-cache git build-base linux-headers
+
+WORKDIR /build
+
+#  go.mod, go.sum  (  )
+COPY go.mod go.sum ./
+RUN go mod download
+
+# NRI  
+COPY nri/main.go .
+
+# 
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o phalanx-nri main.go
+
+# --- Runtime stage ---
+FROM alpine:3.19
+RUN apk add --no-cache ca-certificates
+
+COPY --from=builder /build/phalanx-nri /phalanx-nri
+
+COPY <<'EOF' /install-nri.sh
+#!/bin/sh
+set -e
+
+echo "[*] Installing Phalanx NRI Plugin..."
+mkdir -p /host/opt/nri/plugins
+mkdir -p /host/etc/nri/conf.d
+
+cp /phalanx-nri /host/opt/nri/plugins/phalanx-nri
+chmod +x /host/opt/nri/plugins/phalanx-nri
+
+cat > /host/etc/nri/conf.d/phalanx.conf <<'CONFEOF'
+[plugin.phalanx]
+enable = true
+CONFEOF
+
+echo "[+] Installed at /opt/nri/plugins/phalanx-nri"
+tail -f /dev/null
+EOF
+
+RUN chmod +x /install-nri.sh
+CMD ["/install-nri.sh"]

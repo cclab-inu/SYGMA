@@ -1,0 +1,164 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: sygmapolicies.security.security.io
+spec:
+  group: security.security.io
+  names:
+    kind: SYGMAPolicy
+    listKind: SYGMAPolicyList
+    plural: sygmapolicies
+    shortNames:
+    - sygmap
+    singular: sygmapolicy
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.nodeName
+      name: Node
+      type: string
+    - jsonPath: .spec.podName
+      name: Pod
+      type: string
+    - jsonPath: .spec.imageName
+      name: Image
+      type: string
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .status.loadedTransitions
+      name: Transitions
+      type: integer
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: SYGMAPolicy is the Schema for the sygmapolicies API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SYGMAPolicySpec defines the desired state of SYGMAPolicy
+            properties:
+              binaryName:
+                description: BinaryName is the main binary name
+                type: string
+              blockedPaths:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                description: BlockedPaths defines paths to block for specific syscalls
+                type: object
+              containerID:
+                description: '⭐ NEW: ContainerID is the container ID (short form,
+                  first 12 chars)'
+                type: string
+              imageID:
+                description: '⭐ NEW: ImageID is the image ID from Redis (for faster
+                  policy lookup)'
+                format: int32
+                type: integer
+              imageName:
+                description: ImageName is the container image name
+                type: string
+              mntNs:
+                description: |-
+                  ⭐ NEW: MntNs is the Mount namespace inode number of the container
+                  Set by OCI Hook during container creation
+                format: int32
+                type: integer
+              nodeName:
+                description: |-
+                  ⭐ NEW: NodeName specifies which node this policy applies to
+                  Used by the DaemonSet agent to filter policies for its node
+                type: string
+              phases:
+                additionalProperties:
+                  properties:
+                    ruleSet:
+                      additionalProperties:
+                        items:
+                          type: integer
+                        type: array
+                      description: |-
+                        RuleSet defines syscall transitions for this phase
+                        Key: from_syscall (string), Value: allowed to_syscalls (int array)
+                      type: object
+                  required:
+                  - ruleSet
+                  type: object
+                description: |-
+                  Phases contains phase-specific rulesets
+                  If empty, the agent will load from Redis using ImageID
+                type: object
+              pidNs:
+                description: |-
+                  ⭐ NEW: PidNs is the PID namespace inode number of the container
+                  Set by OCI Hook during container creation
+                format: int32
+                type: integer
+              podName:
+                description: '⭐ NEW: PodName is the name of the target pod'
+                type: string
+            required:
+            - imageName
+            type: object
+          status:
+            description: SYGMAPolicyStatus defines the observed state of SYGMAPolicy
+            properties:
+              appliedToNodes:
+                description: AppliedToNodes lists nodes where policy is applied
+                items:
+                  type: string
+                type: array
+              imageID:
+                description: ImageID is the assigned image ID from Redis
+                format: int32
+                type: integer
+              lastUpdated:
+                description: LastUpdated is the timestamp of last update
+                format: date-time
+                type: string
+              loadedTransitions:
+                description: '⭐ NEW: LoadedTransitions is the number of syscall transitions
+                  loaded'
+                type: integer
+              message:
+                description: Message provides additional status information
+                type: string
+              observedGeneration:
+                description: ObservedGeneration tracks which generation of spec has
+                  been applied
+                format: int64
+                type: integer
+              phase:
+                description: 'Phase represents the current phase: pending, loading,
+                  active, error'
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

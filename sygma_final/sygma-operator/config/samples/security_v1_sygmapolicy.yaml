@@ -1,0 +1,9 @@
+apiVersion: security.security.io/v1
+kind: SYGMAPolicy
+metadata:
+  labels:
+    app.kubernetes.io/name: sygma-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: sygmapolicy-sample
+spec:
+  # TODO(user): Add fields here

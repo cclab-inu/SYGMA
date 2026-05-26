@@ -1,0 +1,137 @@
+# deploy/crds/security.security.io_sygmapolicies.yaml
+#  SYGMAPolicy CRD - NodeName, PidNs, MntNs  
+
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: sygmapolicies.security.security.io
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.14.0
+spec:
+  group: security.security.io
+  names:
+    kind: SYGMAPolicy
+    listKind: SYGMAPolicyList
+    plural: sygmapolicies
+    singular: sygmapolicy
+    shortNames:
+      - sygmap
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: Node
+          type: string
+          jsonPath: .spec.nodeName
+        - name: Pod
+          type: string
+          jsonPath: .spec.podName
+        - name: Image
+          type: string
+          jsonPath: .spec.imageName
+          priority: 1
+        - name: Phase
+          type: string
+          jsonPath: .status.phase
+        - name: Transitions
+          type: integer
+          jsonPath: .status.loadedTransitions
+        - name: Age
+          type: date
+          jsonPath: .metadata.creationTimestamp
+      schema:
+        openAPIV3Schema:
+          description: SYGMAPolicy is the Schema for the sygmapolicies API
+          type: object
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: SYGMAPolicySpec defines the desired state of SYGMAPolicy
+              type: object
+              properties:
+                imageName:
+                  description: Container image name
+                  type: string
+                binaryName:
+                  description: Main binary name
+                  type: string
+                nodeName:
+                  description: Node name where this policy should be applied (for DaemonSet filtering)
+                  type: string
+                podName:
+                  description: Target pod name
+                  type: string
+                containerID:
+                  description: Container ID (short form)
+                  type: string
+                pidNs:
+                  description: PID namespace inode number
+                  type: integer
+                  format: int64
+                mntNs:
+                  description: Mount namespace inode number
+                  type: integer
+                  format: int64
+                imageID:
+                  description: Image ID from Redis for policy lookup
+                  type: integer
+                  format: int64
+                phases:
+                  description: Phase-specific rulesets (initPhase, mainPhase)
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      ruleSet:
+                        description: Syscall transition rules
+                        type: object
+                        additionalProperties:
+                          type: array
+                          items:
+                            type: integer
+                blockedPaths:
+                  description: Paths to block for specific syscalls
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+            status:
+              description: SYGMAPolicyStatus defines the observed state
+              type: object
+              properties:
+                phase:
+                  description: Current phase (pending, loading, active, error)
+                  type: string
+                lastUpdated:
+                  description: Timestamp of last update
+                  type: string
+                  format: date-time
+                appliedToNodes:
+                  description: Nodes where policy is applied
+                  type: array
+                  items:
+                    type: string
+                imageID:
+                  description: Assigned image ID from Redis
+                  type: integer
+                  format: int64
+                message:
+                  description: Additional status information
+                  type: string
+                observedGeneration:
+                  description: Generation that has been applied
+                  type: integer
+                  format: int64
+                loadedTransitions:
+                  description: Number of syscall transitions loaded to eBPF
+                  type: integer

@@ -1,0 +1,103 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: sygmaconfigs.security.security.io
+spec:
+  group: security.security.io
+  names:
+    kind: SYGMAConfig
+    listKind: SYGMAConfigList
+    plural: sygmaconfigs
+    shortNames:
+    - sygmacfg
+    singular: sygmaconfig
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: SYGMAConfig is the Schema for the sygmaconfigs API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: |-
+              SYGMAConfigSpec defines the desired state of SYGMAConfig
+              SYGMAConfigSpec defines the desired state of SYGMAConfig
+            properties:
+              collection:
+                description: Collection defines how to collect syscall data
+                properties:
+                  thirdParty:
+                    description: Third-party tool output
+                    properties:
+                      outputContent:
+                        description: Direct output content (recommended)
+                        type: string
+                      outputPath:
+                        description: Path to output file (deprecated, for backward
+                          compatibility)
+                        type: string
+                    type: object
+                  yamlContent:
+                    description: Direct YAML content (recommended)
+                    type: string
+                  yamlPath:
+                    description: Path to YAML file (deprecated, for backward compatibility)
+                    type: string
+                type: object
+            required:
+            - collection
+            type: object
+          status:
+            description: SYGMAConfigStatus defines the observed state of SYGMAConfig
+            properties:
+              binaryName:
+                description: BinaryName extracted from the pod
+                type: string
+              binaryPath:
+                type: string
+              collectionComplete:
+                description: CollectionComplete indicates if collection is done
+                type: boolean
+              collectionStartTime:
+                format: date-time
+                type: string
+              imageID:
+                format: int32
+                type: integer
+              imageName:
+                description: ImageName extracted from the YAML
+                type: string
+              message:
+                description: Message provides additional status information
+                type: string
+              phase:
+                description: Phase represents the current phase of collection
+                type: string
+              podName:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

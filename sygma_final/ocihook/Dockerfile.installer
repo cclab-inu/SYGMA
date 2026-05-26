@@ -1,0 +1,13 @@
+FROM alpine:3.18
+
+# Copy binaries from build directory
+COPY build/sygma-hook /binaries/sygma-hook
+COPY build/sygma-tracer /binaries/sygma-tracer
+COPY build/sygma-wrapper /binaries/sygma-wrapper
+COPY build/00-sygma /binaries/00-sygma
+
+# Set permissions
+RUN chmod +x /binaries/*
+
+# Default command (for verification)
+CMD ["ls", "-lh", "/binaries/"]

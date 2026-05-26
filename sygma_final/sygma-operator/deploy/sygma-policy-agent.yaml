@@ -1,0 +1,375 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sygma-policy-agent
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-policy-agent
+rules:
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-policy-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-policy-agent
+subjects:
+  - kind: ServiceAccount
+    name: sygma-policy-agent
+    namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-hook
+rules:
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies"]
+    verbs: ["get", "list", "create", "update", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-hook
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-hook
+subjects:
+  - kind: ServiceAccount
+    name: sygma-policy-agent
+    namespace: default
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sygma-installer
+  namespace: default
+data:
+  install.sh: |
+    #!/bin/bash
+    set -e
+    
+    echo "=========================================="
+    echo "SYGMA NRI/OCI Hook Installer"
+    echo "Node: $(hostname)"
+    echo "Date: $(date)"
+    echo "=========================================="
+    
+    # Directories
+    NRI_DIR="/host/opt/nri/plugins"
+    SYGMA_DIR="/host/opt/sygma"
+    BIN_DIR="/host/usr/local/bin"
+    NRI_CONF_DIR="/host/etc/nri/conf.d"
+    
+    echo "📁 Creating directories..."
+    mkdir -p "$NRI_DIR" "$SYGMA_DIR" "$NRI_CONF_DIR"
+    echo "  $NRI_DIR"
+    echo "  $SYGMA_DIR"
+    echo "  $NRI_CONF_DIR"
+    echo ""
+    
+    # Check installer image contents
+    echo "🔍 Checking installer image contents..."
+    ls -lh /binaries/ || echo "  /binaries/ not found!"
+    echo ""
+    
+    # Copy binaries from installer image
+    echo "📦 Installing binaries..."
+    
+    # NRI Plugin (both names for compatibility)
+    if [ -f /binaries/00-sygma ]; then
+      cp /binaries/00-sygma "$NRI_DIR/"
+      chmod +x "$NRI_DIR/00-sygma"
+      echo "✅ 00-sygma (NRI Plugin) installed"
+    elif [ -f /binaries/sygma-nri ]; then
+      cp /binaries/sygma-nri "$NRI_DIR/00-sygma"
+      chmod +x "$NRI_DIR/00-sygma"
+      echo "✅ sygma-nri → 00-sygma (NRI Plugin) installed"
+    else
+      echo "⚠️  NRI Plugin not found (00-sygma or sygma-nri)"
+    fi
+    
+    # OCI Hook
+    if [ -f /binaries/sygma-hook ]; then
+      cp /binaries/sygma-hook "$BIN_DIR/"
+      chmod +x "$BIN_DIR/sygma-hook"
+      echo "✅ sygma-hook installed"
+    else
+      echo "❌ sygma-hook not found!"
+    fi
+    
+    # Tracer
+    if [ -f /binaries/sygma-tracer ]; then
+      cp /binaries/sygma-tracer "$BIN_DIR/"
+      chmod +x "$BIN_DIR/sygma-tracer"
+      echo "✅ sygma-tracer installed"
+    else
+      echo "❌ sygma-tracer not found!"
+    fi
+    
+    # Wrapper (both names for compatibility)
+    if [ -f /binaries/sygma-wrapper ]; then
+      cp /binaries/sygma-wrapper "$SYGMA_DIR/wrapper"
+      chmod +x "$SYGMA_DIR/wrapper"
+      echo "✅ sygma-wrapper installed"
+    elif [ -f /binaries/wrapper ]; then
+      cp /binaries/wrapper "$SYGMA_DIR/wrapper"
+      chmod +x "$SYGMA_DIR/wrapper"
+      echo "✅ wrapper installed"
+    else
+      echo "❌ wrapper not found!"
+    fi
+    
+    # Verification
+    echo ""
+    echo "🔍 Verification:"
+    echo "----------------------------------------"
+    
+    echo "Binaries in $BIN_DIR:"
+    ls -lh "$BIN_DIR"/sygma-* 2>/dev/null || echo "  (no sygma binaries)"
+    
+    echo ""
+    echo "Wrapper in $SYGMA_DIR:"
+    ls -lh "$SYGMA_DIR"/wrapper 2>/dev/null || echo "  (no wrapper)"
+    
+    echo ""
+    echo "NRI Plugin in $NRI_DIR:"
+    ls -lh "$NRI_DIR"/00-sygma 2>/dev/null || echo "  (no NRI plugin)"
+    
+    echo "----------------------------------------"
+    echo ""
+    
+    # Test executables
+    echo "🧪 Testing executables..."
+    
+    if [ -x "$BIN_DIR/sygma-hook" ]; then
+      "$BIN_DIR/sygma-hook" --version 2>&1 || echo "  sygma-hook exists but version check failed"
+    fi
+    
+    if [ -x "$BIN_DIR/sygma-tracer" ]; then
+      "$BIN_DIR/sygma-tracer" --version 2>&1 || echo "  sygma-tracer exists but version check failed"
+    fi
+    
+    echo ""
+    echo "=========================================="
+    echo "Installation complete on $(hostname)!"
+    echo "=========================================="
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: default
+  labels:
+    app: redis
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+      protocol: TCP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sygma-policy-agent
+  namespace: default
+  labels:
+    app: sygma-policy-agent
+    component: data-plane
+spec:
+  selector:
+    matchLabels:
+      app: sygma-policy-agent
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: sygma-policy-agent
+        component: data-plane
+    spec:
+      serviceAccountName: sygma-policy-agent
+      
+      hostPID: true
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        fsGroup: 0
+      
+      # ⭐⭐⭐ Master     
+      tolerations:
+        - operator: Exists
+      
+      initContainers:
+        - name: installer
+          image: sygma-installer:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "/scripts/install.sh"]
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: host-opt-nri
+              mountPath: /host/opt/nri
+            - name: host-opt-sygma
+              mountPath: /host/opt/sygma
+            - name: host-usr-local-bin
+              mountPath: /host/usr/local/bin
+            - name: host-etc-nri
+              mountPath: /host/etc/nri
+            - name: installer-scripts
+              mountPath: /scripts
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+      
+      containers:
+        - name: agent
+          image: sygma-operator:latest
+          imagePullPolicy: IfNotPresent
+          
+          command:
+            - /manager
+          
+          args:
+            - --mode=agent
+            - --redis-addr=$(REDIS_ADDR)
+            - --health-probe-bind-address=:8082
+            - --metrics-bind-address=:8083
+          
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: REDIS_ADDR
+              value: "redis-service.default.svc.cluster.local:6379"
+          
+          ports:
+            - containerPort: 8082
+              name: health
+              protocol: TCP
+            - containerPort: 8083
+              name: metrics
+              protocol: TCP
+          
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - SYS_ADMIN
+                - SYS_RESOURCE
+                - NET_ADMIN
+                - SYS_PTRACE
+                - BPF
+          
+          volumeMounts:
+            - name: bpf-maps
+              mountPath: /sys/fs/bpf
+              readOnly: false
+            - name: sys
+              mountPath: /sys
+              readOnly: false
+            - name: host-var-log
+              mountPath: /var/log
+          
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8082
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+          
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8082
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      
+      volumes:
+        - name: bpf-maps
+          hostPath:
+            path: /sys/fs/bpf
+            type: Directory
+        - name: sys
+          hostPath:
+            path: /sys
+            type: Directory
+        - name: host-var-log
+          hostPath:
+            path: /var/log
+            type: Directory
+        - name: host-opt-nri
+          hostPath:
+            path: /opt/nri
+            type: DirectoryOrCreate
+        - name: host-opt-sygma
+          hostPath:
+            path: /opt/sygma
+            type: DirectoryOrCreate
+        - name: host-usr-local-bin
+          hostPath:
+            path: /usr/local/bin
+            type: Directory
+        - name: host-etc-nri
+          hostPath:
+            path: /etc/nri
+            type: DirectoryOrCreate
+        - name: installer-scripts
+          configMap:
+            name: sygma-installer
+            defaultMode: 0755

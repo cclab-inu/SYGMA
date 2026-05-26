@@ -1,0 +1,118 @@
+#!/bin/bash
+# ~/kuberosy+/SYGMA/ocihook/install.sh
+
+set -e
+
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+MODE="${1:-ebpf}"  #  ebpf
+
+echo "========================================"
+echo "Installing Phalanx Components"
+echo "========================================"
+
+install_nri() {
+    echo ""
+    echo "[NRI] Installing NRI Plugin..."
+    
+    if [ ! -f "$BASE_DIR/nri/phalanx-nri" ]; then
+        echo "Warning: phalanx-nri not found, skipping..."
+        return
+    fi
+    
+    sudo systemctl stop containerd 2>/dev/null || true
+    sudo mkdir -p /opt/nri/plugins
+    sudo cp "$BASE_DIR/nri/phalanx-nri" /opt/nri/plugins/00-phalanx-nri
+    sudo chmod +x /opt/nri/plugins/00-phalanx-nri
+    echo "✓ NRI plugin installed"
+}
+
+install_ebpf() {
+    echo ""
+    echo "[eBPF] Installing eBPF components..."
+    
+    # 1. Preload Library
+    echo "[1/3] Installing libseccomp_inject.so..."
+    if [ ! -f "$BASE_DIR/ebpf/preload/libseccomp_inject.so" ]; then
+        echo "Error: libseccomp_inject.so not found. Run ./build.sh first."
+        exit 1
+    fi
+    sudo mkdir -p /usr/local/lib/phalanx
+    sudo cp "$BASE_DIR/ebpf/preload/libseccomp_inject.so" /usr/local/lib/phalanx/
+    sudo chmod 755 /usr/local/lib/phalanx/libseccomp_inject.so
+    echo "✓ eBPF Library installed"
+    
+    # 2. OCI Hook
+    echo "[2/3] Installing phalanx-hook..."
+    if [ ! -f "$BASE_DIR/ebpf/hook/phalanx-hook" ]; then
+        echo "Error: phalanx-hook not found. Run ./build.sh first."
+        exit 1
+    fi
+    sudo cp "$BASE_DIR/ebpf/hook/phalanx-hook" /usr/local/bin/phalanx-hook
+    sudo chmod +x /usr/local/bin/phalanx-hook
+    echo "✓ Hook installed"
+    
+    # 3. Tracer
+    echo "[3/3] Installing phalanx-tracer..."
+    if [ ! -f "$BASE_DIR/ebpf/tracer/phalanx-tracer" ]; then
+        echo "Error: phalanx-tracer not found. Run ./build.sh first."
+        exit 1
+    fi
+    sudo cp "$BASE_DIR/ebpf/tracer/phalanx-tracer" /usr/local/bin/phalanx-tracer
+    sudo chmod +x /usr/local/bin/phalanx-tracer
+    echo "✓ Tracer installed"
+}
+
+setup_logs() {
+    echo ""
+    echo "Setting up log files..."
+    sudo touch /var/log/phalanx-hook.log
+    sudo touch /tmp/phalanx-tracer.log
+    sudo touch /tmp/phalanx-inject.log
+    sudo chmod 666 /var/log/phalanx-hook.log
+    sudo chmod 666 /tmp/phalanx-tracer.log
+    sudo chmod 666 /tmp/phalanx-inject.log
+    echo "✓ Log files created"
+}
+
+restart_services() {
+    echo ""
+    echo "Restarting services..."
+    sudo systemctl restart containerd
+    sleep 2
+    echo "✓ Containerd restarted"
+}
+
+#  
+case "$MODE" in
+    ebpf)
+        install_nri
+        install_ebpf
+        setup_logs
+        restart_services
+        ;;
+    all)
+        install_nri
+        install_ebpf
+        setup_logs
+        restart_services
+        ;;
+    *)
+        echo "Usage: $0 [ebpf|all]"
+        exit 1
+        ;;
+esac
+
+echo ""
+echo "========================================"
+echo "✓ Installation Complete!"
+echo "========================================"
+echo ""
+echo "Installed components:"
+echo "  - /usr/local/lib/phalanx/libseccomp_inject.so"
+echo "  - /usr/local/bin/phalanx-hook"
+echo "  - /usr/local/bin/phalanx-tracer"
+echo ""
+echo "Logs:"
+echo "  - /var/log/phalanx-hook.log"
+echo "  - /tmp/phalanx-tracer.log"
+echo "  - /tmp/phalanx-inject.log"

@@ -1,0 +1,308 @@
+# deploy/sygma-policy-agent.yaml
+# SYGMA Policy Agent -  Worker Node DaemonSet 
+# SYGMAPolicy  (eBPF Map )
+# init container NRI/OCI Hook  
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sygma-policy-agent
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-policy-agent
+rules:
+  # SYGMAPolicy 
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies/status"]
+    verbs: ["get", "update", "patch"]
+  # Node 
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-policy-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-policy-agent
+subjects:
+  - kind: ServiceAccount
+    name: sygma-policy-agent
+    namespace: default
+
+---
+# OCI Hook RBAC (SYGMAPolicy  )
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-hook
+rules:
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies"]
+    verbs: ["get", "list", "create", "update", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-hook
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-hook
+subjects:
+  - kind: ServiceAccount
+    name: sygma-policy-agent
+    namespace: default
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sygma-installer
+  namespace: default
+data:
+  install.sh: |
+    #!/bin/bash
+    set -e
+    
+    echo "=========================================="
+    echo "SYGMA NRI/OCI Hook Installer"
+    echo "=========================================="
+    
+    # Directories
+    NRI_DIR="/host/opt/nri/plugins"
+    SYGMA_DIR="/host/opt/sygma"
+    BIN_DIR="/host/usr/local/bin"
+    NRI_CONF_DIR="/host/etc/nri/conf.d"
+    
+    mkdir -p "$NRI_DIR" "$SYGMA_DIR" "$NRI_CONF_DIR"
+    
+    # Copy binaries from installer image
+    echo "📦 Installing binaries..."
+    
+    if [ -f /binaries/sygma-nri ]; then
+      cp /binaries/sygma-nri "$NRI_DIR/"
+      chmod +x "$NRI_DIR/sygma-nri"
+      echo "✅ sygma-nri installed"
+    fi
+    
+    if [ -f /binaries/sygma-hook ]; then
+      cp /binaries/sygma-hook "$BIN_DIR/"
+      chmod +x "$BIN_DIR/sygma-hook"
+      echo "✅ sygma-hook installed"
+    fi
+    
+    if [ -f /binaries/sygma-tracer ]; then
+      cp /binaries/sygma-tracer "$BIN_DIR/"
+      chmod +x "$BIN_DIR/sygma-tracer"
+      echo "✅ sygma-tracer installed"
+    fi
+    
+    if [ -f /binaries/wrapper ]; then
+      cp /binaries/wrapper "$SYGMA_DIR/"
+      chmod +x "$SYGMA_DIR/wrapper"
+      echo "✅ wrapper installed"
+    fi
+    
+    # Create NRI config
+    echo "📝 Creating NRI configuration..."
+    cat > "$NRI_CONF_DIR/10-sygma.conf" << 'NRICONF'
+    # SYGMA NRI Plugin Configuration
+    NRICONF
+    
+    # Check containerd NRI config
+    CONTAINERD_CONFIG="/host/etc/containerd/config.toml"
+    if [ -f "$CONTAINERD_CONFIG" ]; then
+      if ! grep -q 'io.containerd.nri.v1.nri' "$CONTAINERD_CONFIG"; then
+        echo "⚠️  NRI not enabled in containerd. Add the following to $CONTAINERD_CONFIG:"
+        echo '[plugins."io.containerd.nri.v1.nri"]'
+        echo '  disable = false'
+        echo '  plugin_path = "/opt/nri/plugins"'
+        touch /tmp/nri-config-needed
+      else
+        echo "✅ containerd NRI already enabled"
+      fi
+    fi
+    
+    echo "=========================================="
+    echo "Installation complete!"
+    echo "=========================================="
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sygma-policy-agent
+  namespace: default
+  labels:
+    app: sygma-policy-agent
+    component: data-plane
+spec:
+  selector:
+    matchLabels:
+      app: sygma-policy-agent
+  template:
+    metadata:
+      labels:
+        app: sygma-policy-agent
+        component: data-plane
+    spec:
+      serviceAccountName: sygma-policy-agent
+      hostPID: true
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet  # hostNetwork k8s DNS 
+      
+      tolerations:
+        - operator: Exists  #   
+      
+      # ========== Init Container: NRI/OCI Hook  ==========
+      initContainers:
+        - name: installer
+          image: sygma-installer:latest  # ⭐   
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "/scripts/install.sh"]
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: host-opt-nri
+              mountPath: /host/opt/nri
+            - name: host-opt-sygma
+              mountPath: /host/opt/sygma
+            - name: host-usr-local-bin
+              mountPath: /host/usr/local/bin
+            - name: host-etc-nri
+              mountPath: /host/etc/nri
+            - name: host-etc-containerd
+              mountPath: /host/etc/containerd
+              readOnly: true
+            - name: installer-scripts
+              mountPath: /scripts
+      
+      # ========== Main Containers ==========
+      containers:
+        # Policy Agent (SYGMAPolicy Controller)
+        - name: agent
+          image: sygma-operator:latest  # ⭐  ,  
+          imagePullPolicy: IfNotPresent
+          args:
+            - --mode=agent              # ⭐ Agent  
+            - --redis-addr=$(REDIS_ADDR)
+            - --health-probe-bind-address=:8082
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: REDIS_ADDR
+              value: "redis-service.default:6379"
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 8082
+              name: health
+          volumeMounts:
+            - name: bpf-maps
+              mountPath: /sys/fs/bpf
+            - name: host-var-log
+              mountPath: /var/log
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8082
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8082
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        
+        # NRI Plugin (Sidecar)
+        - name: nri-plugin
+          image: sygma-nri:latest  # ⭐ NRI  
+          imagePullPolicy: IfNotPresent
+          args:
+            - -name=sygma-nri
+            - -idx=10
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: REDIS_ADDR
+              value: "redis-service.default:6379"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: nri-socket
+              mountPath: /var/run/nri
+            - name: host-opt-sygma
+              mountPath: /opt/sygma
+            - name: host-var-log
+              mountPath: /var/log
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+      
+      volumes:
+        - name: bpf-maps
+          hostPath:
+            path: /sys/fs/bpf
+            type: Directory
+        - name: nri-socket
+          hostPath:
+            path: /var/run/nri
+            type: DirectoryOrCreate
+        - name: host-opt-nri
+          hostPath:
+            path: /opt/nri
+            type: DirectoryOrCreate
+        - name: host-opt-sygma
+          hostPath:
+            path: /opt/sygma
+            type: DirectoryOrCreate
+        - name: host-usr-local-bin
+          hostPath:
+            path: /usr/local/bin
+            type: Directory
+        - name: host-etc-nri
+          hostPath:
+            path: /etc/nri
+            type: DirectoryOrCreate
+        - name: host-etc-containerd
+          hostPath:
+            path: /etc/containerd
+            type: DirectoryOrCreate
+        - name: host-var-log
+          hostPath:
+            path: /var/log
+            type: Directory
+        - name: installer-scripts
+          configMap:
+            name: sygma-installer
+            defaultMode: 0755
