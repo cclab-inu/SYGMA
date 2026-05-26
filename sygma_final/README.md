@@ -1,4 +1,4 @@
-# SYGMA: A Zero-Trust syscall Enforcement Framework for Containerized Microservices
+# SYGMA: Hybrid Syscall Enforcement Framework for Containerized Microservices
 
 ## Environment
 
