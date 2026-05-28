@@ -16,7 +16,7 @@
 # SETUP
 $ sudo apt install -y clang-14 llvm-14 gcc-multilib
 
-$ git clone https://github.com/gjwls/cilium-eBPF-starter.git
+$ git clone https://github.com/eunomia-bpf/cilium-ebpf-starter-template.git
 $ cd cilium-eBPF-starter
 $ sudo apt install make
 $ make build
