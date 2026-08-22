@@ -48,8 +48,3 @@ deployment host also needs `kubectl`.
   — review-friendly workbook of the static syscall-enforceability analysis
 - `Analyzer/output-effective-n-full-patched/` — full machine-readable output
   (all 360 per-syscall checkpoints and call trees) used to generate it
-
-## License
-
-No license has been added yet; select and add a `LICENSE` before public
-distribution.
