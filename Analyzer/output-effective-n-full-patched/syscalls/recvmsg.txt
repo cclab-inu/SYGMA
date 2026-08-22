@@ -1,0 +1,7 @@
+- __do_sys_recvmsg
+  - __sys_recvmsg
+    - sockfd_lookup_light@/workspace/git/linux-v5.15-analysis-src/net/socket.c#658373155
+    - ___sys_recvmsg@/workspace/git/linux-v5.15-analysis-src/net/socket.c#2188914140
+      - ____sys_recvmsg@/workspace/git/linux-v5.15-analysis-src/net/socket.c#784765976
+      - ____sys_recvmsg@/workspace/git/linux-v5.15-analysis-src/net/socket.c#784765976
+        - sock_recvmsg [direct_lsm=security_socket_recvmsg | success_lsm=security_socket_recvmsg | validated_lsm=security_socket_recvmsg]

@@ -1,0 +1,4 @@
+- __do_sys_memfd_create
+  - strnlen_user
+  - kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066 [ambiguous=__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#477816588,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1967333079,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1342710755]
+  - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902

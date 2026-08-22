@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/library/mongo@sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because replacing ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "hotel-mongo-rate", "--", "docker-entrypoint.sh"]
+CMD ["mongod"]

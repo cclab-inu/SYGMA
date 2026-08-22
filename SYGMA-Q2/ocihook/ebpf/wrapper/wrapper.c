@@ -1,0 +1,606 @@
+// wrapper.c - Universal Binary Wrapper (Updated)
+// Method detection via SYGMA_REPLACEMENT_METHOD environment variable
+
+#define _GNU_SOURCE
+
+#include <sys/stat.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
+#include <sys/prctl.h>
+#include <linux/filter.h>
+#include <linux/seccomp.h>
+#include <linux/audit.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <time.h>
+#include <stddef.h>
+#include <dirent.h> 
+
+#define MAX_PATH 2048
+#define MAX_LOG_BUF 512
+
+// ========================================
+// BPF Macros
+// ========================================
+
+#ifndef offsetof
+#define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
+#endif
+
+#define BPF_STMT(code, k) { (unsigned short)(code), 0, 0, k }
+#define BPF_JUMP(code, k, jt, jf) { (unsigned short)(code), jt, jf, k }
+
+/*
+ * Generated from output-effective-n-full-patched:
+ * 146 certified LSM-E syscalls minus the four SIGKILL-priority syscalls.
+ */
+#define LSM_ENFORCED_SYSCALLS(X) \
+    X(0, read) \
+    X(1, write) \
+    X(4, stat) \
+    X(5, fstat) \
+    X(6, lstat) \
+    X(9, mmap) \
+    X(16, ioctl) \
+    X(17, pread64) \
+    X(18, pwrite64) \
+    X(22, pipe) \
+    X(30, shmat) \
+    X(40, sendfile) \
+    X(41, socket) \
+    X(42, connect) \
+    X(43, accept) \
+    X(44, sendto) \
+    X(45, recvfrom) \
+    X(46, sendmsg) \
+    X(47, recvmsg) \
+    X(48, shutdown) \
+    X(49, bind) \
+    X(50, listen) \
+    X(51, getsockname) \
+    X(52, getpeername) \
+    X(53, socketpair) \
+    X(54, setsockopt) \
+    X(55, getsockopt) \
+    X(59, execve) \
+    X(65, semop) \
+    X(69, msgsnd) \
+    X(72, fcntl) \
+    X(73, flock) \
+    X(76, truncate) \
+    X(77, ftruncate) \
+    X(80, chdir) \
+    X(81, fchdir) \
+    X(82, rename) \
+    X(83, mkdir) \
+    X(84, rmdir) \
+    X(86, link) \
+    X(87, unlink) \
+    X(88, symlink) \
+    X(90, chmod) \
+    X(91, fchmod) \
+    X(92, chown) \
+    X(93, fchown) \
+    X(94, lchown) \
+    X(103, syslog) \
+    X(105, setuid) \
+    X(106, setgid) \
+    X(109, setpgid) \
+    X(113, setreuid) \
+    X(114, setregid) \
+    X(116, setgroups) \
+    X(117, setresuid) \
+    X(119, setresgid) \
+    X(126, capset) \
+    X(133, mknod) \
+    X(136, ustat) \
+    X(137, statfs) \
+    X(138, fstatfs) \
+    X(142, sched_setparam) \
+    X(143, sched_getparam) \
+    X(144, sched_setscheduler) \
+    X(145, sched_getscheduler) \
+    X(148, sched_rr_get_interval) \
+    X(153, vhangup) \
+    X(155, pivot_root) \
+    X(161, chroot) \
+    X(163, acct) \
+    X(164, settimeofday) \
+    X(165, mount) \
+    X(166, umount2) \
+    X(167, swapon) \
+    X(168, swapoff) \
+    X(169, reboot) \
+    X(170, sethostname) \
+    X(171, setdomainname) \
+    X(175, init_module) \
+    X(176, delete_module) \
+    X(179, quotactl) \
+    X(188, setxattr) \
+    X(189, lsetxattr) \
+    X(190, fsetxattr) \
+    X(191, getxattr) \
+    X(192, lgetxattr) \
+    X(193, fgetxattr) \
+    X(194, listxattr) \
+    X(195, llistxattr) \
+    X(196, flistxattr) \
+    X(197, removexattr) \
+    X(198, lremovexattr) \
+    X(199, fremovexattr) \
+    X(203, sched_setaffinity) \
+    X(204, sched_getaffinity) \
+    X(213, epoll_create) \
+    X(240, mq_open) \
+    X(241, mq_unlink) \
+    X(246, kexec_load) \
+    X(253, inotify_init) \
+    X(254, inotify_add_watch) \
+    X(256, migrate_pages) \
+    X(258, mkdirat) \
+    X(259, mknodat) \
+    X(260, fchownat) \
+    X(262, newfstatat) \
+    X(264, renameat) \
+    X(265, linkat) \
+    X(266, symlinkat) \
+    X(268, fchmodat) \
+    X(283, timerfd_create) \
+    X(284, eventfd) \
+    X(285, fallocate) \
+    X(288, accept4) \
+    X(290, eventfd2) \
+    X(291, epoll_create1) \
+    X(293, pipe2) \
+    X(294, inotify_init1) \
+    X(298, perf_event_open) \
+    X(300, fanotify_init) \
+    X(304, open_by_handle_at) \
+    X(313, finit_module) \
+    X(314, sched_setattr) \
+    X(315, sched_getattr) \
+    X(316, renameat2) \
+    X(319, memfd_create) \
+    X(320, kexec_file_load) \
+    X(321, bpf) \
+    X(322, execveat) \
+    X(323, userfaultfd) \
+    X(326, copy_file_range) \
+    X(332, statx) \
+    X(428, open_tree) \
+    X(429, move_mount) \
+    X(430, fsopen) \
+    X(432, fsmount) \
+    X(433, fspick) \
+    X(434, pidfd_open) \
+    X(438, pidfd_getfd) \
+    X(440, process_madvise) \
+    X(442, mount_setattr) \
+    X(443, quotactl_fd)
+
+#define SIGKILL_ENFORCED_SYSCALLS(X) \
+    X(56, clone) \
+    X(57, fork) \
+    X(58, vfork) \
+    X(435, clone3)
+
+#define ASYNC_BYPASS_SYSCALLS(X) \
+    X(24, sched_yield) \
+    X(202, futex) \
+    X(232, epoll_wait) \
+    X(271, ppoll)
+
+#define COUNT_SYSCALL(nr, name) +1
+enum {
+    LSM_ENFORCED_SYSCALL_COUNT = 0 LSM_ENFORCED_SYSCALLS(COUNT_SYSCALL),
+    SIGKILL_ENFORCED_SYSCALL_COUNT = 0 SIGKILL_ENFORCED_SYSCALLS(COUNT_SYSCALL),
+    ASYNC_BYPASS_SYSCALL_COUNT = 0 ASYNC_BYPASS_SYSCALLS(COUNT_SYSCALL),
+    PTRACE_BYPASS_SYSCALL_COUNT =
+        LSM_ENFORCED_SYSCALL_COUNT +
+        SIGKILL_ENFORCED_SYSCALL_COUNT +
+        ASYNC_BYPASS_SYSCALL_COUNT,
+    SECCOMP_FILTER_INSTRUCTION_COUNT = 2 + (PTRACE_BYPASS_SYSCALL_COUNT * 2),
+};
+#undef COUNT_SYSCALL
+
+_Static_assert(LSM_ENFORCED_SYSCALL_COUNT == 142, "LSM syscall route count changed");
+_Static_assert(SIGKILL_ENFORCED_SYSCALL_COUNT == 4, "SIGKILL syscall route count changed");
+_Static_assert(ASYNC_BYPASS_SYSCALL_COUNT == 4, "async syscall route count changed");
+_Static_assert(SECCOMP_FILTER_INSTRUCTION_COUNT <= 4096, "seccomp filter is too large");
+
+static char g_found_binary_path[MAX_PATH] = {0};
+
+// ========================================
+// Logging
+// ========================================
+
+static void log_msg(const char *msg) {
+    fprintf(stderr, "[sygma-wrapper] %s\n", msg);
+    fflush(stderr);
+}
+
+static void log_msgf(const char *fmt, ...) {
+    char buf[MAX_LOG_BUF];
+    va_list args;
+    va_start(args, fmt);
+    vsnprintf(buf, sizeof(buf), fmt, args);
+    va_end(args);
+    log_msg(buf);
+}
+
+// ========================================
+// Seccomp Installation (Selective TRACE)
+// ========================================
+
+static int install_seccomp_filter(void) {
+    log_msg("🔒 Installing selective seccomp filter...");
+    log_msgf("   ALLOW: %d LSM + %d SIGKILL + %d asynchronous syscalls",
+             LSM_ENFORCED_SYSCALL_COUNT,
+             SIGKILL_ENFORCED_SYSCALL_COUNT,
+             ASYNC_BYPASS_SYSCALL_COUNT);
+    log_msg("   All remaining syscalls: SECCOMP_RET_TRACE");
+
+    struct seccomp_data {
+        int nr;
+        __u32 arch;
+        __u64 instruction_pointer;
+        __u64 args[6];
+    };
+
+#define ALLOW_RULE(nr, name) \
+    BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, nr, 0, 1), \
+    BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_ALLOW),
+
+    struct sock_filter filter[] = {
+        BPF_STMT(BPF_LD | BPF_W | BPF_ABS, offsetof(struct seccomp_data, nr)),
+
+        ASYNC_BYPASS_SYSCALLS(ALLOW_RULE)
+        SIGKILL_ENFORCED_SYSCALLS(ALLOW_RULE)
+        LSM_ENFORCED_SYSCALLS(ALLOW_RULE)
+
+        BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_TRACE),
+    };
+
+#undef ALLOW_RULE
+
+    _Static_assert(
+        sizeof(filter) / sizeof(filter[0]) == SECCOMP_FILTER_INSTRUCTION_COUNT,
+        "seccomp filter instruction count mismatch");
+
+    struct sock_fprog prog = {
+        .len = (unsigned short)(sizeof(filter) / sizeof(filter[0])),
+        .filter = filter,
+    };
+
+    if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) != 0) {
+        log_msgf("ERROR: PR_SET_NO_NEW_PRIVS failed: %s", strerror(errno));
+        return -1;
+    }
+    log_msg("✅ PR_SET_NO_NEW_PRIVS: OK");
+
+    if (prctl(PR_SET_SECCOMP, SECCOMP_MODE_FILTER, &prog) != 0) {
+        log_msgf("ERROR: PR_SET_SECCOMP failed: %s", strerror(errno));
+        return -1;
+    }
+
+    log_msgf("✅ Seccomp filter installed (%lu instructions)",
+             sizeof(filter) / sizeof(filter[0]));
+    log_msgf("   %d syscalls bypass ptrace; all others trigger ptrace_notify",
+             PTRACE_BYPASS_SYSCALL_COUNT);
+    return 0;
+}
+
+// ========================================
+// PATH Cleanup
+// ========================================
+
+static char* cleanup_path(const char *original_path) {
+    static char cleaned_path[MAX_PATH];
+    
+    log_msgf("Original PATH: %s", original_path);
+    
+    const char *src = original_path;
+    char *dst = cleaned_path;
+    int found_sygma = 0;
+    
+    // ⭐ prefix : /opt/sygma:/usr/... → /usr/...
+    if (strncmp(src, "/opt/sygma:", 9) == 0) {
+        src += 9;
+        found_sygma = 1;
+    }
+    
+    //   :/opt/sygma 
+    while (*src) {
+        if (strncmp(src, ":/opt/sygma:", 10) == 0) {
+            src += 9;   // ":/opt/sygma"  (:  )
+            found_sygma = 1;
+        } else if (strncmp(src, ":/opt/sygma", 9) == 0 && src[9] == '\0') {
+            //  :/opt/sygma
+            found_sygma = 1;
+            break;
+        } else {
+            *dst++ = *src++;
+        }
+    }
+    *dst = '\0';
+    
+    // PATH /opt/sygma  
+    if (cleaned_path[0] == '\0') {
+        strcpy(cleaned_path, "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+        log_msgf("✅ PATH cleaned (was only sygma): %s", cleaned_path);
+        return cleaned_path;
+    }
+    
+    if (found_sygma) {
+        log_msgf("✅ PATH cleaned (removed /opt/sygma): %s", cleaned_path);
+    } else {
+        log_msg("⚠️ /opt/sygma not found in PATH");
+    }
+    
+    return cleaned_path;
+}
+
+static void update_path_in_env(char **envp) {
+    log_msg("🔧 Cleaning up PATH in environment...");
+    
+    for (int i = 0; envp[i] != NULL; i++) {
+        if (strncmp(envp[i], "PATH=", 5) == 0) {
+            char *original_path = envp[i] + 5;
+            char *cleaned = cleanup_path(original_path);
+            
+            static char new_path_env[MAX_PATH];
+            snprintf(new_path_env, sizeof(new_path_env), "PATH=%s", cleaned);
+            envp[i] = new_path_env;
+            
+            log_msg("✅ PATH updated in environment");
+            return;
+        }
+    }
+    
+    log_msg("⚠️ WARNING: PATH not found in environment");
+}
+
+// ========================================
+// Binary Replacement Logic
+// ========================================
+
+static int execute_binary_replacement(char **argv, char **envp) {
+    log_msg("🔧 Mode: Binary Replacement (Minimal Image)");
+    
+    // ⭐    
+    if (g_found_binary_path[0] == '\0') {
+        log_msg("❌ ERROR: Binary path not found");
+        return 1;
+    }
+    
+    char real_path[MAX_PATH];
+    snprintf(real_path, sizeof(real_path), "%s.real", g_found_binary_path);
+    
+    log_msgf("Binary path: %s", g_found_binary_path);
+    log_msgf("Real binary path: %s", real_path);
+    
+    log_msg("========================================");
+    log_msgf("🚀 Executing: %s", real_path);
+    log_msg("========================================");
+    
+    execve(real_path, argv, envp);
+    
+    log_msgf("❌ ERROR: execve failed: %s", strerror(errno));
+    return 1;
+}
+
+// ========================================
+// PATH Hijacking Logic
+// ========================================
+
+static int execute_path_hijacking(char **argv, char **envp) {
+    log_msg("🔧 Mode: PATH Hijacking (Full Image)");
+    
+    // PATH cleanup
+    update_path_in_env(envp);
+    
+    // Target binary 
+    char *target_binary = getenv("SYGMA_TARGET_BINARY");
+    char *exec_target;
+    
+    if (target_binary != NULL && strlen(target_binary) > 0) {
+        exec_target = target_binary;
+        log_msgf("✅ Using SYGMA_TARGET_BINARY: %s", exec_target);
+    } else {
+        exec_target = argv[0];
+        log_msgf("⚠️ SYGMA_TARGET_BINARY not set, using argv[0]: %s", exec_target);
+    }
+    
+    // PATH  
+    char *path_env = NULL;
+    for (int i = 0; envp[i] != NULL; i++) {
+        if (strncmp(envp[i], "PATH=", 5) == 0) {
+            path_env = envp[i] + 5;
+            break;
+        }
+    }
+    
+    if (path_env == NULL) {
+        log_msg("❌ ERROR: PATH not found in environment");
+        return 1;
+    }
+    
+    log_msg("========================================");
+    log_msgf("🔍 Searching for: %s", exec_target);
+    log_msgf("   PATH: %s", path_env);
+    log_msg("========================================");
+    
+    // PATH 
+    char path_copy[MAX_PATH];
+    strncpy(path_copy, path_env, sizeof(path_copy) - 1);
+    path_copy[sizeof(path_copy) - 1] = '\0';
+    
+    char full_path[MAX_PATH];
+    char *dir = strtok(path_copy, ":");
+    int found = 0;
+    
+    while (dir != NULL) {
+        snprintf(full_path, sizeof(full_path), "%s/%s", dir, exec_target);
+        
+        log_msgf("   Trying: %s", full_path);
+        
+        struct stat st;
+        if (stat(full_path, &st) == 0) {
+            if (S_ISREG(st.st_mode) && (st.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH))) {
+                log_msgf("✅ Found: %s", full_path);
+                found = 1;
+                break;
+            } else {
+                log_msgf("   → Found but not executable");
+            }
+        }
+        
+        dir = strtok(NULL, ":");
+    }
+    
+    if (!found) {
+        log_msgf("❌ ERROR: '%s' not found in PATH", exec_target);
+        log_msgf("   PATH: %s", path_env);
+        
+        _exit(127);
+    }
+    
+    log_msg("========================================");
+    log_msgf("🚀 Executing: %s", full_path);
+    log_msg("========================================");
+    
+    execve(full_path, argv, envp);
+    
+    // execve 
+    log_msg("========================================");
+    log_msg("❌ ERROR: execve failed");
+    log_msgf("   errno: %d (%s)", errno, strerror(errno));
+    log_msgf("   file: %s", full_path);
+    log_msg("========================================");
+    _exit(126);
+
+    return 1;
+}
+
+// ========================================
+// Main
+// ========================================
+
+int main(int argc, char **argv, char **envp) {
+    log_msg("========================================");
+    log_msg("========== SYGMA WRAPPER START ==========");
+    log_msg("========================================");
+    
+    log_msgf("PID: %d, PPID: %d", getpid(), getppid());
+    log_msgf("Called as: %s", argv[0]);
+    
+    log_msgf("Arguments (%d):", argc);
+    for (int i = 0; i < argc && i < 10; i++) {
+        log_msgf("  argv[%d]: %s", i, argv[i]);
+    }
+    
+    // ⭐  
+    char *sygma_mode = getenv("SYGMA_MODE");
+    char *sygma_binary = getenv("SYGMA_TARGET_BINARY");
+    char *sygma_binary_path = getenv("SYGMA_BINARY_PATH");
+    char *sygma_method = getenv("SYGMA_REPLACEMENT_METHOD");
+    
+    log_msg("========================================");
+    log_msg("Environment Variables:");
+    if (sygma_mode) log_msgf("  SYGMA_MODE: %s", sygma_mode);
+    if (sygma_binary) log_msgf("  SYGMA_TARGET_BINARY: %s", sygma_binary);
+    if (sygma_binary_path) log_msgf("  SYGMA_BINARY_PATH: %s", sygma_binary_path);
+    if (sygma_method) log_msgf("  SYGMA_REPLACEMENT_METHOD: %s", sygma_method);
+    log_msg("========================================");
+
+    // ⭐⭐⭐ Method 
+    int use_binary_replacement = 0;
+
+    // 1.   
+    if (argv[0][0] == '/') {
+        char real_path[MAX_PATH];
+        snprintf(real_path, sizeof(real_path), "%s.real", argv[0]);
+        
+        if (access(real_path, X_OK) == 0) {
+            use_binary_replacement = 1;
+            strncpy(g_found_binary_path, argv[0], sizeof(g_found_binary_path) - 1);  // ⭐   !
+            log_msgf("✅ Absolute path + .real file exists → Binary Replacement (path: %s)", argv[0]);
+        } else {
+            use_binary_replacement = 0;
+            log_msg("✅ Absolute path but no .real file → PATH Hijacking");
+        }
+    } else {
+        // 2.    - PATH  /opt/sygma 
+        char *path_env = getenv("PATH");
+        if (!path_env) {
+            path_env = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
+        }
+        
+        char found_path[MAX_PATH] = {0};
+        char path_copy[MAX_PATH];
+        strncpy(path_copy, path_env, sizeof(path_copy) - 1);
+        
+        char *dir = strtok(path_copy, ":");
+        while (dir != NULL) {
+            // ⭐ /opt/sygma  
+            if (strncmp(dir, "/opt/sygma", 8) == 0) {
+                log_msgf("   Skipping /opt/sygma directory: %s", dir);
+                dir = strtok(NULL, ":");
+                continue;
+            }
+            
+            char candidate[MAX_PATH];
+            snprintf(candidate, sizeof(candidate), "%s/%s", dir, argv[0]);
+            
+            if (access(candidate, X_OK) == 0) {
+                strncpy(found_path, candidate, sizeof(found_path) - 1);
+                log_msgf("   Found binary at: %s", candidate);
+                break;
+            }
+            dir = strtok(NULL, ":");
+        }
+        
+    if (found_path[0] != '\0') {
+            char real_path[MAX_PATH];
+            snprintf(real_path, sizeof(real_path), "%s.real", found_path);
+            
+            if (access(real_path, X_OK) == 0) {
+                use_binary_replacement = 1;
+                strncpy(g_found_binary_path, found_path, sizeof(g_found_binary_path) - 1);  // ⭐ 
+                log_msgf("✅ Found %s with .real file → Binary Replacement", found_path);
+            } else {
+                use_binary_replacement = 0;
+                log_msgf("✅ Found %s but no .real file → PATH Hijacking", found_path);
+            }
+        }
+    }
+
+    // ⭐ Common setup: SIGSTOP + Tracer wait + Seccomp
+    log_msg("========================================");
+    log_msg("🛑 Raising SIGSTOP for tracer attach...");
+    raise(SIGSTOP);
+    /*
+     * Returning from SIGSTOP is the handshake: the OCI hook started the
+     * tracer, the tracer attached, and PTRACE_CONT resumed this task.
+     * TracerPid cannot be reliably read from a nested PID namespace when the
+     * tracer lives in the host namespace, so do not poll /proc/self/status.
+     */
+    log_msg("✅ Resumed by attached tracer");
+    
+    if (install_seccomp_filter() != 0) {
+        log_msg("❌ ERROR: Seccomp installation failed");
+        return 1;
+    }
+    log_msg("========================================");
+    
+    // ⭐ Execute based on method
+    if (use_binary_replacement) {
+        return execute_binary_replacement(argv, envp);
+    } else {
+        return execute_path_hijacking(argv, envp);
+    }
+}

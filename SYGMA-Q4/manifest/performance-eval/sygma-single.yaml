@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sygma-routing-example
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sygma-routing-example
+  template:
+    metadata:
+      labels:
+        app: sygma-routing-example
+      annotations:
+        sygma.io/mode: "enforcement"
+        sygma.io/seccomp-routing: "all-trace"
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        seccompProfile:
+          type: Unconfined
+      containers:
+        - name: nginx
+          image: nginx:1.24.0
+          imagePullPolicy: IfNotPresent

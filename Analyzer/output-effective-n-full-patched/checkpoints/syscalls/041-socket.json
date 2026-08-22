@@ -1,0 +1,553 @@
+{
+  "number": 41,
+  "abi": "common",
+  "name": "socket",
+  "entry": "sys_socket",
+  "start": "__do_sys_socket",
+  "linked_symbol": "__x64_sys_socket",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "__sock_create"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_socket_create",
+    "security_socket_post_create",
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_socket_create",
+    "security_socket_post_create",
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_socket_create",
+    "security_socket_post_create",
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_socket_create",
+    "security_socket_post_create",
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_socket",
+    "__sys_socket",
+    "sock_create",
+    "__sock_create",
+    "security_socket_create",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688",
+    "get_unused_fd_flags",
+    "__get_unused_fd_flags",
+    "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490",
+    "__raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "sock_alloc_file",
+    "alloc_file_pseudo",
+    "d_alloc_pseudo",
+    "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+    "kmem_cache_alloc",
+    "slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#3106794885",
+    "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+    "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+    "might_alloc@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1021385239",
+    "fs_reclaim_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1934011979",
+    "fs_reclaim_release@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#2756234293",
+    "gfpflags_allow_blocking@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#2879364502",
+    "should_failslab",
+    "trace_kmem_cache_alloc@/workspace/git/linux-v5.15-analysis-src/include/trace/events/kmem.h#2385402376",
+    "static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666",
+    "SOCK_INODE@/workspace/git/linux-v5.15-analysis-src/include/net/sock.h#2041411381",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_socket",
+    "__sys_socket",
+    "sock_create",
+    "__sock_create",
+    "security_socket_create",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688",
+    "get_unused_fd_flags",
+    "__get_unused_fd_flags",
+    "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490",
+    "__raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "sock_alloc_file",
+    "alloc_file_pseudo",
+    "d_alloc_pseudo",
+    "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+    "kmem_cache_alloc",
+    "slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#3106794885",
+    "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+    "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+    "might_alloc@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1021385239",
+    "fs_reclaim_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1934011979",
+    "fs_reclaim_release@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#2756234293",
+    "gfpflags_allow_blocking@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#2879364502",
+    "should_failslab",
+    "trace_kmem_cache_alloc@/workspace/git/linux-v5.15-analysis-src/include/trace/events/kmem.h#2385402376",
+    "static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666",
+    "SOCK_INODE@/workspace/git/linux-v5.15-analysis-src/include/net/sock.h#2041411381",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557"
+  ],
+  "success_path_functions": [
+    "__do_sys_socket",
+    "__sys_socket",
+    "sock_create",
+    "__sock_create",
+    "security_socket_create",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688",
+    "get_unused_fd_flags",
+    "__get_unused_fd_flags",
+    "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490",
+    "__raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "sock_alloc_file",
+    "alloc_file_pseudo",
+    "d_alloc_pseudo",
+    "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+    "kmem_cache_alloc",
+    "slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#3106794885",
+    "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+    "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+    "might_alloc@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1021385239",
+    "fs_reclaim_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1934011979",
+    "fs_reclaim_release@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#2756234293",
+    "gfpflags_allow_blocking@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#2879364502",
+    "should_failslab",
+    "trace_kmem_cache_alloc@/workspace/git/linux-v5.15-analysis-src/include/trace/events/kmem.h#2385402376",
+    "static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666",
+    "SOCK_INODE@/workspace/git/linux-v5.15-analysis-src/include/net/sock.h#2041411381",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557"
+  ],
+  "call_tree_file": "syscalls/socket.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "mixed",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_socket_create",
+    "security_socket_post_create",
+    "security_file_alloc"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_socket_create"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "socket_create"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_socket_create",
+      "bpf_hook": "socket_create",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__sock_create"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_socket_create",
+        "__sock_create",
+        "sock_create",
+        "__sys_socket",
+        "__do_sys_socket"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_socket_create",
+          "function": "__sock_create",
+          "source_function": "__sock_create",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/net/socket.c",
+          "source_line": 1419,
+          "source_column": 8,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-negative-on-error",
+            "must-return-nonnegative-on-positive",
+            "phi",
+            "return"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/net/socket.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_socket_post_create",
+      "bpf_hook": "socket_post_create",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__sock_create"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_socket_post_create",
+        "__sock_create",
+        "sock_create",
+        "__sys_socket",
+        "__do_sys_socket"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_socket_post_create",
+          "function": "__sock_create",
+          "source_function": "__sock_create",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/net/socket.c",
+          "source_line": 1480,
+          "source_column": 8,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-nonnegative-on-zero",
+            "phi",
+            "return"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/net/socket.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_inode_alloc",
+      "bpf_hook": "inode_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "inode_init_always"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_inode_alloc",
+        "inode_init_always",
+        "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+        "new_inode_pseudo",
+        "sock_alloc",
+        "__sock_create",
+        "sock_create",
+        "__sys_socket",
+        "__do_sys_socket"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_inode_alloc",
+          "function": "inode_init_always",
+          "source_function": "inode_init_always",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/inode.c",
+          "source_line": 170,
+          "source_column": 6,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": false,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": true,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-negative-on-error",
+            "must-return-negative-on-true"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/inode.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_file_alloc",
+      "bpf_hook": "file_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "sock_alloc_file",
+        "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688",
+        "__sys_socket",
+        "__do_sys_socket"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_alloc",
+          "function": "__alloc_file",
+          "source_function": "__alloc_file",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c",
+          "source_line": 106,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_socket_create"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_socket_create"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__sock_create",
+      "sock_create",
+      "__sys_socket",
+      "__do_sys_socket"
+    ],
+    "hook_proof_paths": {
+      "security_socket_create": [
+        "security_socket_create",
+        "__sock_create",
+        "sock_create",
+        "__sys_socket",
+        "__do_sys_socket"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+      "new_inode_pseudo",
+      "__sock_create",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "alloc_file_pseudo",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "sock_alloc_file",
+      "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_socket",
+      "__sys_socket",
+      "sock_create",
+      "__sock_create",
+      "__sock_create#cfg-block-54[err=true]",
+      "__sock_create#cfg-block-53",
+      "sock_create#cfg-block-1",
+      "__sys_socket#cfg-block-3[retval\u003c0=false]",
+      "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688",
+      "get_unused_fd_flags",
+      "__get_unused_fd_flags",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276#cfg-block-1",
+      "__get_unused_fd_flags#cfg-block-1",
+      "get_unused_fd_flags#cfg-block-1",
+      "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688#cfg-block-5[unlikely(fd\u003c0)=false]",
+      "sock_alloc_file",
+      "alloc_file_pseudo",
+      "d_alloc_pseudo",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "kmem_cache_alloc",
+      "kmem_cache_alloc#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517#cfg-block-136[!dentry=true]",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517#cfg-block-135",
+      "d_alloc_pseudo#cfg-block-3[likely(dentry)=false]",
+      "d_alloc_pseudo#cfg-block-1",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "alloc_empty_file",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "kmem_cache_zalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#4160144679",
+      "kmem_cache_zalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#4160144679#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006#cfg-block-15[unlikely(!f)=false]",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006#cfg-block-13[unlikely(error)=false]",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006#cfg-block-1",
+      "alloc_empty_file#cfg-block-8[!IS_ERR(f)=true]",
+      "alloc_empty_file#cfg-block-6",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084#cfg-block-15[IS_ERR(file)=false]",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084#cfg-block-1",
+      "alloc_file_pseudo#cfg-block-3[IS_ERR(file)=false]",
+      "alloc_file_pseudo#cfg-block-1",
+      "sock_alloc_file#cfg-block-3[IS_ERR(file)=false]",
+      "sock_alloc_file#cfg-block-1",
+      "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688#cfg-block-3[!IS_ERR(newfile)=true]",
+      "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688#cfg-block-2",
+      "sock_map_fd@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3009776688#cfg-block-2[outcome=signed_integer:6]",
+      "__sys_socket#cfg-block-1",
+      "security_socket_post_create#call_int_hook-default[0]",
+      "__sock_create#callsite:19",
+      "__sys_socket#callsite:5[nonnegative]",
+      "__sys_socket#callsite:6",
+      "__do_sys_socket#cfg-block-1",
+      "__do_sys_socket#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_socket",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__sys_socket",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

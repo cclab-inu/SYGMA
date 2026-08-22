@@ -1,0 +1,3 @@
+- __do_sys_flock [direct_lsm=security_file_lock | success_lsm=security_file_lock | indirect=f.file->f_op->flock]
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - flock_make_lock@/workspace/git/linux-v5.15-analysis-src/fs/locks.c#2774052987

@@ -1,0 +1,10 @@
+- __do_sys_swapon
+  - capable
+    - ns_capable
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - alloc_swap_info@/workspace/git/linux-v5.15-analysis-src/mm/swapfile.c#1279971648
+    - kvzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#398589478
+      - kvmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#2211764895
+        - kvmalloc_node
+    - __ab_c_size@/workspace/git/linux-v5.15-analysis-src/include/linux/overflow.h#2039650214
+  - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557

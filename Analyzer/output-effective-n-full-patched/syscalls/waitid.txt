@@ -1,0 +1,3 @@
+- __do_sys_waitid
+  - kernel_waitid@/workspace/git/linux-v5.15-analysis-src/kernel/exit.c#745902838
+    - do_wait@/workspace/git/linux-v5.15-analysis-src/kernel/exit.c#127981873 [direct_signal=signal_pending]

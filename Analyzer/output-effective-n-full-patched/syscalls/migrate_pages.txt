@@ -1,0 +1,5 @@
+- __do_sys_migrate_pages
+  - kernel_migrate_pages@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#29928154 [direct_lsm=security_task_movememory | success_lsm=security_task_movememory]
+    - kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066 [ambiguous=__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#477816588,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1967333079,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1342710755]
+    - get_nodes@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2032585723
+    - kfree

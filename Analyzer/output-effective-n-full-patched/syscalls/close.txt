@@ -1,0 +1,7 @@
+- __do_sys_close
+  - close_fd
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - pick_file@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2404289711
+    - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+    - filp_close [indirect=filp->f_op->flush]
+      - atomic_long_read@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#535423887

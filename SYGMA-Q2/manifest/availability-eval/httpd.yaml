@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: httpd
+  namespace: default
+  labels:
+    app: httpd
+  annotations:
+    sygma.io/mode: "enforcement"
+spec:
+  restartPolicy: Always
+  containers:
+  - name: httpd
+    image: httpd:2.4.39
+    imagePullPolicy: Always
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 1
+      periodSeconds: 1

@@ -1,0 +1,12 @@
+- __do_sys_brk
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320
+    - __mmap_lock_trace_start_locking@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#3403134037
+      - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666
+    - down_write_killable
+      - __cond_resched
+      - __down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259
+        - __down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564
+          - rwsem_write_trylock@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#843547107
+    - __mmap_lock_trace_acquire_returned@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#4272582625
+      - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666 [dp_skip=revisited]

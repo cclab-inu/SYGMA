@@ -1,0 +1,9 @@
+apiVersion: security.security.io/v1
+kind: SYGMAPolicy
+metadata:
+  name: sygmapolicy-sample
+spec:
+  imageName: nginx:1.27
+  # Empty means: load the persistent initPhase bootstrap graph from Redis.
+  # mainPhase is intentionally unsupported here.
+  phases: {}

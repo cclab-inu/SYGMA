@@ -1,0 +1,1 @@
+- __do_sys_perf_event_open [direct_lsm=security_perf_event_open,security_locked_down | success_lsm=security_perf_event_open | validated_lsm=security_perf_event_open]

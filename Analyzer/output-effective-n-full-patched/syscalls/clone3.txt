@@ -1,0 +1,5 @@
+- __do_sys_clone3
+  - copy_clone_args_from_user@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3807743422
+  - kernel_clone
+    - copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064 [direct_lsm=security_task_alloc,security_task_free | direct_signal=task_sigpending,fatal_signal_pending | success_lsm=security_task_alloc]
+      - dup_task_struct@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3021601261

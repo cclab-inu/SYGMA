@@ -1,0 +1,33 @@
+- __do_sys_timer_delete
+  - __lock_timer@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#4272640703
+  - timer_delete_hook@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#3798304819 [indirect=kc->timer_del]
+  - spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028
+    - _raw_spin_lock
+      - __raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451
+        - do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452
+          - queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875
+            - atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - list_del@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#331594709
+    - __list_del_entry@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#1846858395 [ambiguous=__list_del@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#2356773952,__list_del@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#3793473321,__list_del@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#3500069814]
+      - __list_del_entry_valid@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#771409263
+  - spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490
+    - __raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185
+      - do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415
+        - queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032
+          - pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143
+  - unlock_timer@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#4068994950
+    - spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773
+      - _raw_spin_unlock_irqrestore
+        - __raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143
+          - do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415 [dp_skip=revisited]
+          - arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976
+            - arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247
+  - release_posix_timer@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#3831215991
+    - put_pid
+    - sigqueue_free
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773 [dp_skip=revisited]
+    - call_rcu
+      - __call_rcu@/workspace/git/linux-v5.15-analysis-src/kernel/rcu/tree.c#475915888
+        - debug_rcu_head_queue@/workspace/git/linux-v5.15-analysis-src/kernel/rcu/rcu.h#1940580442

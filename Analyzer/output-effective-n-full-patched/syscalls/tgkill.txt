@@ -1,0 +1,17 @@
+- __do_sys_tgkill
+  - do_tkill@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#2797193764
+    - clear_siginfo@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#4098747082
+    - task_tgid_vnr@/workspace/git/linux-v5.15-analysis-src/include/linux/sched.h#564500544
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - from_kuid_munged
+      - from_kuid
+        - map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889
+        - __kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911
+    - do_send_specific@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1272175403
+      - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+        - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+      - find_task_by_vpid
+        - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+        - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+          - rcu_read_unlock_strict

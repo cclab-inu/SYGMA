@@ -1,0 +1,5 @@
+- __do_sys_writev
+  - do_writev@/workspace/git/linux-v5.15-analysis-src/fs/read_write.c#4230727510
+    - fdget_pos@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4050725842
+    - inc_syscw@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/xacct.h#3930563570
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

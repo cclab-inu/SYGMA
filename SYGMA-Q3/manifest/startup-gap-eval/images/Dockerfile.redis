@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/library/redis@sha256:a7cee7c8178ff9b5297cb109e6240f5072cdaaafd775ce6b586c3c704b06458e
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because replacing ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "redis", "--", "docker-entrypoint.sh"]
+CMD ["redis-server"]

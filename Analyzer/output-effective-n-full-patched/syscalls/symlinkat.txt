@@ -1,0 +1,13 @@
+- __do_sys_symlinkat
+  - do_symlinkat [direct_lsm=security_path_symlink | success_lsm=security_path_symlink]
+    - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+    - putname
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+    - putname
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+    - vfs_symlink [direct_lsm=security_inode_symlink | success_lsm=security_inode_symlink | indirect=dir->i_op->symlink]
+      - may_create@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4176921933
+        - inode_permission [direct_lsm=security_inode_permission | success_lsm=security_inode_permission]
+  - getname
+    - getname_flags
+      - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037

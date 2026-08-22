@@ -1,0 +1,5 @@
+- __do_sys_pwrite64
+  - ksys_pwrite64
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+    - vfs_write [indirect=file->f_op->write]
+      - rw_verify_area [direct_lsm=security_file_permission | success_lsm=security_file_permission | validated_lsm=security_file_permission]

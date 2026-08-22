@@ -1,0 +1,256 @@
+{
+  "number": 91,
+  "abi": "common",
+  "name": "fchmod",
+  "entry": "sys_fchmod",
+  "start": "__do_sys_fchmod",
+  "linked_symbol": "__x64_sys_fchmod",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "chmod_common"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_path_chmod"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_path_chmod"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_path_chmod"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_path_chmod"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_fchmod",
+    "fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488",
+    "vfs_fchmod",
+    "chmod_common"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_fchmod",
+    "fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488",
+    "vfs_fchmod",
+    "chmod_common"
+  ],
+  "success_path_functions": [
+    "__do_sys_fchmod",
+    "fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488",
+    "vfs_fchmod",
+    "chmod_common"
+  ],
+  "call_tree_file": "syscalls/fchmod.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_path_chmod"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_path_chmod"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "path_chmod"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_path_chmod",
+      "bpf_hook": "path_chmod",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "chmod_common"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_path_chmod",
+        "chmod_common",
+        "vfs_fchmod",
+        "__do_sys_fchmod"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_path_chmod",
+          "function": "chmod_common",
+          "source_function": "chmod_common",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/open.c",
+          "source_line": 576,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/open.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_path_chmod"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_path_chmod"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "vfs_fchmod",
+      "chmod_common",
+      "__do_sys_fchmod"
+    ],
+    "hook_proof_paths": {
+      "security_path_chmod": [
+        "security_path_chmod",
+        "chmod_common",
+        "vfs_fchmod",
+        "__do_sys_fchmod"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "cfg_effect_free_success_witness",
+      "cfg_effect_free_fast_success_path+cfg_exact_call_result_alias"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_fchmod",
+      "__do_sys_fchmod#cfg-block-4",
+      "__do_sys_fchmod#cfg-block-3",
+      "__do_sys_fchmod#cfg-block-2",
+      "vfs_fchmod",
+      "vfs_fchmod#cfg-block-2",
+      "vfs_fchmod#cfg-block-1",
+      "chmod_common",
+      "chmod_common#cfg-block-10",
+      "chmod_common#cfg-block-9",
+      "chmod_common#cfg-block-7",
+      "inode_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2870540192",
+      "inode_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2870540192#cfg-block-2",
+      "inode_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2870540192#cfg-block-1",
+      "security_path_chmod",
+      "security_path_chmod#cfg-block-32",
+      "security_path_chmod#cfg-block-31",
+      "security_path_chmod#cfg-block-30",
+      "chmod_common#cfg-block-5",
+      "notify_change",
+      "notify_change#cfg-block-72",
+      "notify_change#cfg-block-71",
+      "notify_change#cfg-block-60",
+      "may_setattr",
+      "may_setattr#cfg-block-12",
+      "may_setattr#cfg-block-11",
+      "may_setattr#cfg-block-7",
+      "may_setattr#cfg-block-1",
+      "notify_change#cfg-block-59",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-15[mask\u0026~mode=true]",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-12",
+      "do_inode_permission@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2382806985#cfg-block-1",
+      "inode_permission#callsite:4[nonzero]",
+      "inode_permission#cfg-block-5[retval=true]",
+      "inode_permission#cfg-block-4",
+      "may_setattr#callsite:2[nonzero]",
+      "may_setattr#cfg-block-3[error=true]",
+      "may_setattr#cfg-block-2",
+      "notify_change#callsite:4[nonzero]",
+      "notify_change#callsite:4",
+      "chmod_common#cfg-block-4",
+      "inode_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#4253377335",
+      "inode_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#4253377335#cfg-block-2",
+      "inode_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#4253377335#cfg-block-1",
+      "chmod_common#cfg-block-1",
+      "setattr_prepare#cfg-block-1",
+      "simple_setattr#callsite:2[zero]",
+      "simple_setattr#cfg-block-1",
+      "notify_change#callsite:20",
+      "vfs_fchmod#callsite:2",
+      "__do_sys_fchmod#cfg-block-1"
+    ],
+    "bypass_proof_method": "cfg_effect_free_fast_success_path+cfg_exact_call_result_alias",
+    "reasons": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

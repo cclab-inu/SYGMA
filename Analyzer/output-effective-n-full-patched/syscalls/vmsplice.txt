@@ -1,0 +1,3 @@
+- __do_sys_vmsplice
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - vmsplice_type@/workspace/git/linux-v5.15-analysis-src/fs/splice.c#2963185648

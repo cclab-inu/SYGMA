@@ -1,0 +1,2 @@
+- __do_sys_io_pgetevents [direct_signal=signal_pending | always_signal=signal_pending | validated_signal=signal_pending]
+  - set_user_sigmask

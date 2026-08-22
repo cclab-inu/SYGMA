@@ -1,0 +1,92 @@
+# SYGMAConfig의 thirdParty.outputContent는 겉보기엔 "syscall 번호 -> [syscall 번호...]"
+# 나열처럼 보이지만, 실제로는 2단계 상태 머신(FSM)입니다.
+#
+#   레벨 1 (매크로 상태) : phases 아래의 이름 붙은 상태
+#       initPhase -> mainPhase
+#       (SYGMAPolicySpec.Phases map[string]PhaseRuleSet 로 매핑됨)
+#
+#   레벨 2 (마이크로 상태) : 각 phase 안에서 "현재 상태 = 직전에 허용된 syscall 번호"
+#       state(from syscall) --edge--> state(to syscall)
+#       허용되지 않은 to syscall로 가려는 요청은 BPF LSM에서 거부(state 밖으로 나가는
+#       edge가 정의되지 않음 = deny)
+#
+# 즉 from 하나에 to가 1개뿐인 곳(예: "257": [0])은 그 상태에서 나가는 edge가
+# 하나뿐인 것이지 "순서 나열"이 아니고, from 하나에 to가 여러 개인 곳
+# (예: "3": [0,2,3,4,9,11,12,21,28,43,61])은 그 상태에서 여러 분기가 가능한 것이며,
+# "233": [...233] 처럼 자기 자신으로 돌아오는 edge는 루프(반복 상태)입니다.
+# 아래는 nginx 워커 프로세스를 관측했을 때 나오는 실제 그래프에 syscall 이름을
+# 주석으로 붙인 버전입니다. (숫자 key 자체는 커널 syscall 번호이며 스키마상
+# 문자열 이름으로 바꿔 쓸 수는 없습니다 — SYGMAPolicySpec.Phases[x].RuleSet은
+# map[string][]int 입니다.)
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: nginx-sygma-config-fsm
+  namespace: default
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          app: nginx
+        name: nginx
+        namespace: default
+      spec:
+        containers:
+        - name: nginx
+          image: nginx:1.24.0
+          imagePullPolicy: Always
+    thirdParty:
+      outputContent: |
+        {
+          "phases": {
+            "initPhase": {
+              "transitions": {
+                "59":  [12, 157],
+                "12":  [21, 257],
+                "21":  [9, 257],
+                "157": [59, 500]
+              }
+            },
+            "mainPhase": {
+              "_comment_": "initPhase 숫자는 이 저장소에 실측 데이터가 없어 형태를 보여주기 위한 예시입니다. mainPhase 값은 nginx-sygmaconfig.yaml의 실제 값 그대로입니다.",
+              "transitions": {
+                "500": [0, 1, 3, 232],
+                "0":   [0, 3],
+                "1":   [1, 61],
+                "3":   [3, 9, 46, 116, 232, 233],
+                "5":   [8],
+                "8":   [0],
+                "9":   [9, 12],
+                "12":  [12, 233],
+                "14":  [213],
+                "16":  [206],
+                "39":  [14, 107],
+                "46":  [3, 46, 130],
+                "47":  [47, 232],
+                "53":  [233],
+                "61":  [15],
+                "232": [3, 47, 232, 288],
+                "233": [3, 53, 232, 233, 290]
+              }
+            }
+          }
+        }
+    # ---- 위 그래프를 상태 다이어그램으로 풀면 ----
+    # initPhase (프로세스 기동)
+    #   59 execve  -> 12 brk, 157 prctl
+    #   12 brk     -> 21 access, 257 openat
+    #   21 access  -> 9 mmap, 257 openat
+    #   157 prctl  -> 59 execve(재exec), 500 START(=mainPhase 진입 신호)
+    #
+    # mainPhase (요청 처리 루프)
+    #   500 START    -> 0 read, 1 write, 3 close, 232 epoll_wait   (진입점, 여러 상태로 분기 가능)
+    #   3  close     -> 3 close, 9 mmap, 46 sendmsg, 116 setgroups, 232 epoll_wait, 233 epoll_ctl
+    #   233 epoll_ctl -> 3 close, 53 socketpair, 232 epoll_wait, 233 epoll_ctl(루프), 290 eventfd2
+    #   232 epoll_wait -> 3 close, 47 recvmsg, 232 epoll_wait(루프), 288 accept4
+    #
+    # 이 그래프에 없는 (from, to) 조합, 즉 정의되지 않은 edge로의 전이는
+    # 전부 거부되는 것이 이 정책의 핵심입니다 — 그래서 "허용된 순서 나열"이
+    # 아니라 "허용/거부를 가르는 상태 전이 규칙(FSM)"입니다.

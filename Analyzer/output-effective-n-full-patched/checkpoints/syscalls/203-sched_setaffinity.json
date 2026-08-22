@@ -1,0 +1,340 @@
+{
+  "number": 203,
+  "abi": "common",
+  "name": "sched_setaffinity",
+  "entry": "sys_sched_setaffinity",
+  "start": "__do_sys_sched_setaffinity",
+  "linked_symbol": "__x64_sys_sched_setaffinity",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "sched_setaffinity"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_task_setscheduler"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_task_setscheduler"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_task_setscheduler"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_task_setscheduler"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_sched_setaffinity",
+    "alloc_cpumask_var",
+    "alloc_cpumask_var_node",
+    "kmalloc_node@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3398483295",
+    "cpumask_size@/workspace/git/linux-v5.15-analysis-src/include/linux/cpumask.h#991017801",
+    "get_user_cpu_mask@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#460855989",
+    "free_cpumask_var",
+    "kfree",
+    "sched_setaffinity"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_sched_setaffinity",
+    "alloc_cpumask_var",
+    "alloc_cpumask_var_node",
+    "kmalloc_node@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3398483295",
+    "cpumask_size@/workspace/git/linux-v5.15-analysis-src/include/linux/cpumask.h#991017801",
+    "get_user_cpu_mask@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#460855989",
+    "free_cpumask_var",
+    "kfree",
+    "sched_setaffinity"
+  ],
+  "success_path_functions": [
+    "__do_sys_sched_setaffinity",
+    "alloc_cpumask_var",
+    "alloc_cpumask_var_node",
+    "kmalloc_node@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3398483295",
+    "cpumask_size@/workspace/git/linux-v5.15-analysis-src/include/linux/cpumask.h#991017801",
+    "get_user_cpu_mask@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#460855989",
+    "free_cpumask_var",
+    "kfree",
+    "sched_setaffinity"
+  ],
+  "call_tree_file": "syscalls/sched_setaffinity.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_task_setscheduler"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_task_setscheduler"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "task_setscheduler"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_task_setscheduler",
+      "bpf_hook": "task_setscheduler",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "sched_setaffinity"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_task_setscheduler",
+        "sched_setaffinity",
+        "__do_sys_sched_setaffinity"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_task_setscheduler",
+          "function": "sched_setaffinity",
+          "source_function": "sched_setaffinity",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c",
+          "source_line": 8007,
+          "source_column": 11,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_task_setscheduler"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_task_setscheduler"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check"
+    ],
+    "proof_functions": [
+      "sched_setaffinity",
+      "__do_sys_sched_setaffinity"
+    ],
+    "hook_proof_paths": {
+      "security_task_setscheduler": [
+        "security_task_setscheduler",
+        "sched_setaffinity",
+        "__do_sys_sched_setaffinity"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_sched_setaffinity",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "sched_setaffinity",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_cpumask_var",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_cpumask_var_node",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "sched_setaffinity",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "ns_capable",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "sched_setaffinity",
+      "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860",
+      "__do_sys_sched_setaffinity"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_sched_setaffinity",
+      "alloc_cpumask_var",
+      "alloc_cpumask_var_node",
+      "kmalloc_node@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3398483295",
+      "kmalloc_node@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3398483295#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "alloc_cpumask_var_node#cfg-block-1",
+      "alloc_cpumask_var#cfg-block-1",
+      "get_user_cpu_mask@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#460855989",
+      "get_user_cpu_mask@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#460855989#cfg-block-4[copy_from_user(new_mask,user_mask_ptr,len)=false]",
+      "get_user_cpu_mask@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#460855989#cfg-block-1",
+      "__do_sys_sched_setaffinity#cfg-block-3[retval==0=true]",
+      "sched_setaffinity",
+      "find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035",
+      "find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035#cfg-block-4[pid=false]",
+      "find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035#cfg-block-1",
+      "sched_setaffinity#cfg-block-29[!p=false]",
+      "sched_setaffinity#cfg-block-4[retval=false]",
+      "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860",
+      "dl_task_check_affinity",
+      "dl_task_check_affinity#cfg-block-8",
+      "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860#cfg-block-8[retval=false]",
+      "__set_cpus_allowed_ptr@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#418677485",
+      "__set_cpus_allowed_ptr_locked@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#3928540060#cfg-block-1",
+      "__set_cpus_allowed_ptr@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#418677485#cfg-block-1",
+      "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860#cfg-block-6[retval=false]",
+      "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860#cfg-block-1",
+      "sched_setaffinity#cfg-block-1",
+      "__do_sys_sched_setaffinity#cfg-block-1",
+      "sched_setaffinity#callsite:2[nonnull]",
+      "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860#callsite:6[zero]"
+    ],
+    "bypass_proof_method": "cfg_exact_call_result_alias",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__sched_setaffinity@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2537543860",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "alloc_cpumask_var",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "alloc_cpumask_var_node",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "sched_setaffinity",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

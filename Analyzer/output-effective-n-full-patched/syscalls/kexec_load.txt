@@ -1,0 +1,5 @@
+- __do_sys_kexec_load
+  - kexec_load_check@/workspace/git/linux-v5.15-analysis-src/kernel/kexec.c#3570456472 [direct_lsm=security_kernel_load_data,security_locked_down | success_lsm=security_kernel_load_data,security_locked_down | validated_lsm=security_kernel_load_data,security_locked_down]
+    - capable
+      - ns_capable
+        - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]

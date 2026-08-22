@@ -1,0 +1,8 @@
+FROM ubuntu@sha256:eb29ed27b0821dca09c2e28b39135e185fc1302036427d5f4d70a41ce8fd7659
+
+# The evaluation packaging flow builds and verifies bin/manager first. Keep
+# image creation offline and byte-for-byte tied to that audited artifact.
+COPY bin/manager /manager
+
+USER 0
+ENTRYPOINT ["/manager"]

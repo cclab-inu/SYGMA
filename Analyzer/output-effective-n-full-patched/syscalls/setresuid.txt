@@ -1,0 +1,22 @@
+- __do_sys_setresuid
+  - __sys_setresuid [direct_lsm=security_task_fix_setuid | success_lsm=security_task_fix_setuid]
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - make_kuid
+      - map_id_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#2286615260
+        - map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034
+    - prepare_creds [direct_lsm=security_prepare_creds | success_lsm=security_prepare_creds]
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - validate_process_creds@/workspace/git/linux-v5.15-analysis-src/include/linux/cred.h#1756264965
+      - kmem_cache_alloc
+        - slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#3106794885
+          - slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935
+            - slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658
+              - might_alloc@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1021385239
+                - fs_reclaim_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1934011979
+                - fs_reclaim_release@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#2756234293
+                - gfpflags_allow_blocking@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#2879364502
+              - should_failslab
+        - trace_kmem_cache_alloc@/workspace/git/linux-v5.15-analysis-src/include/trace/events/kmem.h#2385402376 [indirect=<indirect-call>]
+          - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666
+    - ns_capable_setid
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]

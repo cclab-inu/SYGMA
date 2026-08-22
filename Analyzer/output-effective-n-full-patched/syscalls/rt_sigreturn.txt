@@ -1,0 +1,5 @@
+- __do_sys_rt_sigreturn
+  - task_stack_page@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/task_stack.h#127382014
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - __chk_range_not_ok@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/uaccess.h#2255166019
+  - task_size_max@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/page_64.h#141912916

@@ -1,0 +1,375 @@
+{
+  "number": 166,
+  "abi": "common",
+  "name": "umount2",
+  "entry": "sys_umount",
+  "start": "__do_sys_umount",
+  "linked_symbol": "__x64_sys_umount",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_capable",
+    "security_sb_umount"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_capable",
+    "security_sb_umount"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capable",
+    "security_sb_umount"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capable",
+    "security_sb_umount"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_umount",
+    "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+    "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+    "user_path_at_empty",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "filename_lookup",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "putname",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550",
+    "can_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1038032277",
+    "path_umount",
+    "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_umount",
+    "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+    "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+    "user_path_at_empty",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "filename_lookup",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "putname",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550",
+    "can_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1038032277",
+    "path_umount",
+    "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836"
+  ],
+  "success_path_functions": [
+    "__do_sys_umount",
+    "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+    "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+    "user_path_at_empty",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "filename_lookup",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "putname",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550",
+    "can_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1038032277",
+    "path_umount",
+    "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836"
+  ],
+  "call_tree_file": "syscalls/umount2.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable",
+    "security_sb_umount"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "capable"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capable",
+      "bpf_hook": "capable",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550",
+        "can_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1038032277",
+        "path_umount",
+        "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+        "__do_sys_umount"
+      ],
+      "llvm_verification": "unknown",
+      "llvm_evidence": [
+        {
+          "hook": "security_capable",
+          "function": "ns_capable_common",
+          "source_function": "ns_capable_common",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c",
+          "source_line": 375,
+          "source_column": 12,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-preserve-nonnegative-success",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "return"
+          ],
+          "verification": "must_preserve_success",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_sb_umount",
+      "bpf_hook": "sb_umount",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_sb_umount",
+        "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836",
+        "path_umount",
+        "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+        "__do_sys_umount"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_sb_umount",
+          "function": "path_umount",
+          "source_function": "do_umount",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/namespace.c",
+          "source_line": 1584,
+          "source_column": 11,
+          "inlined_at_functions": [
+            "path_umount"
+          ],
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-negative-on-error",
+            "must-return-nonnegative-on-positive",
+            "phi",
+            "return"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/namespace.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable",
+      "security_sb_umount"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_capable"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550",
+      "can_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1038032277",
+      "path_umount",
+      "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+      "__do_sys_umount",
+      "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550",
+        "can_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1038032277",
+        "path_umount",
+        "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+        "__do_sys_umount"
+      ],
+      "security_sb_umount": [
+        "security_sb_umount",
+        "do_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#847985836",
+        "path_umount",
+        "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+        "__do_sys_umount"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "getname_flags",
+      "user_path_at_empty"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_umount",
+      "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839",
+      "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+      "user_path_at_empty",
+      "getname_flags",
+      "getname_flags#cfg-block-19[result=true]",
+      "getname_flags#cfg-block-18",
+      "filename_lookup",
+      "filename_lookup#cfg-block-13",
+      "filename_lookup#cfg-block-12",
+      "filename_lookup#cfg-block-10",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-20",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-19",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-15",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-42",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-41",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-39",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-36",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-35",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-12",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-9",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-7",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-3",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-1",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#callsite:7",
+      "filename_lookup#cfg-block-8",
+      "filename_lookup#cfg-block-6",
+      "filename_lookup#cfg-block-5",
+      "filename_lookup#cfg-block-3",
+      "filename_lookup#cfg-block-2",
+      "filename_lookup#cfg-block-1",
+      "complete_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1016989665#cfg-block-8",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#callsite:11[zero]",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-3[!err=true]",
+      "filename_lookup#callsite:4[zero]",
+      "filename_lookup#cfg-block-6[likely(!retval)=true]",
+      "user_path_at_empty#cfg-block-1",
+      "user_path_at_empty#callsite:2",
+      "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614#cfg-block-1",
+      "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614#callsite:1",
+      "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839#cfg-block-3[ret=true]",
+      "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839#cfg-block-2",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-3[!err=false]",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-9[!err=false]",
+      "filename_lookup#callsite:4[nonzero]",
+      "filename_lookup#cfg-block-6[likely(!retval)=false]",
+      "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839#callsite:1[nonzero]",
+      "ksys_umount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1665533839#callsite:1",
+      "__do_sys_umount#cfg-block-1",
+      "__do_sys_umount#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

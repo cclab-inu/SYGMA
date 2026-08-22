@@ -1,0 +1,5 @@
+- __do_sys_read
+  - ksys_read
+    - fdget_pos@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4050725842
+    - vfs_read [indirect=file->f_op->read]
+      - rw_verify_area [direct_lsm=security_file_permission | success_lsm=security_file_permission | validated_lsm=security_file_permission]

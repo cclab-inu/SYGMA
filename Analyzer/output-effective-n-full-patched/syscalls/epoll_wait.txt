@@ -1,0 +1,8 @@
+- __do_sys_epoll_wait
+  - do_epoll_wait@/workspace/git/linux-v5.15-analysis-src/fs/eventpoll.c#670426449
+    - __chk_range_not_ok@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/uaccess.h#2255166019
+    - task_size_max@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/page_64.h#141912916
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+    - is_file_epoll@/workspace/git/linux-v5.15-analysis-src/fs/eventpoll.c#3327318458
+    - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791
+  - ep_timeout_to_timespec@/workspace/git/linux-v5.15-analysis-src/fs/eventpoll.c#1513814643

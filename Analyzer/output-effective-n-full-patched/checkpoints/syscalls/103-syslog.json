@@ -1,0 +1,245 @@
+{
+  "number": 103,
+  "abi": "common",
+  "name": "syslog",
+  "entry": "sys_syslog",
+  "start": "__do_sys_syslog",
+  "linked_symbol": "__x64_sys_syslog",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_syslog"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_syslog"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_syslog"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_syslog"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_syslog",
+    "do_syslog",
+    "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+    "security_syslog",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_syslog",
+    "do_syslog",
+    "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+    "security_syslog",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable"
+  ],
+  "success_path_functions": [
+    "__do_sys_syslog",
+    "do_syslog",
+    "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+    "security_syslog",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable"
+  ],
+  "call_tree_file": "syscalls/syslog.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "always",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_syslog",
+    "security_capable"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_syslog"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "syslog"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_syslog",
+      "bpf_hook": "syslog",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_syslog",
+        "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+        "do_syslog",
+        "__do_sys_syslog"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_syslog",
+          "function": "check_syslog_permissions",
+          "source_function": "check_syslog_permissions",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c",
+          "source_line": 542,
+          "source_column": 9,
+          "result_used": true,
+          "controls_branch": false,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "must-preserve-nonnegative-success",
+            "must-return-negative-on-error",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "phi",
+            "return"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable",
+      "security_syslog"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_syslog"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "capable",
+      "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+      "do_syslog",
+      "__do_sys_syslog"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+        "do_syslog",
+        "__do_sys_syslog"
+      ],
+      "security_syslog": [
+        "security_syslog",
+        "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638",
+        "do_syslog",
+        "__do_sys_syslog"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "cfg_effect_free_success_witness",
+      "cfg_effect_free_fast_success_path+direct_forwarded_success_return"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_syslog",
+      "__do_sys_syslog#cfg-block-2",
+      "__do_sys_syslog#cfg-block-1",
+      "do_syslog",
+      "do_syslog#cfg-block-54",
+      "do_syslog#cfg-block-53",
+      "do_syslog#cfg-block-2",
+      "do_syslog#cfg-block-50",
+      "do_syslog#cfg-block-1",
+      "security_syslog#call_int_hook-default[0]",
+      "check_syslog_permissions@/workspace/git/linux-v5.15-analysis-src/kernel/printk/printk.c#3530039638#cfg-block-1",
+      "do_syslog#callsite:1[zero]",
+      "do_syslog#cfg-block-53[error=false]",
+      "__do_sys_syslog#callsite:1"
+    ],
+    "bypass_proof_method": "cfg_effect_free_fast_success_path+direct_forwarded_success_return",
+    "reasons": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

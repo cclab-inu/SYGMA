@@ -1,0 +1,5 @@
+- __do_sys_lseek
+  - ksys_lseek@/workspace/git/linux-v5.15-analysis-src/fs/read_write.c#1191374393
+    - fdget_pos@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4050725842
+    - fdput_pos@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3993937981
+      - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

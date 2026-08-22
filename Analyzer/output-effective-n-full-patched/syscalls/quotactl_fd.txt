@@ -1,0 +1,5 @@
+- __do_sys_quotactl_fd
+  - fdget_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#968566192
+  - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791
+  - do_quotactl@/workspace/git/linux-v5.15-analysis-src/fs/quota/quota.c#2665882229 [indirect=sb->s_qcop->quota_sync]
+    - check_quotactl_permission@/workspace/git/linux-v5.15-analysis-src/fs/quota/quota.c#841348908 [direct_lsm=security_quotactl | success_lsm=security_quotactl | validated_lsm=security_quotactl]

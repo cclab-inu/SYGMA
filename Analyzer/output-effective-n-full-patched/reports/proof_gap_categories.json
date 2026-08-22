@@ -1,0 +1,38 @@
+{
+  "edge_counts": {
+    "lsm": {
+      "frontend_cfg_extraction": 4,
+      "open_function_pointer_target_set": 35,
+      "recursive_fixed_point": 1,
+      "success_value_or_path_feasibility": 193,
+      "symbol_or_definition_resolution": 2,
+      "termination_or_error_propagation": 174
+    },
+    "sigkill": {
+      "configured_translation_unit_variation": 4,
+      "frontend_cfg_extraction": 6,
+      "open_function_pointer_target_set": 74,
+      "success_value_or_path_feasibility": 271,
+      "symbol_or_definition_resolution": 4,
+      "termination_or_error_propagation": 212
+    }
+  },
+  "syscall_counts": {
+    "lsm": {
+      "frontend_cfg_extraction": 1,
+      "open_function_pointer_target_set": 19,
+      "recursive_fixed_point": 1,
+      "success_value_or_path_feasibility": 45,
+      "symbol_or_definition_resolution": 2,
+      "termination_or_error_propagation": 30
+    },
+    "sigkill": {
+      "configured_translation_unit_variation": 2,
+      "frontend_cfg_extraction": 3,
+      "open_function_pointer_target_set": 38,
+      "success_value_or_path_feasibility": 67,
+      "symbol_or_definition_resolution": 4,
+      "termination_or_error_propagation": 41
+    }
+  }
+}

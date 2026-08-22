@@ -1,0 +1,2 @@
+- __do_sys_seccomp
+  - do_seccomp@/workspace/git/linux-v5.15-analysis-src/kernel/seccomp.c#3746984772

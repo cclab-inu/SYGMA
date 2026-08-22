@@ -1,0 +1,153 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: sygmaconfigs.security.security.io
+spec:
+  group: security.security.io
+  names:
+    kind: SYGMAConfig
+    listKind: SYGMAConfigList
+    plural: sygmaconfigs
+    shortNames:
+    - sygmacfg
+    singular: sygmaconfig
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: SYGMAConfig is the Schema for the sygmaconfigs API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SYGMAConfigSpec defines the desired state of SYGMAConfig.
+            properties:
+              collection:
+                description: Collection defines how to launch the workload used to
+                  collect the init policy.
+                properties:
+                  yamlContent:
+                    description: Direct YAML content (recommended)
+                    type: string
+                  yamlPath:
+                    description: Path to YAML file (deprecated, for backward compatibility)
+                    type: string
+                type: object
+              policy:
+                description: |-
+                  Policy defines the main-phase state-machine policy. Exactly one of
+                  stateMachine or allowAll must be selected.
+                properties:
+                  allowAll:
+                    description: |-
+                      AllowAll enables the evaluation-only wildcard policy. The controller
+                      materializes it as a one-state state machine so policy lookup overhead is
+                      still present during an evaluation.
+                    type: boolean
+                  stateMachine:
+                    description: StateMachine is the main-phase syscall policy.
+                    properties:
+                      initialState:
+                        description: InitialState identifies the state used for a
+                          newly observed process.
+                        format: int32
+                        type: integer
+                      states:
+                        additionalProperties:
+                          properties:
+                            allowedSyscalls:
+                              description: AllowedSyscalls contains Linux x86-64 syscall
+                                numbers supported by SYGMA.
+                              items:
+                                type: integer
+                              minItems: 1
+                              type: array
+                          required:
+                          - allowedSyscalls
+                          type: object
+                        description: States maps decimal state IDs to their syscall
+                          allow-lists.
+                        minProperties: 1
+                        type: object
+                      transitions:
+                        additionalProperties:
+                          additionalProperties:
+                            format: int32
+                            type: integer
+                          type: object
+                        description: |-
+                          Transitions maps state ID -> syscall number -> next state ID. A missing
+                          transition keeps the process in its current state.
+                        type: object
+                    required:
+                    - initialState
+                    - states
+                    type: object
+                type: object
+                x-kubernetes-validations:
+                - message: exactly one of stateMachine or allowAll=true must be specified
+                  rule: (has(self.stateMachine) && !has(self.allowAll)) || (!has(self.stateMachine)
+                    && has(self.allowAll) && self.allowAll)
+            required:
+            - collection
+            - policy
+            type: object
+          status:
+            description: SYGMAConfigStatus defines the observed state of SYGMAConfig
+            properties:
+              binaryName:
+                description: BinaryName extracted from the pod
+                type: string
+              binaryPath:
+                type: string
+              collectionComplete:
+                description: CollectionComplete indicates if collection is done
+                type: boolean
+              collectionStartTime:
+                format: date-time
+                type: string
+              imageID:
+                format: int32
+                type: integer
+              imageName:
+                description: ImageName extracted from the YAML
+                type: string
+              message:
+                description: Message provides additional status information
+                type: string
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the spec generation currently being processed or
+                  already published by the controller.
+                format: int64
+                type: integer
+              phase:
+                description: Phase represents the current phase of collection
+                type: string
+              podName:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

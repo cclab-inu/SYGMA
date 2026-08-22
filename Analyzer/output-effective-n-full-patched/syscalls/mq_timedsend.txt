@@ -1,0 +1,4 @@
+- __do_sys_mq_timedsend
+  - do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327
+    - load_msg [direct_lsm=security_msg_msg_alloc | success_lsm=security_msg_msg_alloc]
+      - alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482

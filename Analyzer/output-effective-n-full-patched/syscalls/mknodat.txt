@@ -1,0 +1,8 @@
+- __do_sys_mknodat
+  - do_mknodat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3056711848 [direct_lsm=security_path_mknod | success_lsm=security_path_mknod]
+    - may_mknod@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2926324847
+    - putname
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+  - getname
+    - getname_flags
+      - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037

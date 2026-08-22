@@ -1,0 +1,3 @@
+- __do_sys_mmap
+  - ksys_mmap_pgoff
+    - vm_mmap_pgoff [direct_lsm=security_mmap_file | success_lsm=security_mmap_file | validated_lsm=security_mmap_file]

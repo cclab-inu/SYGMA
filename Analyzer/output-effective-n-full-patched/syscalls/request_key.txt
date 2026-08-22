@@ -1,0 +1,3 @@
+- __do_sys_request_key
+  - key_get_type_from_user@/workspace/git/linux-v5.15-analysis-src/security/keys/keyctl.c#205219335
+  - request_key_and_link [indirect=type->match_preparse,type->match_free]

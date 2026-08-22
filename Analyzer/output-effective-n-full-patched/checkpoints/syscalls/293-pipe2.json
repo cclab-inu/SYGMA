@@ -1,0 +1,535 @@
+{
+  "number": 293,
+  "abi": "common",
+  "name": "pipe2",
+  "entry": "sys_pipe2",
+  "start": "__do_sys_pipe2",
+  "linked_symbol": "__x64_sys_pipe2",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_inode_alloc",
+    "security_file_alloc"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_pipe2",
+    "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+    "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+    "create_pipe_files",
+    "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+    "new_inode_pseudo",
+    "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_pipe2",
+    "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+    "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+    "create_pipe_files",
+    "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+    "new_inode_pseudo",
+    "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo"
+  ],
+  "success_path_functions": [
+    "__do_sys_pipe2",
+    "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+    "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+    "create_pipe_files",
+    "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+    "new_inode_pseudo",
+    "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo"
+  ],
+  "call_tree_file": "syscalls/pipe2.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "file_alloc_security"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_inode_alloc",
+      "bpf_hook": "inode_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "inode_init_always"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "unknown",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_inode_alloc",
+        "inode_init_always",
+        "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+        "new_inode_pseudo",
+        "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+        "create_pipe_files",
+        "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+        "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+        "__do_sys_pipe2"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_inode_alloc",
+          "function": "inode_init_always",
+          "source_function": "inode_init_always",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/inode.c",
+          "source_line": 170,
+          "source_column": 6,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": false,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": true,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-negative-on-error",
+            "must-return-negative-on-true"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/inode.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_file_alloc",
+      "bpf_hook": "file_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "create_pipe_files",
+        "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+        "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+        "__do_sys_pipe2"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_alloc",
+          "function": "__alloc_file",
+          "source_function": "__alloc_file",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c",
+          "source_line": 106,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_file_alloc"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_file_alloc"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check"
+    ],
+    "proof_functions": [
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "alloc_file_pseudo",
+      "create_pipe_files",
+      "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+      "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+      "__do_sys_pipe2"
+    ],
+    "hook_proof_paths": {
+      "security_file_alloc": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "create_pipe_files",
+        "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+        "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+        "__do_sys_pipe2"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "create_pipe_files",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_pipe2",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_pipe2",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "inode_init_always",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "ops-\u003ealloc_inode",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_pipe_info",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "capable",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_pipe_info",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "pipe_is_unprivileged_user",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_pipe_info",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "create_pipe_files",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "get_pipe_inode",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__do_pipe_flags",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "alloc_pipe_info",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "new_inode_pseudo",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "new_inode_pseudo",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "alloc_inode",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "new_inode_pseudo",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "pipe_is_unprivileged_user",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "capable",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "pipe_is_unprivileged_user",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+      "new_inode_pseudo",
+      "alloc_pipe_info",
+      "create_pipe_files"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_pipe2",
+      "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794",
+      "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562",
+      "create_pipe_files",
+      "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916",
+      "new_inode_pseudo",
+      "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685",
+      "kmem_cache_alloc",
+      "kmem_cache_alloc#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685#cfg-block-8[!inode=false]",
+      "alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685#cfg-block-1",
+      "new_inode_pseudo#cfg-block-3[inode=true]",
+      "new_inode_pseudo#cfg-block-1",
+      "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916#cfg-block-17[!inode=false]",
+      "alloc_pipe_info",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "alloc_pipe_info#cfg-block-25[pipe==NULL=false]",
+      "kcalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3817187090",
+      "kcalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3817187090#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "alloc_pipe_info#cfg-block-3",
+      "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916#cfg-block-15[!pipe=false]",
+      "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916#cfg-block-3",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available",
+      "alloc_pipe_info#callsite:5[nonnull]",
+      "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916#callsite:3[nonnull]",
+      "new_inode_pseudo#callsite:1[nonnull]",
+      "get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916#callsite:1[nonnull]",
+      "create_pipe_files#cfg-block-10[!inode=false]",
+      "watch_queue_init",
+      "watch_queue_init#cfg-block-8",
+      "watch_queue_init#cfg-block-7",
+      "watch_queue_init#cfg-block-5",
+      "watch_queue_init#cfg-block-3",
+      "watch_queue_init#cfg-block-2",
+      "watch_queue_init#cfg-block-1",
+      "watch_queue_init#callsite:1[nonnull]",
+      "create_pipe_files#cfg-block-7[error=true]",
+      "create_pipe_files#cfg-block-6",
+      "create_pipe_files#callsite:2",
+      "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562#cfg-block-9[error=true]",
+      "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562#cfg-block-8",
+      "create_pipe_files#callsite:1[nonnull]",
+      "alloc_file_pseudo#cfg-block-6",
+      "create_pipe_files#callsite:5[error_pointer]",
+      "create_pipe_files#cfg-block-5[IS_ERR(f)=true]",
+      "create_pipe_files#cfg-block-4",
+      "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562#callsite:1[nonzero]",
+      "__do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562#callsite:1",
+      "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794#cfg-block-5[!error=false]",
+      "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794#cfg-block-1",
+      "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794#callsite:1[nonzero]",
+      "do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794#callsite:1",
+      "__do_sys_pipe2#cfg-block-1",
+      "__do_sys_pipe2#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_pipe2",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_pipe2",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

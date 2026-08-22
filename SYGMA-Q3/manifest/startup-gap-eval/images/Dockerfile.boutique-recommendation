@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=us-central1-docker.pkg.dev/google-samples/microservices-demo/recommendationservice@sha256:2f3eae327b743160033cec8662362e2190f9aa9a04a1ace1bd05f19106ed4bd3
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Base ENTRYPOINT is fully self-sufficient (CMD is null); reproduce it
+# verbatim after "--" so gap-launch's child argv is unchanged.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "boutique-recommendation", "--", "python", "recommendation_server.py"]

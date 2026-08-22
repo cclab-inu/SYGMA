@@ -1,0 +1,282 @@
+{
+  "number": 153,
+  "abi": "common",
+  "name": "vhangup",
+  "entry": "sys_vhangup",
+  "start": "__do_sys_vhangup",
+  "linked_symbol": "__x64_sys_vhangup",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_capable"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_capable"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capable"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capable"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_vhangup",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "tty_vhangup_self",
+    "get_current_tty",
+    "_raw_spin_lock_irqsave",
+    "spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "tty_kref_get@/workspace/git/linux-v5.15-analysis-src/include/linux/tty.h#1394145967",
+    "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+    "_raw_spin_unlock_irqrestore",
+    "__raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976",
+    "arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_vhangup",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "tty_vhangup_self",
+    "get_current_tty",
+    "_raw_spin_lock_irqsave",
+    "spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "tty_kref_get@/workspace/git/linux-v5.15-analysis-src/include/linux/tty.h#1394145967",
+    "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+    "_raw_spin_unlock_irqrestore",
+    "__raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976",
+    "arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247"
+  ],
+  "success_path_functions": [
+    "__do_sys_vhangup",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "tty_vhangup_self",
+    "get_current_tty",
+    "_raw_spin_lock_irqsave",
+    "spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "tty_kref_get@/workspace/git/linux-v5.15-analysis-src/include/linux/tty.h#1394145967",
+    "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+    "_raw_spin_unlock_irqrestore",
+    "__raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976",
+    "arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247"
+  ],
+  "call_tree_file": "syscalls/vhangup.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "capable"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capable",
+      "bpf_hook": "capable",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "__do_sys_vhangup"
+      ],
+      "llvm_verification": "unknown",
+      "llvm_evidence": [
+        {
+          "hook": "security_capable",
+          "function": "ns_capable_common",
+          "source_function": "ns_capable_common",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c",
+          "source_line": 375,
+          "source_column": 12,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-preserve-nonnegative-success",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "return"
+          ],
+          "verification": "must_preserve_success",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_capable"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "capable",
+      "__do_sys_vhangup"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "__do_sys_vhangup"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "closed_effect_source_absence",
+      "explicit_success_return"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_vhangup",
+      "__do_sys_vhangup#cfg-block-2"
+    ],
+    "bypass_proof_method": "explicit_success_return",
+    "reasons": [
+      "a proven normal successful operation path has no effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "a proven normal successful operation path has no effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

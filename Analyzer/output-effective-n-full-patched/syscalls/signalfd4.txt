@@ -1,0 +1,5 @@
+- __do_sys_signalfd4
+  - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902
+  - do_signalfd4@/workspace/git/linux-v5.15-analysis-src/fs/signalfd.c#2481495967
+    - sigdelsetmask@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#212417156
+    - signotset@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#477354028

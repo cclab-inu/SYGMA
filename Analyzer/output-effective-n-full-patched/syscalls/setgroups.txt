@@ -1,0 +1,11 @@
+- __do_sys_setgroups
+  - may_setgroups
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - ns_capable_setid
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - groups_alloc
+    - kvmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#2211764895
+      - kvmalloc_node
+    - __ab_c_size@/workspace/git/linux-v5.15-analysis-src/include/linux/overflow.h#2039650214
+  - groups_from_user@/workspace/git/linux-v5.15-analysis-src/kernel/groups.c#1419966840
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]

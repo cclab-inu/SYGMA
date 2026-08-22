@@ -1,0 +1,2 @@
+- __do_sys_ioprio_set
+  - ioprio_check_cap

@@ -1,0 +1,290 @@
+{
+  "number": 440,
+  "abi": "common",
+  "name": "process_madvise",
+  "entry": "sys_process_madvise",
+  "start": "__do_sys_process_madvise",
+  "linked_symbol": "__x64_sys_process_madvise",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_capable"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_capable"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capable"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capable"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_process_madvise"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_process_madvise"
+  ],
+  "success_path_functions": [
+    "__do_sys_process_madvise"
+  ],
+  "call_tree_file": "syscalls/process_madvise.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "capable"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capable",
+      "bpf_hook": "capable",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__do_sys_process_madvise"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capable",
+        "__do_sys_process_madvise"
+      ],
+      "proof_method": "reviewed_kernel_success_gate_contract",
+      "llvm_verification": "unknown"
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_capable"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "reviewed_kernel_success_gate_contract",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "__do_sys_process_madvise"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "__do_sys_process_madvise"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_process_madvise",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "capable",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "mm_access",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ptrace_may_access",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "mm_access"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_process_madvise",
+      "import_iovec",
+      "import_iovec#cfg-block-2",
+      "import_iovec#cfg-block-1",
+      "__import_iovec",
+      "__import_iovec#cfg-block-17",
+      "__import_iovec#cfg-block-16",
+      "iovec_from_user",
+      "iovec_from_user#cfg-block-16",
+      "iovec_from_user#cfg-block-15",
+      "iovec_from_user#cfg-block-13",
+      "iovec_from_user#cfg-block-11",
+      "iovec_from_user#cfg-block-10",
+      "kmalloc_array@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#2557835121#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "iovec_from_user#cfg-block-8",
+      "iovec_from_user#cfg-block-6",
+      "iovec_from_user#cfg-block-5",
+      "iovec_from_user#cfg-block-1",
+      "copy_iovec_from_user@/workspace/git/linux-v5.15-analysis-src/lib/iov_iter.c#2464310944#cfg-block-1",
+      "iovec_from_user#callsite:5[zero]",
+      "kmalloc_array@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#2557835121#runtime-resource-available",
+      "iovec_from_user#callsite:2[nonnull]",
+      "__import_iovec#cfg-block-14",
+      "__import_iovec#cfg-block-13",
+      "__import_iovec#cfg-block-4",
+      "__import_iovec#cfg-block-3",
+      "__import_iovec#cfg-block-1",
+      "copy_compat_iovec_from_user@/workspace/git/linux-v5.15-analysis-src/lib/iov_iter.c#2258476912#cfg-block-1",
+      "iovec_from_user#callsite:4[zero]",
+      "__import_iovec#callsite:1[valid_pointer]",
+      "import_iovec#callsite:1",
+      "__do_sys_process_madvise#cfg-block-28[ret\u003c0=false]",
+      "__do_sys_process_madvise#cfg-block-26[IS_ERR(pid)=false]",
+      "__do_sys_process_madvise#cfg-block-24[!task=false]",
+      "mm_access",
+      "down_read_killable",
+      "down_read_killable#cfg-block-11",
+      "down_read_killable#cfg-block-9",
+      "down_read_killable#cfg-block-8",
+      "down_read_killable#cfg-block-6",
+      "down_read_killable#cfg-block-5",
+      "__down_read_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1629009507",
+      "__down_read_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1629009507#cfg-block-2",
+      "__down_read_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1629009507#cfg-block-1",
+      "__down_read_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1099009593",
+      "__down_read_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1099009593#cfg-block-5",
+      "__down_read_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1099009593#cfg-block-4",
+      "__down_read_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1099009593#cfg-block-1",
+      "__down_read_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1629009507#callsite:1",
+      "down_read_killable#cfg-block-1",
+      "mm_access#cfg-block-7[err=false]",
+      "mm_access#cfg-block-1",
+      "__do_sys_process_madvise#cfg-block-20[IS_ERR_OR_NULL(mm)=false]",
+      "__do_sys_process_madvise#cfg-block-7[ret==0=false]",
+      "__do_sys_process_madvise#cfg-block-1",
+      "__do_sys_process_madvise#cfg-block-1[outcome=signed_integer:4]"
+    ],
+    "bypass_proof_method": "return_outcome_constrained_success",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "mm_access",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

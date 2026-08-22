@@ -1,0 +1,4 @@
+- __do_sys_move_pages
+  - kernel_move_pages@/workspace/git/linux-v5.15-analysis-src/mm/migrate.c#995376875
+    - find_mm_struct@/workspace/git/linux-v5.15-analysis-src/mm/migrate.c#3106907690 [direct_lsm=security_task_movememory]
+    - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557

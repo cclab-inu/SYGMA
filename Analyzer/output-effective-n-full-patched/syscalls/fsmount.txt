@@ -1,0 +1,8 @@
+- __do_sys_fsmount
+  - may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550
+    - ns_capable
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - attr_flags_to_mnt_flags@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2146986601
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

@@ -1,0 +1,64 @@
+apiVersion: security.security.io/v1
+kind: SYGMAPolicy
+metadata:
+  name: nginx-sygma-policy
+  namespace: default
+spec:
+  # 정책이 어떤 이미지/바이너리에 대한 것인지 식별
+  imageName: nginx:1.24.0
+  binaryName: nginx
+
+  # DaemonSet 에이전트가 자기 노드에 해당하는 정책만 골라 적용하기 위한 필터
+  nodeName: worker-node-1
+  podName: nginx
+  containerID: 8f4c2a1b9d3e
+
+  # OCI Hook이 컨테이너 생성 시점에 채워주는 네임스페이스 inode 번호
+  pidNs: 4026532871
+  mntNs: 4026532872
+
+  # Redis에서 이미지 템플릿을 빠르게 조회하기 위한 ID (없으면 phases를 직접 사용)
+  imageID: 42
+
+  # phase별 syscall 상태 전이 규칙 (SYGMAConfig의 thirdParty.outputContent가
+  # 변환되어 여기로 들어옴: "from syscall번호" -> "허용된 to syscall번호 목록")
+  phases:
+    initPhase:
+      ruleSet:
+        "0": [0, 3]
+        "3": [3, 9, 59]     # read -> read/close/execve
+        "59": [59, 12, 21]  # execve -> brk/access 등 초기화 syscall
+
+    mainPhase:
+      ruleSet:
+        "0": [0, 3]
+        "1": [1, 61]
+        "3": [3, 9, 46, 116, 232, 233]
+        "5": [8]
+        "8": [0]
+        "9": [9, 12]
+        "12": [12, 233]
+        "14": [213]
+        "16": [206]
+        "39": [14, 107]
+        "46": [3, 46, 130]
+        "47": [47, 232]
+        "53": [233]
+        "61": [15]
+
+  # phase별로 차단할 파일 경로 (openat 등 경로 인자를 받는 syscall에 적용)
+  blockedPaths:
+    mainPhase:
+      - /etc/shadow
+      - /etc/passwd
+      - /proc/self/mem
+      - /root/.ssh
+status:
+  phase: active
+  lastUpdated: "2026-08-18T09:00:00Z"
+  appliedToNodes:
+    - worker-node-1
+  imageID: 42
+  message: Policy loaded into BPF maps successfully
+  observedGeneration: 1
+  loadedTransitions: 17

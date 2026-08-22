@@ -1,0 +1,2 @@
+- __do_sys_semtimedop
+  - ksys_semtimedop

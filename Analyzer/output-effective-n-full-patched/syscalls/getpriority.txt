@@ -1,0 +1,21 @@
+- __do_sys_getpriority
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+    - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+  - _raw_read_lock
+    - __raw_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rwlock_api_smp.h#2961161158
+      - queued_read_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qrwlock.h#1792550136
+        - atomic_add_return_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4230533297
+          - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796
+            - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104
+            - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313
+          - arch_atomic_add_return@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#1764673818
+  - __raw_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rwlock_api_smp.h#822222164
+    - queued_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qrwlock.h#2916952632
+      - atomic_sub_return_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#3430528141
+        - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796 [dp_skip=revisited]
+        - arch_atomic_sub_return@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#2860306672
+          - arch_atomic_add_return@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#1764673818
+  - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+    - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+      - rcu_read_unlock_strict

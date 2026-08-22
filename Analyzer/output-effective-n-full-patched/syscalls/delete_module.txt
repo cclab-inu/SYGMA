@@ -1,0 +1,11 @@
+- __do_sys_delete_module [indirect=mod->exit]
+  - capable
+    - ns_capable
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - strncpy_from_user
+  - audit_log_kern_module@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#418631205
+    - audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724
+  - mutex_lock_interruptible
+    - __cond_resched
+    - __mutex_trylock_fast@/workspace/git/linux-v5.15-analysis-src/kernel/locking/mutex.c#2485577
+  - find_module

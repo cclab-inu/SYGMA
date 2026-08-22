@@ -1,0 +1,16 @@
+- __do_sys_setpgid [direct_lsm=security_task_setpgid | success_lsm=security_task_setpgid]
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+    - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+  - _raw_write_lock_irq
+    - __raw_write_lock_irq@/workspace/git/linux-v5.15-analysis-src/include/linux/rwlock_api_smp.h#855954172
+      - arch_local_irq_disable@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#3969350775
+      - queued_write_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qrwlock.h#1938900783
+        - atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744
+  - find_task_by_vpid
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+  - __raw_write_unlock_irq@/workspace/git/linux-v5.15-analysis-src/include/linux/rwlock_api_smp.h#2267052525 [ambiguous=queued_write_unlock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qrwlock.h#4236253556,queued_write_unlock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qrwlock.h#2807345582,queued_write_unlock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qrwlock.h#4221691762]
+    - arch_local_irq_enable@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#344772184
+  - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+    - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+      - rcu_read_unlock_strict

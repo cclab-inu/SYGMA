@@ -1,0 +1,12 @@
+ARG BASE_IMAGE=docker.io/deathstarbench/hotel-reservation@sha256:488d8980c81eeae337d089185f2dd2643dec589809e102c2abf65a4d6e9bb436
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# The published multi-service image has no per-service default: every binary
+# lives under /go/bin and the Helm chart supplies the choice externally via
+# a Pod-level `command`. Bake that same choice into the image instead so the
+# derived image is a self-sufficient single-service carrier. WORKDIR stays
+# /workspace (inherited from the base), matching where config.json is baked.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "hotel-recommendation", "--", "/go/bin/recommendation"]
+CMD []

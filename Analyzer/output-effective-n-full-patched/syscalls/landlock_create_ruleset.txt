@@ -1,0 +1,2 @@
+- __do_sys_landlock_create_ruleset
+  - build_check_abi@/workspace/git/linux-v5.15-analysis-src/security/landlock/syscalls.c#2049510086 [unresolved=__compiletime_assert_309,__compiletime_assert_311]

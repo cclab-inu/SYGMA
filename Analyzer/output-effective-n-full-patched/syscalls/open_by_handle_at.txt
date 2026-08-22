@@ -1,0 +1,6 @@
+- __do_sys_open_by_handle_at
+  - do_handle_open@/workspace/git/linux-v5.15-analysis-src/fs/fhandle.c#1358218457
+    - handle_to_path@/workspace/git/linux-v5.15-analysis-src/fs/fhandle.c#2782007705
+      - capable
+        - ns_capable
+          - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]

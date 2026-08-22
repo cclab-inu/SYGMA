@@ -1,0 +1,3 @@
+- __do_sys_shmdt
+  - ksys_shmdt
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

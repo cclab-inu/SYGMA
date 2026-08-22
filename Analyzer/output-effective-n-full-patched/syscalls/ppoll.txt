@@ -1,0 +1,2 @@
+- __do_sys_ppoll
+  - set_user_sigmask

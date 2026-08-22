@@ -1,0 +1,5 @@
+- __do_sys_timerfd_settime
+  - get_itimerspec64
+  - do_timerfd_settime@/workspace/git/linux-v5.15-analysis-src/fs/timerfd.c#3675742925
+    - itimerspec64_valid@/workspace/git/linux-v5.15-analysis-src/include/linux/time.h#1420858705
+    - timerfd_fget@/workspace/git/linux-v5.15-analysis-src/fs/timerfd.c#890237566

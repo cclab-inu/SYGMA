@@ -1,0 +1,2 @@
+- __do_sys_iopl [direct_lsm=security_locked_down]
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

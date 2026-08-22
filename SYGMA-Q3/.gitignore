@@ -1,0 +1,6 @@
+# Local build staging; the transferable image bundle is written separately.
+sygma_eBPF/.local-image/
+sygma_eBPF/core
+sygma_eBPF/route-snapshot
+sygma-operator/.local-image/
+ocihook/build/

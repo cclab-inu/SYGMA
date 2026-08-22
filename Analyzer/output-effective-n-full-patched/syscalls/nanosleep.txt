@@ -1,0 +1,56 @@
+- __do_sys_nanosleep
+  - get_timespec64
+  - timespec64_valid@/workspace/git/linux-v5.15-analysis-src/include/linux/time64.h#3252251759
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - hrtimer_nanosleep
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - dl_task@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/deadline.h#3573669754
+    - hrtimer_init_sleeper_on_stack@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#1566763340
+      - hrtimer_init_sleeper
+        - __hrtimer_init_sleeper@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#1774138533
+          - __hrtimer_init@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#3469980602
+            - hrtimer_clockid_to_base@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#157289243
+            - timerqueue_init@/workspace/git/linux-v5.15-analysis-src/include/linux/timerqueue.h#1310657099
+          - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+    - hrtimer_set_expires_range_ns@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#3074677803
+      - ktime_add_safe
+      - ns_to_ktime@/workspace/git/linux-v5.15-analysis-src/include/linux/ktime.h#2221898553
+    - do_nanosleep@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#3090520765 [direct_signal=signal_pending]
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - instrument_atomic_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#972338627
+      - hrtimer_sleeper_start_expires
+        - hrtimer_start_expires@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#2470434864
+          - hrtimer_get_softexpires@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#1135551241
+          - hrtimer_get_expires@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#3255046538
+          - ktime_to_ns@/workspace/git/linux-v5.15-analysis-src/include/linux/ktime.h#3986577028
+          - hrtimer_start_range_ns
+            - lock_hrtimer_base@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#3149434395
+            - __hrtimer_start_range_ns@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#1663806651 [indirect=base->get_time]
+              - remove_hrtimer@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#977053028
+              - hrtimer_update_lowres@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#2380548279
+              - hrtimer_set_expires_range_ns@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#3074677803 [dp_skip=revisited]
+              - enqueue_hrtimer@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#291592894
+                - debug_activate@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#3535832953
+                  - debug_hrtimer_activate@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#102620654
+                  - trace_hrtimer_start@/workspace/git/linux-v5.15-analysis-src/include/trace/events/timer.h#2307999134 [indirect=<indirect-call>]
+                    - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666
+                - timerqueue_add
+                  - rb_add_cached@/workspace/git/linux-v5.15-analysis-src/include/linux/rbtree.h#531354154 [indirect=less]
+                    - rb_link_node@/workspace/git/linux-v5.15-analysis-src/include/linux/rbtree.h#1152101110
+                    - rb_insert_color_cached@/workspace/git/linux-v5.15-analysis-src/include/linux/rbtree.h#558742649
+                      - rb_insert_color
+                        - __rb_insert@/workspace/git/linux-v5.15-analysis-src/lib/rbtree.c#3280364710 [indirect=augment_rotate]
+                          - rb_red_parent@/workspace/git/linux-v5.15-analysis-src/lib/rbtree.c#2460717217
+            - unlock_hrtimer_base@/workspace/git/linux-v5.15-analysis-src/kernel/time/hrtimer.c#1488623783
+              - _raw_spin_unlock_irqrestore
+                - __raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143
+                  - do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415
+                    - queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032
+                      - pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143
+                  - arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976
+                    - arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247
+      - hrtimer_cancel
+        - hrtimer_try_to_cancel
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+    - destroy_hrtimer_on_stack@/workspace/git/linux-v5.15-analysis-src/include/linux/hrtimer.h#1815053099
+  - timespec64_to_ktime@/workspace/git/linux-v5.15-analysis-src/include/linux/ktime.h#197638984

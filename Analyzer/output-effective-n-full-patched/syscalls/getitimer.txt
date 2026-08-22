@@ -1,0 +1,3 @@
+- __do_sys_getitimer
+  - do_getitimer@/workspace/git/linux-v5.15-analysis-src/kernel/time/itimer.c#3167005452
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

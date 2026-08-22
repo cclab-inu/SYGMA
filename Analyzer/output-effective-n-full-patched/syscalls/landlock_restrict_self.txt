@@ -1,0 +1,9 @@
+- __do_sys_landlock_restrict_self
+  - task_no_new_privs@/workspace/git/linux-v5.15-analysis-src/include/linux/sched.h#4149721655
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - get_ruleset_from_fd@/workspace/git/linux-v5.15-analysis-src/security/landlock/syscalls.c#3970505584
+  - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+  - prepare_creds [direct_lsm=security_prepare_creds | success_lsm=security_prepare_creds]
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+  - landlock_merge_ruleset
+    - create_ruleset@/workspace/git/linux-v5.15-analysis-src/security/landlock/ruleset.c#2891969991

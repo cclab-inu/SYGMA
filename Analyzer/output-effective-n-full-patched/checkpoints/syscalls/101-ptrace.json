@@ -1,0 +1,179 @@
+{
+  "number": 101,
+  "abi": "64",
+  "name": "ptrace",
+  "entry": "sys_ptrace",
+  "start": "__do_sys_ptrace",
+  "linked_symbol": "__x64_sys_ptrace",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_ptrace",
+    "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_ptrace",
+    "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456"
+  ],
+  "success_path_functions": [
+    "__do_sys_ptrace",
+    "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456"
+  ],
+  "call_tree_file": "syscalls/ptrace.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_ptrace_traceme"
+  ],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "non_enforcing",
+    "hooks": [
+      "security_ptrace_traceme"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_ptrace_traceme"
+      ],
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456",
+      "__do_sys_ptrace"
+    ],
+    "hook_proof_paths": {
+      "security_ptrace_traceme": [
+        "security_ptrace_traceme",
+        "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456",
+        "__do_sys_ptrace"
+      ]
+    },
+    "bypass_proof_path": [
+      "__do_sys_ptrace",
+      "__do_sys_ptrace#cfg-block-17[!child=false]",
+      "ptrace_check_attach@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#234872781",
+      "ptrace_check_attach@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#234872781#cfg-block-24[!ret\u0026\u0026!ignore_state=true]",
+      "ptrace_check_attach@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#234872781#cfg-block-1",
+      "__do_sys_ptrace#cfg-block-7[ret\u003c0=false]",
+      "arch_ptrace",
+      "arch_ptrace#cfg-block-33",
+      "arch_ptrace#cfg-block-2",
+      "arch_ptrace#cfg-block-23",
+      "arch_ptrace#cfg-block-22",
+      "arch_ptrace#cfg-block-20",
+      "arch_ptrace#cfg-block-19",
+      "arch_ptrace#cfg-block-15",
+      "arch_ptrace#cfg-block-1",
+      "set_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/kernel/ptrace.c#1142211576#cfg-block-1",
+      "putreg@/workspace/git/linux-v5.15-analysis-src/arch/x86/kernel/ptrace.c#1331886070#cfg-block-9",
+      "__do_sys_ptrace#cfg-block-4[ret||request!=PTRACE_DETACH=false]",
+      "__do_sys_ptrace#cfg-block-1",
+      "__do_sys_ptrace#cfg-block-1[outcome=signed_integer:2]"
+    ],
+    "bypass_proof_method": "return_outcome_constrained_success",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every syscall-terminating LSM denial"
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "cfg_effect_free_success_witness",
+      "cfg_effect_free_fast_success_path+llvm_ssa_nonnegative_success_preservation"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_ptrace",
+      "__do_sys_ptrace#cfg-block-23",
+      "__do_sys_ptrace#cfg-block-22",
+      "__do_sys_ptrace#cfg-block-21",
+      "security_ptrace_traceme#call_int_hook-default[0]",
+      "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456#callsite:3",
+      "__do_sys_ptrace#cfg-block-18",
+      "__do_sys_ptrace#cfg-block-1",
+      "ptrace_traceme@/workspace/git/linux-v5.15-analysis-src/kernel/ptrace.c#1943710456#cfg-block-1",
+      "__do_sys_ptrace#callsite:1[nonzero]",
+      "__do_sys_ptrace#callsite:1"
+    ],
+    "bypass_proof_method": "cfg_effect_free_fast_success_path+llvm_ssa_nonnegative_success_preservation",
+    "reasons": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_not_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "N",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [
+      "at least one modeled feasible success path bypasses every syscall-terminating LSM denial"
+    ],
+    "sigkill": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

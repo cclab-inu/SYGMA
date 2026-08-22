@@ -1,0 +1,206 @@
+{
+  "number": 62,
+  "abi": "common",
+  "name": "kill",
+  "entry": "sys_kill",
+  "start": "__do_sys_kill",
+  "linked_symbol": "__x64_sys_kill",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_kill",
+    "prepare_kill_siginfo@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#873081637",
+    "clear_siginfo@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#4098747082",
+    "task_tgid_vnr@/workspace/git/linux-v5.15-analysis-src/include/linux/sched.h#564500544",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "from_kuid_munged",
+    "from_kuid",
+    "map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889",
+    "__kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911",
+    "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693",
+    "kill_proc_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#2830722045",
+    "kill_pid_info"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_kill",
+    "prepare_kill_siginfo@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#873081637",
+    "clear_siginfo@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#4098747082",
+    "task_tgid_vnr@/workspace/git/linux-v5.15-analysis-src/include/linux/sched.h#564500544",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "from_kuid_munged",
+    "from_kuid",
+    "map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889",
+    "__kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911",
+    "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693",
+    "kill_proc_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#2830722045",
+    "kill_pid_info"
+  ],
+  "success_path_functions": [
+    "__do_sys_kill",
+    "prepare_kill_siginfo@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#873081637",
+    "clear_siginfo@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#4098747082",
+    "task_tgid_vnr@/workspace/git/linux-v5.15-analysis-src/include/linux/sched.h#564500544",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "from_kuid_munged",
+    "from_kuid",
+    "map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889",
+    "__kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911",
+    "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693",
+    "kill_proc_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#2830722045",
+    "kill_pid_info"
+  ],
+  "call_tree_file": "syscalls/kill.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "non_enforcing",
+    "hooks": null,
+    "success_path_hook_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "__do_sys_kill",
+      "kill_proc_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#2830722045",
+      "kill_pid_info",
+      "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693"
+    ],
+    "hook_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_kill",
+      "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693",
+      "__kill_pgrp_info",
+      "group_send_sig_info",
+      "group_send_sig_info#cfg-block-5",
+      "group_send_sig_info#cfg-block-4",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-16",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-15",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-13",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-12",
+      "group_send_sig_info#cfg-block-1",
+      "__kill_pgrp_info#cfg-block-4[success=true]",
+      "__kill_pgrp_info#cfg-block-1",
+      "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693#cfg-block-1",
+      "__do_sys_kill#cfg-block-1",
+      "__do_sys_kill#callsite:2"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every syscall-terminating LSM denial"
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "__do_sys_kill",
+      "kill_proc_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#2830722045",
+      "kill_pid_info",
+      "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_kill",
+      "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693",
+      "__kill_pgrp_info",
+      "group_send_sig_info",
+      "group_send_sig_info#cfg-block-5",
+      "group_send_sig_info#cfg-block-4",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-16",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-15",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-13",
+      "check_kill_permission@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#4163306253#cfg-block-12",
+      "group_send_sig_info#cfg-block-1",
+      "__kill_pgrp_info#cfg-block-4[success=true]",
+      "__kill_pgrp_info#cfg-block-1",
+      "kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693#cfg-block-1",
+      "__do_sys_kill#cfg-block-1",
+      "__do_sys_kill#callsite:2"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_not_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "N",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [
+      "at least one modeled feasible success path bypasses every syscall-terminating LSM denial"
+    ],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

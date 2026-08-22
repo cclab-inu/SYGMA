@@ -1,0 +1,177 @@
+{
+  "number": 228,
+  "abi": "common",
+  "name": "clock_gettime",
+  "entry": "sys_clock_gettime",
+  "start": "__do_sys_clock_gettime",
+  "linked_symbol": "__x64_sys_clock_gettime",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_clock_gettime",
+    "clockid_to_kclock@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#923764587"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_clock_gettime",
+    "clockid_to_kclock@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#923764587"
+  ],
+  "success_path_functions": [
+    "__do_sys_clock_gettime",
+    "clockid_to_kclock@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#923764587"
+  ],
+  "call_tree_file": "syscalls/clock_gettime.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "uncertain",
+    "hooks": null,
+    "success_path_hook_sets": [
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": null,
+    "hook_proof_paths": {},
+    "reasons": [
+      "__do_sys_clock_gettime: indirect call may affect LSM denial propagation: kc-\u003eclock_get_timespec"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_clock_gettime",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "kc-\u003eclock_get_timespec",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "reasons": [
+      "__do_sys_clock_gettime: indirect signal target set is open: kc-\u003eclock_get_timespec"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_clock_gettime",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "kc-\u003eclock_get_timespec",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "__do_sys_clock_gettime: indirect call may affect LSM denial propagation: kc-\u003eclock_get_timespec",
+        "success path 1 has no hook with certified final syscall-error propagation",
+        "success path 2 has no hook with certified final syscall-error propagation",
+        "success path 3 has no hook with certified final syscall-error propagation"
+      ]
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "__do_sys_clock_gettime: indirect signal target set is open: kc-\u003eclock_get_timespec"
+      ]
+    }
+  },
+  "lsm_classification": "uncertain",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "U",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [
+      "__do_sys_clock_gettime: indirect call may affect LSM denial propagation: kc-\u003eclock_get_timespec",
+      "success path 1 has no hook with certified final syscall-error propagation",
+      "success path 2 has no hook with certified final syscall-error propagation",
+      "success path 3 has no hook with certified final syscall-error propagation"
+    ],
+    "sigkill": [
+      "__do_sys_clock_gettime: indirect signal target set is open: kc-\u003eclock_get_timespec"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "lsm",
+      "caller": "__do_sys_clock_gettime",
+      "kind": "indirect_coverage_edge_unresolved",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "kc-\u003eclock_get_timespec",
+      "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_clock_gettime",
+      "kind": "indirect_signal_target_set_unproven",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "kc-\u003eclock_get_timespec",
+      "detail": "the runtime function-pointer target set is not statically closed"
+    }
+  ]
+}

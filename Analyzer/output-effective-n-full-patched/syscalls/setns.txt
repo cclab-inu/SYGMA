@@ -1,0 +1,17 @@
+- __do_sys_setns
+  - fget
+  - proc_ns_file
+  - fput
+    - fput_many
+      - atomic_long_sub_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#1038624733
+        - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796
+          - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104
+          - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313
+        - arch_atomic_long_sub_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#2960928183
+          - arch_atomic64_sub_and_test@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#4168730632
+      - atomic_long_sub_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#1038624733
+        - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796 [dp_skip=revisited]
+        - arch_atomic_long_sub_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#2960928183 [dp_skip=revisited]
+        - arch_atomic_long_sub_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#2960928183
+          - arch_atomic64_sub_and_test@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#4168730632 [dp_skip=revisited]
+          - arch_atomic64_sub_and_test@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#4168730632

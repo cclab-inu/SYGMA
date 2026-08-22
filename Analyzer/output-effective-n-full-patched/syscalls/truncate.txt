@@ -1,0 +1,17 @@
+- __do_sys_truncate
+  - do_sys_truncate
+    - user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614
+      - user_path_at_empty
+        - getname_flags
+          - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037
+        - filename_lookup
+          - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+        - putname
+          - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+        - getname_flags
+          - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037 [dp_skip=revisited]
+    - retry_estale@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#3733421218
+    - vfs_truncate [direct_lsm=security_path_truncate | success_lsm=security_path_truncate]
+      - inode_permission [direct_lsm=security_inode_permission | success_lsm=security_inode_permission]
+      - do_truncate
+        - notify_change [direct_lsm=security_inode_need_killpriv,security_inode_setattr | success_lsm=security_inode_setattr | indirect=inode->i_op->setattr]

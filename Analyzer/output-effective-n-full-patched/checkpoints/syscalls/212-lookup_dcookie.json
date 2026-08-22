@@ -1,0 +1,106 @@
+{
+  "number": 212,
+  "abi": "common",
+  "name": "lookup_dcookie",
+  "entry": "sys_lookup_dcookie",
+  "start": "__do_sys_lookup_dcookie",
+  "linked_symbol": "__x64_sys_lookup_dcookie",
+  "linked_symbol_type": "W",
+  "availability": "unavailable_config_stub",
+  "availability_reason": "the completed build links a weak conditional ENOSYS syscall stub",
+  "start_found": false,
+  "direct_lsm_functions": null,
+  "direct_signal_functions": null,
+  "reachable_lsm_hooks": null,
+  "reachable_signal_checks": null,
+  "reachable_signal_check_categories": {
+    "group_exit": null,
+    "fatal_pending": null,
+    "generic_pending": null
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": null,
+  "always_signal_check_categories": {
+    "group_exit": null,
+    "fatal_pending": null,
+    "generic_pending": null
+  },
+  "validated_lsm_hooks": null,
+  "validated_signal_checks": null,
+  "must_pass_lsm_hooks": null,
+  "inactive_config_lsm_hooks": null,
+  "optional_lsm_hooks": null,
+  "normal_path_functions": null,
+  "strong_sig_checks": null,
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": null,
+  "reachable_functions": null,
+  "success_path_functions": null,
+  "call_tree_file": "syscalls/lookup_dcookie.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "",
+  "signal_reachability": "",
+  "validated_lsm_reachability": "",
+  "validated_signal_reachability": "",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": null,
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": null,
+  "lsm_path_coverage": {
+    "status": "uncertain",
+    "hooks": [],
+    "success_path_hook_sets": [],
+    "proof_methods": [],
+    "proof_functions": [],
+    "hook_proof_paths": {},
+    "reasons": []
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": [],
+    "success_path_check_sets": [],
+    "proof_methods": [],
+    "proof_functions": [],
+    "check_proof_paths": {},
+    "reasons": []
+  },
+  "unproven_lsm_candidates": null,
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "not_applicable",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": [
+        "the completed build links a weak conditional ENOSYS syscall stub"
+      ]
+    },
+    "sigkill": {
+      "status": "not_applicable",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": [
+        "the completed build links a weak conditional ENOSYS syscall stub"
+      ]
+    }
+  },
+  "lsm_classification": "not_applicable_unavailable",
+  "sigkill_classification": "not_applicable_unavailable",
+  "lsm_enforcement_state": "NA",
+  "sigkill_enforcement_state": "NA",
+  "negative_reasons": {
+    "lsm": [
+      "the completed build links a weak conditional ENOSYS syscall stub"
+    ],
+    "sigkill": [
+      "the completed build links a weak conditional ENOSYS syscall stub"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": []
+}

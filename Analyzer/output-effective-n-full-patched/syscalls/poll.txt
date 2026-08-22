@@ -1,0 +1,3 @@
+- __do_sys_poll
+  - do_sys_poll@/workspace/git/linux-v5.15-analysis-src/fs/select.c#3545040779
+    - rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742 [ambiguous=task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2368167491,task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2435533354,task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2287110434]

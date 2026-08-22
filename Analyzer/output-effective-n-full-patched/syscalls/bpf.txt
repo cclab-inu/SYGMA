@@ -1,0 +1,4 @@
+- __do_sys_bpf
+  - __sys_bpf@/workspace/git/linux-v5.15-analysis-src/kernel/bpf/syscall.c#3570896554 [direct_lsm=security_bpf | success_lsm=security_bpf]
+    - bpf_check_uarg_tail_zero
+  - USER_BPFPTR@/workspace/git/linux-v5.15-analysis-src/include/linux/bpfptr.h#2075211965

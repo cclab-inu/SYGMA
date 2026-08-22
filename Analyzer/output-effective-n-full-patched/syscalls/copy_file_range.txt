@@ -1,0 +1,4 @@
+- __do_sys_copy_file_range
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - vfs_copy_file_range [indirect=file_in->f_op->remap_file_range]
+    - rw_verify_area [direct_lsm=security_file_permission | success_lsm=security_file_permission | validated_lsm=security_file_permission]

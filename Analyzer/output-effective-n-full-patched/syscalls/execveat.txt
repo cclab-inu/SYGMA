@@ -1,0 +1,13 @@
+- __do_sys_execveat
+  - do_execveat@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#3054181484
+    - do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+      - bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638 [direct_lsm=security_bprm_creds_for_exec | direct_signal=fatal_signal_pending | success_lsm=security_bprm_creds_for_exec]
+        - exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118
+          - search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526 [direct_lsm=security_bprm_check | success_lsm=security_bprm_check | validated_lsm=security_bprm_check | indirect=fmt->load_binary]
+            - prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003
+              - kernel_read
+                - rw_verify_area [direct_lsm=security_file_permission | success_lsm=security_file_permission | validated_lsm=security_file_permission]
+  - getname_uflags
+    - getname_flags
+      - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037

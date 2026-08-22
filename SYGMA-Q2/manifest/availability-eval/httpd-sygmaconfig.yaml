@@ -1,0 +1,20 @@
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: httpd-sygma-config
+  namespace: default
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          app: httpd
+        name: httpd
+        namespace: default
+      spec:
+        containers:
+        - name: httpd
+          image: httpd:2.4.39
+          imagePullPolicy: Always

@@ -1,0 +1,12 @@
+- __do_sys_io_submit
+  - lookup_ioctx@/workspace/git/linux-v5.15-analysis-src/fs/aio.c#1347528967
+    - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+      - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+    - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+      - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+        - rcu_read_unlock_strict
+  - percpu_ref_put@/workspace/git/linux-v5.15-analysis-src/include/linux/percpu-refcount.h#1359392232
+    - percpu_ref_put_many@/workspace/git/linux-v5.15-analysis-src/include/linux/percpu-refcount.h#541808943 [ambiguous=__ref_is_percpu@/workspace/git/linux-v5.15-analysis-src/include/linux/percpu-refcount.h#1727133961,__ref_is_percpu@/workspace/git/linux-v5.15-analysis-src/include/linux/percpu-refcount.h#3778094911,__ref_is_percpu@/workspace/git/linux-v5.15-analysis-src/include/linux/percpu-refcount.h#972104360 | indirect=ref->data->release]
+      - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072 [dp_skip=revisited]
+      - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+        - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162 [dp_skip=revisited]

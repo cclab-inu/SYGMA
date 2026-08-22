@@ -1,0 +1,9 @@
+- __do_sys_mincore
+  - __chk_range_not_ok@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/uaccess.h#2255166019
+  - task_size_max@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/page_64.h#141912916
+  - __get_free_pages
+    - alloc_pages
+      - preempt_count@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/preempt.h#74403457
+    - alloc_pages
+      - preempt_count@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/preempt.h#74403457 [dp_skip=revisited]
+  - free_pages

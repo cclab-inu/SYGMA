@@ -1,0 +1,757 @@
+{
+  "number": 313,
+  "abi": "common",
+  "name": "finit_module",
+  "entry": "sys_finit_module",
+  "start": "__do_sys_finit_module",
+  "linked_symbol": "__x64_sys_finit_module",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "kernel_read_file"
+  ],
+  "direct_signal_functions": [
+    "prepare_to_wait_event"
+  ],
+  "reachable_lsm_hooks": [
+    "security_capable"
+  ],
+  "reachable_signal_checks": [
+    "signal_pending_state"
+  ],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": [
+      "signal_pending_state"
+    ]
+  },
+  "signal_check_paths": [
+    {
+      "check": "signal_pending_state",
+      "callsite_id": "callsite:3",
+      "category": "generic-pending",
+      "sigkill_relevance": "proven_relevant",
+      "subject": "current-task",
+      "traversal": "cfg-path",
+      "function": "prepare_to_wait_event",
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "abort_effect": "guaranteed",
+      "proof_path": [
+        "signal_pending_state",
+        "prepare_to_wait_event",
+        "add_unformed_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1803171828",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "__do_sys_finit_module"
+      ]
+    }
+  ],
+  "always_lsm_hooks": [
+    "security_capable"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capable"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capable"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_finit_module",
+    "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "kernel_read_file",
+    "kernel_read_file_from_fd"
+  ],
+  "strong_sig_checks": [
+    "signal_pending_state"
+  ],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [
+    "signal_pending_state"
+  ],
+  "reachable_functions": [
+    "__do_sys_finit_module",
+    "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "kernel_read_file",
+    "kernel_read_file_from_fd"
+  ],
+  "success_path_functions": [
+    "__do_sys_finit_module",
+    "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "kernel_read_file",
+    "kernel_read_file_from_fd"
+  ],
+  "call_tree_file": "syscalls/finit_module.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": true,
+  "lsm_reachability": "always",
+  "signal_reachability": "conditional",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "conditional",
+  "has_sigkill_related_checks": true,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable",
+    "security_kernel_read_file"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_kernel_read_file"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "kernel_read_file"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capable",
+      "bpf_hook": "capable",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+        "__do_sys_finit_module"
+      ],
+      "llvm_verification": "unknown",
+      "llvm_evidence": [
+        {
+          "hook": "security_capable",
+          "function": "ns_capable_common",
+          "source_function": "ns_capable_common",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c",
+          "source_line": 375,
+          "source_column": 12,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-preserve-nonnegative-success",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "return"
+          ],
+          "verification": "must_preserve_success",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable",
+      "security_kernel_read_file"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_kernel_read_file"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "capable",
+      "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+      "__do_sys_finit_module",
+      "kernel_read_file",
+      "kernel_read_file_from_fd"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+        "__do_sys_finit_module"
+      ],
+      "security_kernel_read_file": [
+        "security_kernel_read_file",
+        "kernel_read_file",
+        "kernel_read_file_from_fd",
+        "__do_sys_finit_module"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": [
+      "signal_pending_state"
+    ],
+    "success_path_check_sets": [
+      null,
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_finit_module",
+      "kernel_read_file",
+      "module_sig_check@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3097219154",
+      "pkcs7_parse_message",
+      "verify_pkcs7_message_sig",
+      "pkcs7_verify",
+      "verify_pkcs7_signature",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "find_symbol@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#2082126600",
+      "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050",
+      "move_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#4080508806",
+      "add_unformed_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1803171828",
+      "prepare_to_wait_event",
+      "post_relocation@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#839800418",
+      "memdup_user",
+      "parse_args",
+      "mod_sysfs_init@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3236351880",
+      "kobject_init_and_add",
+      "kobject_add_internal@/workspace/git/linux-v5.15-analysis-src/lib/kobject.c#2891368954",
+      "sysfs_create_dir_ns",
+      "__kernfs_new_node@/workspace/git/linux-v5.15-analysis-src/fs/kernfs/dir.c#167974043",
+      "idr_alloc_u32",
+      "idr_get_free",
+      "radix_tree_extend@/workspace/git/linux-v5.15-analysis-src/lib/radix-tree.c#281247260",
+      "__kernfs_iattrs@/workspace/git/linux-v5.15-analysis-src/fs/kernfs/inode.c#46069968",
+      "kernfs_new_node",
+      "create_dir@/workspace/git/linux-v5.15-analysis-src/lib/kobject.c#2658885528",
+      "kobject_create",
+      "kobject_create_and_add",
+      "mod_sysfs_setup@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#2992263258",
+      "kmemdup@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#234056272"
+    ],
+    "check_proof_paths": {
+      "signal_pending_state": [
+        "signal_pending_state",
+        "prepare_to_wait_event",
+        "add_unformed_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1803171828",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "__do_sys_finit_module"
+      ]
+    },
+    "unproven_bypass_path": [
+      "__do_sys_finit_module",
+      "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261",
+      "may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261#cfg-block-1",
+      "__do_sys_finit_module#cfg-block-16[err=false]",
+      "kernel_read_file_from_fd",
+      "kernel_read_file",
+      "deny_write_access@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2958226010",
+      "deny_write_access@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2958226010#cfg-block-4[atomic_dec_unless_positive(\u0026inode-\u003ei_writecount)=true]",
+      "deny_write_access@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2958226010#cfg-block-1",
+      "kernel_read_file#cfg-block-42[ret=false]",
+      "kernel_read_file#cfg-block-40[i_size\u003c=0=false]",
+      "kernel_read_file#cfg-block-30[ret=true]",
+      "kernel_read_file#cfg-block-4[ret==0=true]",
+      "kernel_read_file#cfg-block-1",
+      "kernel_read_file_from_fd#cfg-block-1",
+      "__do_sys_finit_module#cfg-block-3[err\u003c0=false]",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "module_sig_check@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3097219154",
+      "mod_verify_sig",
+      "mod_check_sig",
+      "mod_check_sig#cfg-block-1",
+      "mod_verify_sig#cfg-block-3[ret=false]",
+      "verify_pkcs7_signature",
+      "pkcs7_parse_message",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "pkcs7_parse_message#cfg-block-21[!ctx=false]",
+      "pkcs7_parse_message#cfg-block-1",
+      "verify_pkcs7_signature#cfg-block-7[IS_ERR(pkcs7)=false]",
+      "verify_pkcs7_message_sig",
+      "pkcs7_verify",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#cfg-block-28",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#cfg-block-27",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#cfg-block-23",
+      "pkcs7_digest@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#62075597",
+      "pkcs7_digest@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#62075597#cfg-block-68",
+      "pkcs7_digest@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#62075597#cfg-block-67",
+      "pkcs7_digest@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#62075597#cfg-block-63",
+      "pkcs7_digest@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#62075597#cfg-block-62",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#cfg-block-21",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#cfg-block-19",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#cfg-block-18",
+      "pkcs7_find_key@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#1544255580#cfg-block-12",
+      "pkcs7_verify_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_verify.c#3349142556#callsite:3[nonnegative]",
+      "pkcs7_verify#cfg-block-1",
+      "verify_pkcs7_message_sig#cfg-block-42[ret\u003c0=false]",
+      "pkcs7_validate_trust",
+      "pkcs7_validate_trust#cfg-block-16",
+      "pkcs7_validate_trust#cfg-block-15",
+      "pkcs7_validate_trust#cfg-block-14",
+      "pkcs7_validate_trust#cfg-block-11",
+      "pkcs7_validate_trust#cfg-block-10",
+      "pkcs7_validate_trust#cfg-block-3",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-82",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-81",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-77",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-71",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-70",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-69",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-68",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-67",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-10",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-5",
+      "pkcs7_validate_trust_one@/workspace/git/linux-v5.15-analysis-src/crypto/asymmetric_keys/pkcs7_trust.c#4278315242#cfg-block-1",
+      "pkcs7_validate_trust#cfg-block-4",
+      "verify_pkcs7_message_sig#cfg-block-23[ret\u003c0=false]",
+      "verify_pkcs7_message_sig#cfg-block-1",
+      "verify_pkcs7_message_sig#callsite:7[nonnegative]",
+      "verify_pkcs7_signature#cfg-block-1",
+      "verify_pkcs7_signature#callsite:4",
+      "mod_verify_sig#cfg-block-1",
+      "mod_verify_sig#callsite:5",
+      "module_sig_check@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3097219154#cfg-block-12[!err=true]",
+      "module_sig_check@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3097219154#cfg-block-11",
+      "module_sig_check@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3097219154#cfg-block-11[outcome=signed_integer:2]",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077#cfg-block-75[err=true]",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077#cfg-block-1",
+      "__do_sys_finit_module#cfg-block-1"
+    ],
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: module_sig_check",
+      "module_alloc: translation-unit variants have different CFG facts",
+      "move_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#4080508806: signal-abort propagation is unresolved: module_alloc",
+      "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050: signal-abort propagation is unresolved: move_module",
+      "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: layout_and_allocate",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: add_unformed_module",
+      "module_finalize: translation-unit variants have different CFG facts",
+      "post_relocation@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#839800418: signal-abort propagation is unresolved: module_finalize",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: post_relocation",
+      "memdup_user: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "strndup_user: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "parse_args: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: mod_sysfs_setup",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: copy_module_elf",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_finit_module: signal-abort propagation is unresolved: load_module",
+      "__do_sys_finit_module: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_finit_module",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "load_module",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_finit_module",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "move_module",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "add_unformed_module",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "copy_module_elf",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "layout_and_allocate",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "mod_sysfs_setup",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "module_sig_check",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "post_relocation",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "memdup_user",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "module_alloc",
+        "kind": "translation_unit_variant_conflict",
+        "category": "configured_translation_unit_variation",
+        "resolution_scope": "configured_input_ambiguity",
+        "detail": "coverage is not guessed across differing translation-unit variants"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "module_finalize",
+        "kind": "translation_unit_variant_conflict",
+        "category": "configured_translation_unit_variation",
+        "resolution_scope": "configured_input_ambiguity",
+        "detail": "coverage is not guessed across differing translation-unit variants"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "move_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#4080508806",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "module_alloc",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "parse_args",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "post_relocation@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#839800418",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "module_finalize",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "strndup_user",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [
+    "signal_pending_state"
+  ],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: module_sig_check",
+        "module_alloc: translation-unit variants have different CFG facts",
+        "move_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#4080508806: signal-abort propagation is unresolved: module_alloc",
+        "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050: signal-abort propagation is unresolved: move_module",
+        "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: layout_and_allocate",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: add_unformed_module",
+        "module_finalize: translation-unit variants have different CFG facts",
+        "post_relocation@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#839800418: signal-abort propagation is unresolved: module_finalize",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: post_relocation",
+        "memdup_user: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "strndup_user: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "parse_args: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: mod_sysfs_setup",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: copy_module_elf",
+        "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_finit_module: signal-abort propagation is unresolved: load_module",
+        "__do_sys_finit_module: a checkpoint-free potential return is not proven to be a normal successful operation return"
+      ]
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: module_sig_check",
+      "module_alloc: translation-unit variants have different CFG facts",
+      "move_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#4080508806: signal-abort propagation is unresolved: module_alloc",
+      "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050: signal-abort propagation is unresolved: move_module",
+      "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: layout_and_allocate",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: add_unformed_module",
+      "module_finalize: translation-unit variants have different CFG facts",
+      "post_relocation@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#839800418: signal-abort propagation is unresolved: module_finalize",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: post_relocation",
+      "memdup_user: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "strndup_user: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "parse_args: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: mod_sysfs_setup",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: signal-abort propagation is unresolved: copy_module_elf",
+      "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_finit_module: signal-abort propagation is unresolved: load_module",
+      "__do_sys_finit_module: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_finit_module",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "load_module",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_finit_module",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "move_module",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "layout_and_allocate@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#56351050",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "add_unformed_module",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "copy_module_elf",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "layout_and_allocate",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "mod_sysfs_setup",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "module_sig_check",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "post_relocation",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "load_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1134587077",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "memdup_user",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "module_alloc",
+      "kind": "translation_unit_variant_conflict",
+      "category": "configured_translation_unit_variation",
+      "resolution_scope": "configured_input_ambiguity",
+      "detail": "coverage is not guessed across differing translation-unit variants"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "module_finalize",
+      "kind": "translation_unit_variant_conflict",
+      "category": "configured_translation_unit_variation",
+      "resolution_scope": "configured_input_ambiguity",
+      "detail": "coverage is not guessed across differing translation-unit variants"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "move_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#4080508806",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "module_alloc",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "parse_args",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "post_relocation@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#839800418",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "module_finalize",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "strndup_user",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+- __do_sys_fchown
+  - ksys_fchown
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+    - vfs_fchown
+      - chown_common [direct_lsm=security_path_chown | success_lsm=security_path_chown | validated_lsm=security_path_chown]

@@ -1,0 +1,6 @@
+## Append samples of your project ##
+resources:
+- security_v1_sygmaconfig.yaml
+- security_v1_sygmaconfig_allowall.yaml
+- security_v1_sygmapolicy.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

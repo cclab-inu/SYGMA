@@ -1,0 +1,13 @@
+- __do_sys_dup3
+  - ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742 [ambiguous=task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2368167491,task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2435533354,task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2287110434]
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+    - spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028
+      - _raw_spin_lock
+        - __raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451
+          - do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452
+            - queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875
+              - atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744
+    - expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855
+    - files_lookup_fd_locked@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#232240839 [ambiguous=files_lookup_fd_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#1542786399,files_lookup_fd_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#2370281249,files_lookup_fd_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#3577688973,files_lookup_fd_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#3488564812]

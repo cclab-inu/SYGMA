@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/library/nginx@sha256:c7a6ad68be85142c7fe1089e48faa1e7c7166a194caa9180ddea66345876b9d2
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because replacing ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "nginx", "--", "/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,35 @@
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: mysql-sygma-config
+  namespace: default
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: mysql
+        namespace: default
+        labels:
+          app: mysql
+      spec:
+        containers:
+        - name: mysql
+          image: mysql:8.3.0
+          imagePullPolicy: Always
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: rootpassword
+          - name: MYSQL_DATABASE
+            value: testdb
+          - name: MYSQL_USER
+            value: testuser
+          - name: MYSQL_PASSWORD
+            value: testpass
+          readinessProbe:
+            exec:
+              command: ["mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-prootpassword"]
+            initialDelaySeconds: 3
+            periodSeconds: 2
+

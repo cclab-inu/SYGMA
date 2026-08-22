@@ -1,0 +1,2 @@
+- __do_sys_settimeofday
+  - do_sys_settimeofday64 [direct_lsm=security_settime64 | success_lsm=security_settime64 | validated_lsm=security_settime64]

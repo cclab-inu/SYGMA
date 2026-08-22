@@ -1,0 +1,4 @@
+- __do_sys_fchmod
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - vfs_fchmod
+    - chmod_common [direct_lsm=security_path_chmod | success_lsm=security_path_chmod]

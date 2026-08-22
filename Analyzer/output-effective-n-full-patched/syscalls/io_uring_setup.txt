@@ -1,0 +1,36 @@
+- __do_sys_io_uring_setup
+  - io_uring_setup@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#1387793620
+    - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902
+    - io_uring_create@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#2590999293
+      - io_ring_ctx_alloc@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#1995239381
+        - kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303
+          - kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066 [ambiguous=__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#477816588,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1967333079,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1342710755]
+        - kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066 [ambiguous=__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#477816588,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1967333079,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1342710755 | dp_skip=revisited]
+        - percpu_ref_init
+          - kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303 [dp_skip=revisited]
+      - in_compat_syscall@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/compat.h#2510512485
+      - capable
+        - ns_capable
+          - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+      - mmgrab@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#534860433
+        - atomic_inc@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#2526436378
+          - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796
+            - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104
+            - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313
+          - arch_atomic_inc@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#204048299
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+      - io_allocate_scq_urings@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#41531579
+        - rings_size@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#3830460730
+        - io_mem_alloc@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#1646679097
+          - __get_free_pages
+            - alloc_pages
+              - preempt_count@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/preempt.h#74403457
+          - get_order@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/getorder.h#1472058019
+        - array_size@/workspace/git/linux-v5.15-analysis-src/include/linux/overflow.h#732755021
+        - io_mem_alloc@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#1646679097
+          - __get_free_pages [dp_skip=revisited]
+          - get_order@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/getorder.h#1472058019 [dp_skip=revisited]
+      - io_uring_get_file@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#3110704055
+        - sock_create_kern
+          - __sock_create [direct_lsm=security_socket_create,security_socket_post_create | success_lsm=security_socket_create,security_socket_post_create | validated_lsm=security_socket_create | indirect=pf->create]
+      - io_uring_install_fd@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#1318264499

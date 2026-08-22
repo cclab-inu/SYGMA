@@ -1,0 +1,12 @@
+- __do_sys_setfsuid
+  - __sys_setfsuid [direct_lsm=security_task_fix_setuid]
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - from_kuid_munged
+      - from_kuid
+        - map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889
+        - __kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911
+    - make_kuid
+      - map_id_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#2286615260
+        - map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034
+    - uid_valid@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#4272962922
+      - __kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911 [dp_skip=revisited]

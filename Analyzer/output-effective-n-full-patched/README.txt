@@ -1,0 +1,116 @@
+systematic_analysis output
+
+kernel_root: /workspace/git/linux-v5.15-analysis-src
+compile_database: /workspace/git/linux-v5.15-analysis-build/compile_commands.json
+source_mode: hybrid Clang AST/CFG + kernel success-gate semantics + selective LLVM IR verification
+generated_output: /workspace/test/systematic_analysis/output-effective-n-full-patched
+
+files:
+- summary.json: syscall-level aggregate report
+- checkpoints/progress.json: atomically updated completion, classification, uncertain, and unresolved ratios
+- checkpoints/syscalls/<number>-<name>.json: complete syscall report written immediately after that syscall finishes
+- function_index.json: disabled by default; pass -emit-function-index to emit the complete diagnostic AST/CFG/LLVM index
+- analysis_metadata.json: frontend coverage, CFG coverage, translation-unit variants, and LLVM failure counts
+- reports/input_validation.json: source/config/build/compile-database completeness checks used by certification
+- reports/syscall_availability.txt: every x86-64 table slot classified from the linked System.map
+- reports/lsm_syscalls.txt: syscalls that can reach one or more security_* hooks
+- reports/signal_syscalls.txt: syscalls that can reach one or more signal-exit-related checks
+- reports/always_lsm_syscalls.txt: syscall -> hooks proven mandatory for successful syscall execution
+- reports/always_signal_syscalls.txt: compatibility view of locally mandatory signal checks
+- reports/signal_check_paths.txt: strict SIGKILL proof-cone checkpoints with category and proof path
+- reports/indirect_call_resolutions.txt: evidence-based INDIRECT_CALL_* and audited socket ops-table target expansion
+- reports/must_pass_lsm_syscalls.txt: syscall -> hooks that must be traversed on the normal success path
+- reports/effective_lsm_syscalls.txt: path-local hooks whose negative result is proven to block the operation and terminate the syscall
+- reports/certified_bpf_lsm_syscalls.txt: only syscalls with the final certified BPF LSM classification and canonical BPF hook names
+- reports/lsm_path_coverage.txt: per-success-exit E/N/U coverage proof, including branch-specific enforcing hook sets
+- reports/inactive_lsm_syscalls.txt: source-level security_* calls compiled as inactive stubs by the selected configuration
+- reports/unproven_lsm_candidates.txt: direct hooks inside proven normal-path functions that were not promoted to mandatory
+- reports/lsm_classification.txt: final certified_bpf_lsm_enforceable / certified_bpf_lsm_not_enforceable / uncertain classification
+- reports/sigkill_classification.txt: final certified_sigkill_enforceable / certified_sigkill_not_enforceable / uncertain classification
+- reports/classification_counts.json: paper-ready counts with unavailable syscall slots separated from applicable syscalls
+- reports/proof_gaps.txt: per-syscall CFG, alias, function-pointer, variant, and unresolved-call proof gaps
+- reports/proof_gap_categories.json: proof gaps grouped by domain, cause, and implementation/static-limit scope
+- reports/llvm_verification_failures.txt: translation units whose optional LLVM corroboration could not be produced
+- summary.json also includes validated_* fields for hooks/checks proven after top-level guard-return validation
+- reports/lsm_functions.txt: functions that directly contain security_* calls
+- reports/signal_functions.txt: functions that directly contain signal-exit-related checks
+- syscalls/<name>.txt: conservatively proven successful-path call tree
+- raw diagnostic output disabled; pass -emit-raw to generate it
+
+notes:
+- frontend: hybrid
+- final certification requires a completed build: vmlinux, System.map, configured module manifests, and every selected compile command object must exist and be newer than its source and build .config
+- empty or weak-ENOSYS x86-64 syscall slots are reported as not_applicable_unavailable rather than omitted or counted as uncertain
+- hybrid mode obtains typed function definitions, direct callees, exact direct callback arguments, and const ops-table initializers from Clang AST; regex parsing is retained only for kernel-specific errno/success-gate semantics and fallback diagnostics
+- a missing Clang-identified direct target is never replaced by an unrelated same-name definition
+- Clang CFG supplies executable may-reach calls, success-only edges, and per-block hook/call events
+- Clang CFG successor predicates are retained so interprocedural constant arguments can remove infeasible branches before an E/N/U witness is accepted
+- ambiguous AST-to-CFG event placement is emitted as cfg_event_unplaced and is never guessed
+- kernel errno guards such as if (err) return err and initialized-error success gates are composed with CFG facts
+- kernel_errno_success_gate is an LSM-only proof method; SIGKILL enforcement uses per-success-exit Clang CFG coverage
+- LLVM verification is proof-cone selective and corroborative: it records hook and ordinary direct-call SSA uses plus negative-error, nonnegative-success, and valid-pointer-success preservation after optimization
+- Clang keeps both source and macro-expanded return expressions; LLVM function summaries certify a return class only when every modeled return satisfies it
+- assigned call results retain exact CFG callsite lineage across value-preserving wrappers; a wrapper is treated as identity only when every CFG return forwards the same input parameter
+- symbolic caller arguments become existential success witnesses only when exact parameter-return structure and current CFG constraints prove compatibility
+- LLVM may-use evidence never creates a new positive proof by itself; ignored-call slicing additionally requires complete matching reachable AST call sites
+- not_present_after_codegen means optimized/inlined or absent and remains unknown; it is never treated as proof that a hook is ignored
+- translation-unit-dependent inline variants are separated with Clang ODR semantic hashes and marked frontend_variant_conflict when their CFG facts differ
+- reachable_functions and success_path_functions contain only the conservatively proven success path
+- branch-insensitive debug, panic, warning, and failure-only paths are omitted by default
+- closed_effect_source_absence is a fixed-point summary over the syscall-reachable direct-call graph
+- source-free recursive SCCs converge to no effect; an actual source or unresolved effect edge propagates Possible or Unknown backward through the SCC
+- unresolved targets and relevant unplaced CFG events are never closed merely because they occur in a cycle
+- a final return wrapper propagates an errno only when its unique tainted parameter cannot escape and every assignment/return preserves or explicitly normalizes a negative error
+- Clang records each call as returned, assigned, condition, argument, discarded, or unknown together with its return type
+- a call result is classified as discarded only for a Clang-proven standalone/void call or complete matching LLVM ignored facts; calls inside if/while/comparison/short-circuit expressions remain effect-relevant
+- direct predicate propagation rejects negated conditions and treats additional && requirements as conditional
+- audited diagnostic-only barriers such as schedule_debug, debug hrtimer setup, taint tests, and dump_stack are excluded from success paths
+- reachable_lsm_hooks uses clean mandatory paths by default; reachable_signal_checks is populated from the strict context-sensitive SIGKILL proof cone unless -emit-raw requests the legacy may-reach diagnostic traversal
+- INDIRECT_CALL_1..4/INET candidates plus type-proven proto_ops/proto tables are expanded for may-reach signal paths
+- proto_ops/proto candidates are narrowed through configured .ops/.prot registration pairs when that provenance is available
+- other operation-table types remain unresolved because type-only global target unions can create cross-subsystem false paths
+- unresolved function pointers remain marked indirect instead of being guessed; indirect expansion never promotes a hook/check into always by itself
+- each unresolved proof edge records a category and resolution_scope so implementation gaps remain separate from runtime alias/function-pointer limits
+- revisited functions are marked with dp_skip=revisited and not expanded again
+- signal checks include only group-exit, fatal-pending, and generic-pending predicates; errno constants and PF_EXITING are excluded
+- "always_lsm_hooks" means proven mandatory on the successful syscall path
+- "validated" means proven after skipping top-level guard returns like if (bad_input) return ...;
+- "must_pass_lsm_hooks" is the backward-compatible alias for always_lsm_hooks
+- "lsm_error_effects" tracks hook_kind, blocks_operation, terminates_syscall, errno_propagation, overwrite_sites, and proof_path
+- hook_kind is error-return, notification, or unknown based on the indexed hook definition's return type
+- errno_propagation is exact, normalized, overwritten, conditional, ignored, or unknown; unsupported control flow remains unknown
+- "effective_enforcing_lsm_hooks" contains hooks whose denial is proven to block and reach the syscall on the modeled path; collective all-path coverage is recorded separately
+- "lsm_path_coverage" composes E/N/U states over every CFG success exit; different branches may use different enforcing hooks
+- lsm_path_coverage.proof_methods distinguishes clang_cfg_coverage from kernel_errno_success_gate plus clang_reachable_cross_check
+- a bypass is certified as N only when its return is explicitly successful or directly forwards another recursively proven successful return
+- a shared variable return such as return err remains U when unrelated negative precondition paths and successful paths merge; unproven_bypass_path records that diagnostic
+- unrelated baseline failures such as -EBADF or -EFAULT are excluded from E/N success-path voting
+- a negative return caused by a BPF LSM denial or an observed current-task SIGKILL checkpoint remains E evidence when operation blocking and propagation to the syscall are proven
+- an unresolved edge is adversarial until a later common enforcing hook covers every remaining successful path
+- "certified_enforcing_lsm_hooks" is the collectively covering enforcing hook set after hybrid/CFG and BPF configuration checks
+- proof_eligibility status is complete, positive_only, or incomplete; positive_only permits a certified positive witness but never a closed-world negative claim
+- lsm_classification is certified_bpf_lsm_enforceable, certified_bpf_lsm_not_enforceable, or uncertain
+- universal enforcement uses E+E=E, E+N=N, N+U=N, and E+U=U; one certified complete normal-success bypass therefore makes the syscall N even when other paths contain E or U
+- a common E after a branch covers that branch only when every surviving path actually reaches it; an independently certified path that bypasses the common E still takes N precedence
+- sigkill_classification is certified_sigkill_enforceable, certified_sigkill_not_enforceable, or uncertain
+- sigkill_path_coverage applies the same E/N/U algebra to current-task SIGKILL checkpoints and requires their abort result to reach the syscall
+- lsm_enforcement_state and sigkill_enforcement_state expose the paper-facing E, N, U, or NA label directly
+- unresolved_edges_in_proof_cone records the exact frontend, CFG, direct-call, function-pointer, and ops-table gaps behind uncertain results
+- only signal predicates whose subject is explicitly proven current and whose abort reaches the syscall contribute positive evidence
+- repeated signal predicates are analyzed by Clang callsite ID; state mask, task subject, and local abort evidence cannot be borrowed across callsites
+- current_task_reachable_signal_checks is diagnostic reachability; signal_check_paths.abort_effect and sigkill_classification carry the enforcement verdict
+- abort_effect=conditional is limited to a positive current-task predicate conjunct followed by an explicit negative errno assignment whose return path is proven
+- boolean predicate forwarding such as return signal_pending(current) is not treated as errno termination without a proven negative-error normalization
+- loop-controlled predicates such as while (!signal_pending(current)) remain uncertain until loop exit and errno flow are modeled together
+- ignored signal-return paths, including allocator/reclaim/debug descendants, are sliced out of the SIGKILL proof cone
+- indirect signal paths remain uncertified unless the runtime target set can be closed; they are never promoted by a single candidate target
+- default report generation prioritizes effect-free, low-complexity CFG blocks and stops a syscall proof immediately after a certified N success-exit witness; this changes exploration order only, not proof semantics; -report-jobs controls independent syscall workers with per-worker DP caches
+- "unproven_lsm_candidates" is a review queue, not an always/optional verdict; it prevents unsupported CFG cases from becoming silent false negatives
+- inactive_config_lsm_hooks records source-level security_* calls compiled as inactive stubs by the selected kernel configuration
+- success-path analysis follows nested errno gates, negative initializers, and result/&errno lookup patterns; unsupported control flow produces conservative false negatives
+- pointer-return calls propagate a non-NULL success requirement only when the caller proves it with an immediate failure guard; NULL is never treated as failure globally
+- notify_change receives caller-proven iattr.ia_valid bits so ATTR_* masks can prove mandatory setattr hooks without guessing unrelated structure fields
+- error-flow analysis preserves proven NULL cleanup guards across goto labels
+- bounded retry_estale paths retain enforcement when the mandatory hook is re-entered, while errno propagation is marked conditional
+- guaranteed-entry for loops such as for (;;) are analyzed through the first conditional break/continue; other loop forms remain conservative
+- compile-database mode indexes only translation units built by that kernel configuration and removes inactive preprocessor branches

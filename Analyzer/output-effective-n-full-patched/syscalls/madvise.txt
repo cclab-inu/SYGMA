@@ -1,0 +1,4 @@
+- __do_sys_madvise
+  - do_madvise
+    - madvise_behavior_valid@/workspace/git/linux-v5.15-analysis-src/mm/madvise.c#1817974920
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

@@ -1,0 +1,3 @@
+- __do_sys_fchownat
+  - do_fchownat
+    - chown_common [direct_lsm=security_path_chown | success_lsm=security_path_chown | validated_lsm=security_path_chown]

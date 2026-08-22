@@ -1,0 +1,9 @@
+- __do_sys_mount
+  - copy_mount_string@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#1293836734
+  - PTR_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2452958405
+  - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+  - do_mount
+    - path_mount [direct_lsm=security_sb_mount | success_lsm=security_sb_mount | validated_lsm=security_sb_mount]
+      - may_mount@/workspace/git/linux-v5.15-analysis-src/fs/namespace.c#2953563550
+        - ns_capable
+          - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]

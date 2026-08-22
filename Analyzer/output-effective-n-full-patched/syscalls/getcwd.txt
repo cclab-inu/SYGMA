@@ -1,0 +1,32 @@
+- __do_sys_getcwd
+  - kmem_cache_alloc
+    - slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#3106794885
+      - slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935
+        - slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658
+          - might_alloc@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1021385239
+            - fs_reclaim_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#1934011979
+            - fs_reclaim_release@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/mm.h#2756234293
+            - gfpflags_allow_blocking@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#2879364502
+          - should_failslab
+    - trace_kmem_cache_alloc@/workspace/git/linux-v5.15-analysis-src/include/trace/events/kmem.h#2385402376 [indirect=<indirect-call>]
+      - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666
+  - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+    - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+  - get_fs_root_and_pwd_rcu@/workspace/git/linux-v5.15-analysis-src/fs/d_path.c#2822508144
+    - __seqprop_spinlock_sequence@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#3795740639
+    - kcsan_atomic_next@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#2015335103
+    - do_read_seqcount_retry@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#2298063046 [ambiguous=do___read_seqcount_retry@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#51367162,do___read_seqcount_retry@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#3840879995,do___read_seqcount_retry@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#2896739728]
+    - __seqprop_ptr@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#1007840536
+    - __seqprop_raw_spinlock_ptr@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#2183734668
+    - __seqprop_spinlock_ptr@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#1184739928
+    - __seqprop_rwlock_ptr@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#366097328
+    - __seqprop_mutex_ptr@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#4217558691
+    - __seqprop_ww_mutex_ptr@/workspace/git/linux-v5.15-analysis-src/include/linux/seqlock.h#2264890912
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - d_unlinked@/workspace/git/linux-v5.15-analysis-src/include/linux/dcache.h#2123964301
+  - kmem_cache_free
+    - cache_from_obj@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#275563258
+      - virt_to_cache@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2629308889
+        - virt_to_head_page@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#4115898889 [ambiguous=_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#2824967961,_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#3416462784]
+        - PageSlab@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#3512770426 [ambiguous=PageTail@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#2146620713,PageTail@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#3818526123,PageTail@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#1901542361,_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#2824967961,_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#3416462784,_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#3037543249]
+    - virt_to_head_page@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#4115898889 [ambiguous=_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#2824967961,_compound_head@/workspace/git/linux-v5.15-analysis-src/include/linux/page-flags.h#3416462784 | dp_skip=revisited]

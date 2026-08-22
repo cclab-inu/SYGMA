@@ -1,0 +1,34 @@
+- __do_sys_munlock
+  - mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320
+    - __mmap_lock_trace_start_locking@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#3403134037
+      - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666
+    - down_write_killable
+      - __cond_resched
+      - __down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259
+        - __down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564
+          - rwsem_write_trylock@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#843547107
+    - __mmap_lock_trace_acquire_returned@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#4272582625
+      - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666 [dp_skip=revisited]
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - apply_vma_lock_flags@/workspace/git/linux-v5.15-analysis-src/mm/mlock.c#789031937
+  - mmap_write_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#4096260035
+    - __mmap_lock_trace_released@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#1684703688
+      - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666 [dp_skip=revisited]
+    - up_write
+      - __up_write@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#3748128128
+        - rwsem_clear_owner@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#681805042
+          - atomic_long_set@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#80922500
+            - instrument_atomic_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#972338627
+              - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104
+              - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313
+            - arch_atomic_long_set@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#1371058314
+              - arch_atomic64_set@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#2433679290
+            - arch_atomic_long_set@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#1371058314
+              - arch_atomic64_set@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#2433679290 [dp_skip=revisited]
+              - arch_atomic64_set@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#2433679290
+        - atomic_long_fetch_add_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#489212815
+          - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796
+            - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104 [dp_skip=revisited]
+            - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313 [dp_skip=revisited]
+          - arch_atomic_long_fetch_add_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#4221116394
+            - arch_atomic64_fetch_add@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#1312574985

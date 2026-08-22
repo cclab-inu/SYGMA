@@ -1,0 +1,5 @@
+- __do_sys_sched_rr_get_interval
+  - sched_rr_get_interval@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2236359953 [direct_lsm=security_task_getscheduler | success_lsm=security_task_getscheduler | indirect=p->sched_class->get_rr_interval]
+    - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+      - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+    - find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035

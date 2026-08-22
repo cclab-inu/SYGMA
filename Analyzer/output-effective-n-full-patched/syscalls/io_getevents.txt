@@ -1,0 +1,3 @@
+- __do_sys_io_getevents [direct_signal=signal_pending]
+  - do_io_getevents@/workspace/git/linux-v5.15-analysis-src/fs/aio.c#1323889906
+    - lookup_ioctx@/workspace/git/linux-v5.15-analysis-src/fs/aio.c#1347528967

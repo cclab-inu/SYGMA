@@ -1,0 +1,11 @@
+- __do_sys_io_setup
+  - might_fault@/workspace/git/linux-v5.15-analysis-src/include/linux/kernel.h#2973240269
+  - ioctx_alloc@/workspace/git/linux-v5.15-analysis-src/fs/aio.c#196646375
+    - percpu_ref_init
+    - percpu_ref_init
+    - aio_setup_ring@/workspace/git/linux-v5.15-analysis-src/fs/aio.c#1373847900
+      - aio_private_file@/workspace/git/linux-v5.15-analysis-src/fs/aio.c#4190698407
+        - alloc_file_pseudo
+          - alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084
+            - alloc_empty_file
+              - __alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006 [direct_lsm=security_file_alloc | success_lsm=security_file_alloc]

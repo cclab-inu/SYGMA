@@ -1,0 +1,16 @@
+- __do_sys_mkdirat
+  - do_mkdirat [direct_lsm=security_path_mkdir | success_lsm=security_path_mkdir]
+    - filename_create@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3933824238
+      - ERR_PTR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#3188995726
+      - filename_parentat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3961523384
+        - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+    - PTR_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2452958405
+    - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+    - putname
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+    - vfs_mkdir [direct_lsm=security_inode_mkdir | success_lsm=security_inode_mkdir | indirect=dir->i_op->mkdir]
+      - may_create@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4176921933
+        - inode_permission [direct_lsm=security_inode_permission | success_lsm=security_inode_permission]
+  - getname
+    - getname_flags
+      - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037

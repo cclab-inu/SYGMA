@@ -1,0 +1,92 @@
+# ⚠️ 더미(설계용) 정책입니다. 현재 컨트롤러/CRD가 파싱하는 형식이 아닙니다.
+#
+# 지금까지 구현된 형태(nginx-sygmaconfig.yaml, nginx-sygmaconfig-statemachine.yaml)는
+#   상태 = 직전 syscall 번호
+#   allowed list = 그 상태에서 나가는 edge 목록
+#   다음 상태 = 방금 허용된 그 syscall 번호 자기 자신 (간접 매핑 없음)
+# 이었습니다.
+#
+# 이 파일은 당신이 원래 생각한 모델을 그대로 옮긴 것입니다:
+#   상태는 이름을 가진 별개의 개념이고, 상태마다:
+#     1) allowedSyscalls: 이 상태에서 호출 가능한 syscall 목록
+#     2) transitions: "그 syscall을 호출했을 때 어느 상태로 넘어가는지"를
+#        따로 정의한 맵 (목적지 상태가 그 syscall 자신일 필요 없음)
+#   허용되지 않은 syscall이 호출되면 어느 상태에서든 거부(SIGKILL/LSM deny).
+#
+# 실제로 쓰려면 추후에:
+#   - api/v1/sygmapolicy_types.go 의 PhaseRuleSet을
+#     StateRuleSet{ AllowedSyscalls []int, Transitions map[string]string } 형태로 확장
+#   - syscall_graph_map의 key를 (state_id)로, value를
+#     (allowed_mask, to_state_id 배열 또는 syscall->state_id 매핑)으로 확장
+#   - monitoring.c의 process_state에 "현재 상태 이름/ID" 필드를 추가하고
+#     ps->prev_syscall = ps->current_syscall 대신
+#     ps->state = transitions[state][current_syscall] 로 대체
+#   가 필요합니다. (지금 코드는 상태를 syscall 번호로 단순화해서 이 인다이렉션이 없음)
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: nginx-sygma-config-dummy-fsm
+  namespace: default
+  annotations:
+    sygma.io/schema-status: "draft-not-yet-implemented"
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          app: nginx
+        name: nginx
+        namespace: default
+      spec:
+        containers:
+        - name: nginx
+          image: nginx:1.24.0
+          imagePullPolicy: Always
+    thirdParty:
+      outputContent: |
+        {
+          "startState": "INIT",
+          "states": {
+            "INIT": {
+              "description": "worker 기동 직후, exec 이후 설정/공유 메모리 준비",
+              "allowedSyscalls": ["brk", "access", "openat", "mmap", "prctl"],
+              "transitions": {
+                "brk":    "INIT",
+                "access": "INIT",
+                "openat": "INIT",
+                "mmap":   "INIT",
+                "prctl":  "EVENT_LOOP"
+              }
+            },
+            "EVENT_LOOP": {
+              "description": "epoll_wait로 이벤트 대기 중인 idle 상태",
+              "allowedSyscalls": ["epoll_wait", "accept4", "close"],
+              "transitions": {
+                "epoll_wait": "EVENT_LOOP",
+                "accept4":    "HANDLING_CONN",
+                "close":      "EVENT_LOOP"
+              }
+            },
+            "HANDLING_CONN": {
+              "description": "연결 수락 후 요청을 읽고 epoll에 재등록하는 상태",
+              "allowedSyscalls": ["read", "recvmsg", "epoll_ctl", "close"],
+              "transitions": {
+                "read":       "HANDLING_CONN",
+                "recvmsg":    "RESPONDING",
+                "epoll_ctl":  "EVENT_LOOP",
+                "close":      "EVENT_LOOP"
+              }
+            },
+            "RESPONDING": {
+              "description": "응답 본문을 write/sendmsg로 내보내는 상태",
+              "allowedSyscalls": ["write", "sendmsg", "close"],
+              "transitions": {
+                "write":   "RESPONDING",
+                "sendmsg": "RESPONDING",
+                "close":   "EVENT_LOOP"
+              }
+            }
+          }
+        }

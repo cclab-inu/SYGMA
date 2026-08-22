@@ -1,0 +1,22 @@
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: redis-sygma-config
+  namespace: default
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          app: redis
+        name: redis
+      spec:
+        containers:
+        - name: redis
+          image: redis:4.0.2
+          imagePullPolicy: Always
+  policy:
+    # Evaluation-only wildcard; init and main still exercise policy lookup.
+    allowAll: true

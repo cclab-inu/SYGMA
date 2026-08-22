@@ -1,0 +1,7 @@
+- __do_sys_getpgrp
+  - do_getpgid@/workspace/git/linux-v5.15-analysis-src/kernel/sys.c#698206073 [direct_lsm=security_task_getpgid]
+    - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+      - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+    - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+      - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+        - rcu_read_unlock_strict

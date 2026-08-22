@@ -1,0 +1,161 @@
+read [always]: security_file_permission
+write [always]: security_file_permission
+open [always]: security_file_alloc
+stat [always]: security_inode_getattr
+fstat [always]: security_inode_getattr
+lstat [always]: security_inode_getattr
+mmap [always]: security_mmap_file, security_mmap_addr
+ioctl [always]: security_file_ioctl
+pread64 [always]: security_file_permission
+pwrite64 [always]: security_file_permission
+access [always]: security_inode_permission
+pipe [always]: security_inode_alloc, security_file_alloc
+shmat [always]: security_shm_shmat, security_mmap_file, security_ipc_permission, security_file_alloc, security_mmap_addr
+socket [always]: security_socket_create, security_socket_post_create, security_inode_alloc, security_file_alloc
+connect [always]: security_socket_connect
+accept [always]: security_socket_accept, security_inode_alloc, security_file_alloc
+sendto [always]: security_socket_sendmsg
+recvfrom [always]: security_socket_recvmsg
+sendmsg [always]: security_socket_sendmsg
+recvmsg [always]: security_socket_recvmsg
+shutdown [always]: security_socket_shutdown
+bind [always]: security_socket_bind
+listen [always]: security_socket_listen
+getsockname [always]: security_socket_getsockname
+getpeername [always]: security_socket_getpeername
+socketpair [always]: security_socket_socketpair, security_socket_create, security_socket_post_create, security_inode_alloc, security_file_alloc
+setsockopt [always]: security_socket_setsockopt
+getsockopt [always]: security_socket_getsockopt
+clone [always]: security_task_alloc, security_prepare_creds
+fork [always]: security_task_alloc, security_prepare_creds
+vfork [always]: security_task_alloc, security_prepare_creds
+execve [always]: security_bprm_creds_for_exec, security_file_alloc, security_bprm_check, security_file_permission
+semop [always]: security_sem_semop, security_ipc_permission
+msgsnd [always]: security_msg_queue_msgsnd, security_msg_msg_alloc, security_ipc_permission
+msgrcv [always]: security_ipc_permission, security_msg_msg_free
+fcntl [always]: security_file_fcntl
+flock [always]: security_file_lock
+truncate [always]: security_path_truncate, security_inode_permission, security_inode_setattr
+ftruncate [always]: security_path_truncate, security_inode_setattr
+getdents [always]: security_file_permission
+chdir [always]: security_inode_permission
+fchdir [always]: security_inode_permission
+rename [always]: security_path_rename
+mkdir [always]: security_path_mkdir, security_inode_mkdir, security_inode_permission
+rmdir [always]: security_path_rmdir, security_inode_rmdir, security_inode_permission
+creat [always]: security_file_alloc
+link [always]: security_path_link, security_inode_link, security_inode_permission
+unlink [always]: security_path_unlink, security_inode_unlink, security_inode_permission
+symlink [always]: security_path_symlink, security_inode_symlink, security_inode_permission
+chmod [always]: security_path_chmod
+fchmod [always]: security_path_chmod
+chown [always]: security_path_chown
+fchown [always]: security_path_chown
+lchown [always]: security_path_chown
+syslog [always]: security_syslog
+setuid [always]: security_task_fix_setuid, security_prepare_creds, security_capable
+setgid [always]: security_task_fix_setgid, security_prepare_creds, security_capable
+setpgid [always]: security_task_setpgid
+setreuid [always]: security_task_fix_setuid, security_prepare_creds
+setregid [always]: security_task_fix_setgid, security_prepare_creds
+setgroups [always]: security_capable, security_prepare_creds
+setresuid [always]: security_task_fix_setuid, security_prepare_creds, security_capable
+setresgid [always]: security_task_fix_setgid, security_prepare_creds, security_capable
+capset [always]: security_capset, security_prepare_creds
+mknod [always]: security_path_mknod
+ustat [always]: security_sb_statfs
+statfs [always]: security_sb_statfs
+fstatfs [always]: security_sb_statfs
+sched_setparam [always]: security_task_setscheduler
+sched_getparam [always]: security_task_getscheduler
+sched_setscheduler [always]: security_task_setscheduler
+sched_getscheduler [always]: security_task_getscheduler
+sched_rr_get_interval [always]: security_task_getscheduler
+vhangup [always]: security_capable
+pivot_root [always]: security_sb_pivotroot, security_capable
+chroot [always]: security_path_chroot, security_inode_permission, security_capable
+acct [always]: security_capable
+settimeofday [always]: security_settime64
+mount [always]: security_sb_mount, security_capable
+umount2 [always]: security_capable, security_sb_umount
+swapon [always]: security_capable, security_file_alloc
+swapoff [always]: security_capable, security_file_alloc
+reboot [always]: security_capable
+sethostname [always]: security_capable
+setdomainname [always]: security_capable
+init_module [always]: security_capable, security_kernel_load_data, security_kernel_post_load_data
+delete_module [always]: security_capable
+setxattr [always]: security_inode_setxattr
+lsetxattr [always]: security_inode_setxattr
+fsetxattr [always]: security_inode_setxattr
+getxattr [always]: security_inode_getxattr
+lgetxattr [always]: security_inode_getxattr
+fgetxattr [always]: security_inode_getxattr
+listxattr [always]: security_inode_listxattr
+llistxattr [always]: security_inode_listxattr
+flistxattr [always]: security_inode_listxattr
+removexattr [always]: security_inode_removexattr
+lremovexattr [always]: security_inode_removexattr
+fremovexattr [always]: security_inode_removexattr
+sched_setaffinity [always]: security_task_setscheduler
+sched_getaffinity [always]: security_task_getscheduler
+io_setup [always]: security_inode_alloc, security_file_alloc
+epoll_create [always]: security_file_alloc
+remap_file_pages [always]: security_mmap_addr
+getdents64 [always]: security_file_permission
+mq_open [always]: security_file_alloc, security_inode_permission
+mq_unlink [always]: security_inode_permission, security_inode_unlink
+mq_timedsend [always]: security_msg_msg_alloc
+mq_timedreceive [always]: security_msg_msg_free
+kexec_load [always]: security_kernel_load_data, security_locked_down, security_capable
+inotify_init [always]: security_file_alloc
+inotify_add_watch [always]: security_path_notify, security_inode_permission
+migrate_pages [always]: security_task_movememory
+openat [always]: security_file_alloc
+mkdirat [always]: security_path_mkdir, security_inode_mkdir, security_inode_permission
+mknodat [always]: security_path_mknod
+fchownat [always]: security_path_chown
+newfstatat [always]: security_inode_getattr
+renameat [always]: security_path_rename
+linkat [always]: security_path_link, security_inode_link, security_inode_permission
+symlinkat [always]: security_path_symlink, security_inode_symlink, security_inode_permission
+fchmodat [always]: security_path_chmod
+faccessat [always]: security_inode_permission
+timerfd_create [always]: security_file_alloc
+eventfd [always]: security_file_alloc
+fallocate [always]: security_file_permission
+accept4 [always]: security_socket_accept, security_inode_alloc, security_file_alloc
+eventfd2 [always]: security_file_alloc
+epoll_create1 [always]: security_file_alloc
+pipe2 [always]: security_inode_alloc, security_file_alloc
+inotify_init1 [always]: security_file_alloc
+perf_event_open [always]: security_perf_event_open, security_perf_event_alloc, security_file_alloc
+fanotify_init [always]: security_file_alloc, security_capable
+fanotify_mark [always]: security_capable
+open_by_handle_at [always]: security_file_alloc, security_capable
+finit_module [always]: security_capable
+sched_setattr [always]: security_task_setscheduler
+sched_getattr [always]: security_task_getscheduler
+renameat2 [always]: security_path_rename
+memfd_create [always]: security_file_alloc
+kexec_file_load [always]: security_capable
+bpf [always]: security_bpf
+execveat [always]: security_bprm_creds_for_exec, security_file_alloc, security_bprm_check, security_file_permission
+userfaultfd [always]: security_inode_init_security_anon, security_inode_alloc, security_file_alloc
+copy_file_range [always]: security_file_permission
+statx [always]: security_inode_getattr
+io_uring_setup [always]: security_capable, security_socket_create, security_socket_post_create, security_inode_alloc, security_file_alloc
+open_tree [always]: security_file_alloc
+move_mount [always]: security_move_mount, security_capable
+fsopen [always]: security_capable, security_file_alloc
+fsmount [always]: security_capable
+fspick [always]: security_capable, security_file_alloc
+pidfd_open [always]: security_file_alloc
+clone3 [always]: security_task_alloc, security_prepare_creds
+openat2 [always]: security_file_alloc
+faccessat2 [always]: security_inode_permission
+process_madvise [always]: security_capable
+mount_setattr [always]: security_capable
+quotactl_fd [always]: security_quotactl
+landlock_restrict_self [always]: security_prepare_creds
+memfd_secret [always]: security_inode_alloc, security_file_alloc

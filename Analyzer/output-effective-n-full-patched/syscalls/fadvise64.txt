@@ -1,0 +1,5 @@
+- __do_sys_fadvise64
+  - ksys_fadvise64_64
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+    - vfs_fadvise [indirect=file->f_op->fadvise]
+    - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

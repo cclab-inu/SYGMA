@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "total_syscalls": 360,
+  "completed_syscalls": 360,
+  "completed_applicable_syscalls": 343,
+  "unavailable_syscalls": 17,
+  "completed_ratio": 1,
+  "started_at": "2026-07-28T06:00:41.187214097Z",
+  "updated_at": "2026-07-28T06:09:57.930383067Z",
+  "elapsed_milliseconds": 556743,
+  "last_completed": {
+    "number": 448,
+    "abi": "common",
+    "name": "process_mrelease",
+    "lsm_classification": "certified_bpf_lsm_not_enforceable",
+    "sigkill_classification": "certified_sigkill_not_enforceable",
+    "unresolved_proof_edges": 0,
+    "elapsed_milliseconds": 1021,
+    "checkpoint": "checkpoints/syscalls/448-process_mrelease.json"
+  },
+  "lsm_classifications": {
+    "certified_bpf_lsm_enforceable": 146,
+    "certified_bpf_lsm_not_enforceable": 138,
+    "not_applicable_unavailable": 17,
+    "uncertain": 59
+  },
+  "sigkill_classifications": {
+    "certified_sigkill_enforceable": 4,
+    "certified_sigkill_not_enforceable": 257,
+    "not_applicable_unavailable": 17,
+    "uncertain": 82
+  },
+  "lsm_uncertain_syscalls": 59,
+  "lsm_uncertain_ratio": 0.17201166180758018,
+  "sigkill_uncertain_syscalls": 82,
+  "sigkill_uncertain_ratio": 0.239067055393586,
+  "either_domain_uncertain_syscalls": 98,
+  "either_domain_uncertain_ratio": 0.2857142857142857,
+  "unresolved_proof_syscalls": 98,
+  "unresolved_proof_syscall_ratio": 0.2857142857142857,
+  "unresolved_proof_edges": 980,
+  "unresolved_lsm_proof_edges": 409,
+  "unresolved_sigkill_proof_edges": 571,
+  "unresolved_unknown_domain_edges": 0
+}

@@ -1,0 +1,283 @@
+{
+  "number": 292,
+  "abi": "common",
+  "name": "dup3",
+  "entry": "sys_dup3",
+  "start": "__do_sys_dup3",
+  "linked_symbol": "__x64_sys_dup3",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_dup3",
+    "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855",
+    "files_lookup_fd_locked@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#232240839"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_dup3",
+    "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855",
+    "files_lookup_fd_locked@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#232240839"
+  ],
+  "success_path_functions": [
+    "__do_sys_dup3",
+    "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855",
+    "files_lookup_fd_locked@/workspace/git/linux-v5.15-analysis-src/include/linux/fdtable.h#232240839"
+  ],
+  "call_tree_file": "syscalls/dup3.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "uncertain",
+    "hooks": null,
+    "success_path_hook_sets": [
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809"
+    ],
+    "hook_proof_paths": {},
+    "unproven_bypass_path": [
+      "__do_sys_dup3",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-50",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-49",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-48",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-46",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-45",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-44",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-43",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-41",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-39",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-38",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-36",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-32",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-31",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-30",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809#cfg-block-9[unlikely(!file)=false]",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809#cfg-block-7[unlikely(err\u003c0)=false]",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809#cfg-block-3",
+      "__do_sys_dup3#cfg-block-1"
+    ],
+    "reasons": [
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_dup3: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_dup3",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809"
+    ],
+    "check_proof_paths": {},
+    "unproven_bypass_path": [
+      "__do_sys_dup3",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-50",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-49",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-48",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-46",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-45",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-44",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-43",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-41",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-39",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-38",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-36",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-32",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-31",
+      "expand_files@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1482055855#cfg-block-30",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809#cfg-block-9[unlikely(!file)=false]",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809#cfg-block-7[unlikely(err\u003c0)=false]",
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809#cfg-block-3",
+      "__do_sys_dup3#cfg-block-1"
+    ],
+    "reasons": [
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_dup3: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_dup3",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_dup3: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "success path 1 has no hook with certified final syscall-error propagation"
+      ]
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_dup3: a checkpoint-free potential return is not proven to be a normal successful operation return"
+      ]
+    }
+  },
+  "lsm_classification": "uncertain",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "U",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_dup3: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "success path 1 has no hook with certified final syscall-error propagation"
+    ],
+    "sigkill": [
+      "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_dup3: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "lsm",
+      "caller": "__do_sys_dup3",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "lsm",
+      "caller": "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_dup3",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "ksys_dup3@/workspace/git/linux-v5.15-analysis-src/fs/file.c#2611064809",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    }
+  ]
+}

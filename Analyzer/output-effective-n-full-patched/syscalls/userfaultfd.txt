@@ -1,0 +1,16 @@
+- __do_sys_userfaultfd
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - anon_inode_getfd_secure
+    - __anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679
+      - __anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224
+        - alloc_file_pseudo
+          - alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084
+            - alloc_empty_file
+              - __alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006 [direct_lsm=security_file_alloc | success_lsm=security_file_alloc]
+            - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - __anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224
+        - alloc_file_pseudo [dp_skip=revisited]
+    - __anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679
+      - __anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224 [dp_skip=revisited]
+      - __anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224
+        - alloc_file_pseudo [dp_skip=revisited]

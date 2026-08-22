@@ -1,0 +1,2 @@
+- __do_sys_shmat
+  - do_shmat [direct_lsm=security_shm_shmat,security_mmap_file | success_lsm=security_shm_shmat,security_mmap_file]

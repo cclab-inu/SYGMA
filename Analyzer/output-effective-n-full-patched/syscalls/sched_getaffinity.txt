@@ -1,0 +1,15 @@
+- __do_sys_sched_getaffinity
+  - alloc_cpumask_var
+    - alloc_cpumask_var_node
+      - kmalloc_node@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#3398483295 [ambiguous=__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#477816588,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1967333079,__kmalloc_index@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1342710755]
+      - cpumask_size@/workspace/git/linux-v5.15-analysis-src/include/linux/cpumask.h#991017801
+  - sched_getaffinity [direct_lsm=security_task_getscheduler | success_lsm=security_task_getscheduler]
+    - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+      - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+    - find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035
+    - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+      - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+        - rcu_read_unlock_strict
+  - free_cpumask_var
+    - kfree
+  - cpumask_size@/workspace/git/linux-v5.15-analysis-src/include/linux/cpumask.h#991017801 [dp_skip=revisited]

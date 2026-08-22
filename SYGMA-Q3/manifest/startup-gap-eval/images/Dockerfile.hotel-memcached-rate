@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/library/memcached@sha256:eeb9eaa939ffaa2304899674c9e88a9247ec8e5e40e424a892df7b09914bd2ec
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because replacing ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "hotel-memcached-rate", "--", "docker-entrypoint.sh"]
+CMD ["memcached"]

@@ -1,0 +1,10 @@
+- __do_sys_kill
+  - prepare_kill_siginfo@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#873081637
+    - clear_siginfo@/workspace/git/linux-v5.15-analysis-src/include/linux/signal.h#4098747082
+    - task_tgid_vnr@/workspace/git/linux-v5.15-analysis-src/include/linux/sched.h#564500544
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - from_kuid_munged
+      - from_kuid
+        - map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889
+        - __kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911
+  - kill_something_info@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#1780681693

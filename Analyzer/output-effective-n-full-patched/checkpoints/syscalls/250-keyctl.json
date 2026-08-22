@@ -1,0 +1,139 @@
+{
+  "number": 250,
+  "abi": "common",
+  "name": "keyctl",
+  "entry": "sys_keyctl",
+  "start": "__do_sys_keyctl",
+  "linked_symbol": "__x64_sys_keyctl",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_keyctl"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_keyctl"
+  ],
+  "success_path_functions": [
+    "__do_sys_keyctl"
+  ],
+  "call_tree_file": "syscalls/keyctl.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "non_enforcing",
+    "hooks": null,
+    "success_path_hook_sets": [
+      null
+    ],
+    "proof_methods": [
+      "cfg_effect_free_success_witness",
+      "cfg_effect_free_fast_success_path+direct_forwarded_success_return"
+    ],
+    "proof_functions": null,
+    "hook_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_keyctl",
+      "__do_sys_keyctl#cfg-block-38",
+      "__do_sys_keyctl#cfg-block-1",
+      "__do_sys_keyctl#cfg-block-4",
+      "keyctl_capabilities#cfg-block-1[nonnegative-result]",
+      "__do_sys_keyctl#callsite:30"
+    ],
+    "bypass_proof_method": "cfg_effect_free_fast_success_path+direct_forwarded_success_return",
+    "reasons": [
+      "a proven normal successful operation path bypasses every syscall-terminating LSM denial"
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "cfg_effect_free_success_witness",
+      "cfg_effect_free_fast_success_path+direct_forwarded_success_return"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_keyctl",
+      "__do_sys_keyctl#cfg-block-38",
+      "__do_sys_keyctl#cfg-block-1",
+      "__do_sys_keyctl#cfg-block-4",
+      "keyctl_capabilities#cfg-block-1[nonnegative-result]",
+      "__do_sys_keyctl#callsite:30"
+    ],
+    "bypass_proof_method": "cfg_effect_free_fast_success_path+direct_forwarded_success_return",
+    "reasons": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_not_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "N",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [
+      "a proven normal successful operation path bypasses every syscall-terminating LSM denial"
+    ],
+    "sigkill": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

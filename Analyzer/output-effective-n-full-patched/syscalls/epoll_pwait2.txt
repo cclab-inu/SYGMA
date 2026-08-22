@@ -1,0 +1,3 @@
+- __do_sys_epoll_pwait2
+  - do_epoll_pwait@/workspace/git/linux-v5.15-analysis-src/fs/eventpoll.c#3594524508
+    - set_user_sigmask

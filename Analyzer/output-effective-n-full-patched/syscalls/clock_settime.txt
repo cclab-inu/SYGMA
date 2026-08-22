@@ -1,0 +1,3 @@
+- __do_sys_clock_settime [indirect=kc->clock_set]
+  - clockid_to_kclock@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#923764587
+  - get_timespec64

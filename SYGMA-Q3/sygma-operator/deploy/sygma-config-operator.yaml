@@ -1,0 +1,196 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sygma-config-operator
+  namespace: default
+
+---
+# ⭐⭐⭐ Lease   ClusterRole ⭐⭐⭐
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-config-operator
+rules:
+  # ⭐ Leader Election Lease  (!)
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  
+  # SYGMAConfig CRD 
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmaconfigs"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmaconfigs/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmaconfigs/finalizers"]
+    verbs: ["update"]
+  
+  # Pod  (Collection Pod )
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get"]
+  
+  # Node  (  )
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+  
+  # Events ()
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-config-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-config-operator
+subjects:
+  - kind: ServiceAccount
+    name: sygma-config-operator
+    namespace: default
+
+---
+# ⭐⭐⭐ NODE_NAME   Deployment ⭐⭐⭐
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sygma-config-operator
+  namespace: default
+  labels:
+    app: sygma-config-operator
+    component: control-plane
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sygma-config-operator
+  template:
+    metadata:
+      labels:
+        app: sygma-config-operator
+        component: control-plane
+    spec:
+      serviceAccountName: sygma-config-operator
+      
+      # ⭐ Host   (ClusterIP  )
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      
+      # ⭐ eBPF   
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        fsGroup: 0
+      
+      containers:
+        - name: manager
+          image: localhost/sygma-q3/operator:artifact-v1
+          imagePullPolicy: Never
+          
+          command:
+            - /manager
+          
+          args:
+            - --mode=config
+            - --redis-addr=$(REDIS_ADDR)
+            - --health-probe-bind-address=:8091
+            - --metrics-bind-address=:8090
+            - --leader-elect=true  # ⭐ Leader election 
+          
+          env:
+            # Exact node name used to pin collection Pods beside this operator.
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            
+            # Redis  (ClusterIP)
+            - name: REDIS_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  name: sygma-config
+                  key: redis-addr
+          
+          ports:
+            - containerPort: 8091
+              name: health
+              protocol: TCP
+            - containerPort: 8090
+              name: metrics
+              protocol: TCP
+          
+          securityContext:
+            # ⭐ eBPF    
+            privileged: true
+            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+            capabilities:
+              add:
+                - SYS_ADMIN
+                - SYS_RESOURCE
+                - NET_ADMIN
+                - BPF
+          
+          volumeMounts:
+            # ⭐ eBPF  
+            - name: bpf-maps
+              mountPath: /sys/fs/bpf
+              readOnly: false
+            # ⭐ /sys 
+            - name: sys
+              mountPath: /sys
+              readOnly: false
+          
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8091
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+          
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8091
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+      
+      volumes:
+        # ⭐ eBPF 
+        - name: bpf-maps
+          hostPath:
+            path: /sys/fs/bpf
+            type: Directory
+        # ⭐ /sys 
+        - name: sys
+          hostPath:
+            path: /sys
+            type: Directory

@@ -1,0 +1,2 @@
+- __do_sys_capget
+  - cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693

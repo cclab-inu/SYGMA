@@ -1,0 +1,6 @@
+- __do_sys_msgrcv
+  - ksys_msgrcv
+    - do_msgrcv@/workspace/git/linux-v5.15-analysis-src/ipc/msg.c#2805278175 [direct_signal=signal_pending | indirect=msg_handler]
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+      - ipcperms [direct_lsm=security_ipc_permission | success_lsm=security_ipc_permission | validated_lsm=security_ipc_permission]
+        - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]

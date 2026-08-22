@@ -1,0 +1,361 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sygma-policy-agent
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-policy-agent
+rules:
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-policy-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-policy-agent
+subjects:
+  - kind: ServiceAccount
+    name: sygma-policy-agent
+    namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sygma-hook
+rules:
+  - apiGroups: ["security.security.io"]
+    resources: ["sygmapolicies"]
+    verbs: ["get", "list", "create", "update", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sygma-hook
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: sygma-hook
+subjects:
+  - kind: ServiceAccount
+    name: sygma-policy-agent
+    namespace: default
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sygma-installer
+  namespace: default
+data:
+  install.sh: |
+    #!/bin/sh  # ⭐ bash → sh
+    set -e
+    
+    echo "=========================================="
+    echo "SYGMA NRI/OCI Hook Installer"
+    echo "Node: $(hostname)"
+    echo "Date: $(date)"
+    echo "=========================================="
+    
+    # Directories
+    NRI_DIR="/host/opt/nri/plugins"
+    SYGMA_DIR="/host/opt/sygma"
+    BIN_DIR="/host/usr/local/bin"
+    NRI_CONF_DIR="/host/etc/nri/conf.d"
+    NRI_REDIS_FILE="/host/etc/nri/sygma-redis-addr"
+    
+    echo "📁 Creating directories..."
+    mkdir -p "$NRI_DIR" "$SYGMA_DIR" "$NRI_CONF_DIR"
+    echo "  $NRI_DIR"
+    echo "  $SYGMA_DIR"
+    echo "  $NRI_CONF_DIR"
+    echo ""
+
+    if [ -z "${REDIS_ADDR:-}" ]; then
+      echo "❌ REDIS_ADDR is required before installing the host NRI plugin"
+      exit 1
+    fi
+    printf '%s\n' "$REDIS_ADDR" > "${NRI_REDIS_FILE}.tmp"
+    chmod 0644 "${NRI_REDIS_FILE}.tmp"
+    mv "${NRI_REDIS_FILE}.tmp" "$NRI_REDIS_FILE"
+    echo "✅ Host NRI Redis endpoint: $REDIS_ADDR"
+
+    stage_binary() {
+      source_path="$1"
+      target_path="$2"
+      temp_path="${target_path}.sygma-new"
+      rm -f "$temp_path"
+      cp "$source_path" "$temp_path"
+      chmod 0755 "$temp_path"
+      if ! cmp -s "$source_path" "$temp_path"; then
+        echo "❌ Staged binary verification failed: $target_path"
+        exit 1
+      fi
+    }
+
+    commit_binary() {
+      source_path="$1"
+      target_path="$2"
+      mv -f "${target_path}.sygma-new" "$target_path"
+      if ! cmp -s "$source_path" "$target_path"; then
+        echo "❌ Installed binary verification failed: $target_path"
+        exit 1
+      fi
+    }
+
+    host_systemctl() {
+      nsenter --target 1 --mount --uts --ipc --net \
+        --root=/proc/1/root /bin/systemctl "$@"
+    }
+    
+    # Check installer image contents
+    echo "🔍 Checking installer image contents..."
+    ls -lh /binaries/ || echo "  /binaries/ not found!"
+    for required_binary in sygma-hook sygma-tracer sygma-wrapper 00-sygma; do
+      if [ ! -f "/binaries/${required_binary}" ]; then
+        echo "❌ Required evaluation binary missing: /binaries/${required_binary}"
+        exit 1
+      fi
+    done
+    echo ""
+    
+    # Stage and verify the complete generation before replacing any running
+    # host path. The four final renames allocate no payload blocks and are
+    # atomic within their respective host filesystems.
+    echo "📦 Staging complete binary generation..."
+    stage_binary /binaries/00-sygma "$NRI_DIR/00-sygma"
+    stage_binary /binaries/sygma-hook "$BIN_DIR/sygma-hook"
+    stage_binary /binaries/sygma-tracer "$BIN_DIR/sygma-tracer"
+    stage_binary /binaries/sygma-wrapper "$SYGMA_DIR/wrapper"
+
+    commit_binary /binaries/00-sygma "$NRI_DIR/00-sygma"
+    commit_binary /binaries/sygma-hook "$BIN_DIR/sygma-hook"
+    commit_binary /binaries/sygma-tracer "$BIN_DIR/sygma-tracer"
+    commit_binary /binaries/sygma-wrapper "$SYGMA_DIR/wrapper"
+    NRI_INSTALLED=true
+    echo "✅ Complete SYGMA host binary generation installed"
+    
+    echo ""
+    
+    # Verification
+    echo "🔍 Verification:"
+    echo "----------------------------------------"
+    
+    echo "Binaries in $BIN_DIR:"
+    ls -lh "$BIN_DIR"/sygma-* 2>/dev/null || echo "  (no sygma binaries)"
+    
+    echo ""
+    echo "Wrapper in $SYGMA_DIR:"
+    ls -lh "$SYGMA_DIR"/wrapper 2>/dev/null || echo "  (no wrapper)"
+    
+    echo ""
+    echo "NRI Plugin in $NRI_DIR:"
+    ls -lh "$NRI_DIR"/00-sygma 2>/dev/null || echo "  (no NRI plugin)"
+    
+    echo "----------------------------------------"
+    echo ""
+    
+    # ⭐⭐⭐ Containerd  (NRI Plugin )
+    if [ "$NRI_INSTALLED" = true ]; then
+      echo "🔄 Restarting containerd to load NRI plugin..."
+      
+      # nsenter  systemd 
+      if host_systemctl is-active containerd >/dev/null 2>&1; then
+        echo "  Containerd is running, restarting..."
+        
+        # Containerd 
+        host_systemctl restart containerd
+        
+        nri_ready=false
+        for attempt in $(seq 1 30); do
+          if [ -S /host/var/run/nri/nri.sock ] && pgrep -x 00-sygma >/dev/null 2>&1; then
+            nri_ready=true
+            break
+          fi
+          sleep 1
+        done
+
+        if host_systemctl is-active containerd >/dev/null 2>&1; then
+          echo "  ✅ Containerd restarted successfully"
+          if [ "$nri_ready" = true ]; then
+            echo "  ✅ NRI socket and SYGMA plugin process available"
+          else
+            echo "  ❌ NRI socket did not appear within 30 seconds"
+            exit 1
+          fi
+        else
+          echo "  ❌ Containerd failed to restart!"
+          host_systemctl status containerd --no-pager
+          exit 1
+        fi
+      else
+        echo "  ❌ Containerd not running or not accessible"
+        exit 1
+      fi
+    else
+      echo "❌ NRI Plugin not installed"
+      exit 1
+    fi
+    
+    echo ""
+    echo "=========================================="
+    echo "Installation complete on $(hostname)!"
+    echo "=========================================="
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: default
+  labels:
+    app.kubernetes.io/name: sygma-policy-redis
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: sygma-policy-redis
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+      protocol: TCP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sygma-policy-agent
+  namespace: default
+  labels:
+    app: sygma-policy-agent
+    component: data-plane
+spec:
+  selector:
+    matchLabels:
+      app: sygma-policy-agent
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: sygma-policy-agent
+        component: data-plane
+    spec:
+      serviceAccountName: sygma-policy-agent
+      
+      hostPID: true      # ⭐ nsenter  
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        fsGroup: 0
+      
+      tolerations:
+        - operator: Exists  #   (Master )
+      
+      initContainers:
+        - name: installer
+          image: localhost/sygma-q3/installer:artifact-v1
+          imagePullPolicy: Never
+          command: ["/bin/sh", "/scripts/install.sh"]
+          
+          securityContext:
+            privileged: true  # ⭐ nsenter systemctl  
+          
+          volumeMounts:
+            - name: host-opt-nri
+              mountPath: /host/opt/nri
+            - name: host-opt-sygma
+              mountPath: /host/opt/sygma
+            - name: host-usr-local-bin
+              mountPath: /host/usr/local/bin
+            - name: host-etc-nri
+              mountPath: /host/etc/nri
+            - name: host-var-run
+              mountPath: /host/var/run  # ⭐ NRI  
+            - name: installer-scripts
+              mountPath: /scripts
+          
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: REDIS_ADDR
+              valueFrom:
+                configMapKeyRef:
+                  name: sygma-config
+                  key: redis-addr
+      
+      containers:
+        # Direct hook setup is the authoritative evaluation data plane. Keep
+        # the DaemonSet alive after its installer initContainer without
+        # running the redundant SYGMAPolicy watch controller on every node.
+        - name: keeper
+          image: localhost/sygma-q3/installer:artifact-v1
+          imagePullPolicy: Never
+          command: ["/bin/sleep", "infinity"]
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          resources:
+            requests:
+              cpu: 1m
+              memory: 8Mi
+            limits:
+              cpu: 10m
+              memory: 32Mi
+      
+      volumes:
+        - name: host-var-run
+          hostPath:
+            path: /var/run
+            type: Directory
+        - name: host-opt-nri
+          hostPath:
+            path: /opt/nri
+            type: DirectoryOrCreate
+        - name: host-opt-sygma
+          hostPath:
+            path: /opt/sygma
+            type: DirectoryOrCreate
+        - name: host-usr-local-bin
+          hostPath:
+            path: /usr/local/bin
+            type: Directory
+        - name: host-etc-nri
+          hostPath:
+            path: /etc/nri
+            type: DirectoryOrCreate
+        - name: installer-scripts
+          configMap:
+            name: sygma-installer
+            defaultMode: 0755

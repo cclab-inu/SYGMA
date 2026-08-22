@@ -1,0 +1,4 @@
+- __do_sys_clock_adjtime
+  - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902
+  - do_clock_adjtime [indirect=kc->clock_adj]
+    - clockid_to_kclock@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#923764587

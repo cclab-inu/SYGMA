@@ -1,0 +1,550 @@
+{
+  "number": 433,
+  "abi": "common",
+  "name": "fspick",
+  "entry": "sys_fspick",
+  "start": "__do_sys_fspick",
+  "linked_symbol": "__x64_sys_fspick",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_capable",
+    "security_file_alloc"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_capable",
+    "security_file_alloc"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capable",
+    "security_file_alloc"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capable",
+    "security_file_alloc"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_fspick",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+    "user_path_at_empty",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "filename_lookup",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "putname",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+    "anon_inode_getfd",
+    "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_fspick",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+    "user_path_at_empty",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "filename_lookup",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "putname",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+    "anon_inode_getfd",
+    "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127"
+  ],
+  "success_path_functions": [
+    "__do_sys_fspick",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+    "user_path_at_empty",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "filename_lookup",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "putname",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+    "anon_inode_getfd",
+    "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127"
+  ],
+  "call_tree_file": "syscalls/fspick.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable",
+    "security_file_alloc"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "capable"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capable",
+      "bpf_hook": "capable",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "__do_sys_fspick"
+      ],
+      "llvm_verification": "unknown",
+      "llvm_evidence": [
+        {
+          "hook": "security_capable",
+          "function": "ns_capable_common",
+          "source_function": "ns_capable_common",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c",
+          "source_line": 375,
+          "source_column": 12,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-preserve-nonnegative-success",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "return"
+          ],
+          "verification": "must_preserve_success",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_file_alloc",
+      "bpf_hook": "file_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+        "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+        "anon_inode_getfd",
+        "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127",
+        "__do_sys_fspick"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_alloc",
+          "function": "__alloc_file",
+          "source_function": "__alloc_file",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c",
+          "source_line": 106,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable",
+      "security_file_alloc"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_capable"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "__do_sys_fspick",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "alloc_file_pseudo",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+      "anon_inode_getfd",
+      "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "__do_sys_fspick"
+      ],
+      "security_file_alloc": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+        "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+        "anon_inode_getfd",
+        "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127",
+        "__do_sys_fspick"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_fspick",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "fs_context_for_reconfigure",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_fspick",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "fscontext_create_fd",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "init_fs_context",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "fs_context_for_reconfigure",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "alloc_fs_context",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "fs_context_for_reconfigure",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "getname_flags",
+      "user_path_at_empty",
+      "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152",
+      "__do_sys_fspick",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "alloc_file_pseudo",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_fspick",
+      "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614",
+      "user_path_at_empty",
+      "getname_flags",
+      "getname_flags#cfg-block-19[result=true]",
+      "getname_flags#cfg-block-18",
+      "filename_lookup",
+      "filename_lookup#cfg-block-13",
+      "filename_lookup#cfg-block-12",
+      "filename_lookup#cfg-block-10",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-20",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-19",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-15",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-42",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-41",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-39",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-36",
+      "link_path_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3703748379#cfg-block-35",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-12",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-9",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-7",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-3",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-1",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#callsite:7",
+      "filename_lookup#cfg-block-8",
+      "filename_lookup#cfg-block-6",
+      "filename_lookup#cfg-block-5",
+      "filename_lookup#cfg-block-3",
+      "filename_lookup#cfg-block-2",
+      "filename_lookup#cfg-block-1",
+      "complete_walk@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1016989665#cfg-block-8",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#callsite:11[zero]",
+      "path_lookupat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1849964611#cfg-block-3[!err=true]",
+      "filename_lookup#callsite:4[zero]",
+      "filename_lookup#cfg-block-6[likely(!retval)=true]",
+      "user_path_at_empty#cfg-block-1",
+      "user_path_at_empty#callsite:2",
+      "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614#cfg-block-1",
+      "user_path_at@/workspace/git/linux-v5.15-analysis-src/include/linux/namei.h#37564614#callsite:1",
+      "__do_sys_fspick#cfg-block-15[ret\u003c0=false]",
+      "fs_context_for_reconfigure",
+      "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152#cfg-block-21[!fc=true]",
+      "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152#cfg-block-20",
+      "fs_context_for_reconfigure#cfg-block-1",
+      "__do_sys_fspick#cfg-block-11[IS_ERR(fc)=false]",
+      "fscontext_alloc_log@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#4290563165",
+      "fscontext_alloc_log@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#4290563165#cfg-block-4",
+      "fscontext_alloc_log@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#4290563165#cfg-block-3",
+      "fscontext_alloc_log@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#4290563165#cfg-block-1",
+      "__do_sys_fspick#cfg-block-9[ret\u003c0=false]",
+      "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127",
+      "anon_inode_getfd",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+      "get_unused_fd_flags",
+      "__get_unused_fd_flags",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276#cfg-block-1",
+      "__get_unused_fd_flags#cfg-block-1",
+      "get_unused_fd_flags#cfg-block-1",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-6[error\u003c0=false]",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224#cfg-block-1",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-4[IS_ERR(file)=false]",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-2",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-2[outcome=signed_integer:6]",
+      "anon_inode_getfd#cfg-block-1",
+      "anon_inode_getfd#callsite:1",
+      "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127#cfg-block-3[fd\u003c0=false]",
+      "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127#cfg-block-1",
+      "fscontext_create_fd@/workspace/git/linux-v5.15-analysis-src/fs/fsopen.c#3042988127#callsite:1",
+      "__do_sys_fspick#cfg-block-4",
+      "__do_sys_fspick#callsite:9"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_fspick",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "fs_context_for_reconfigure",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_fspick",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "fscontext_create_fd",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "init_fs_context",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "alloc_fs_context@/workspace/git/linux-v5.15-analysis-src/fs/fs_context.c#1837698152",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "fs_context_for_reconfigure",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "alloc_fs_context",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "fs_context_for_reconfigure",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

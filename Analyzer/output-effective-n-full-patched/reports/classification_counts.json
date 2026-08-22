@@ -1,0 +1,29 @@
+{
+  "applicable_syscalls": 343,
+  "lsm": {
+    "certified_bpf_lsm_enforceable": 146,
+    "certified_bpf_lsm_not_enforceable": 138,
+    "not_applicable_unavailable": 17,
+    "uncertain": 59
+  },
+  "lsm_enforcement_states": {
+    "E": 146,
+    "N": 138,
+    "NA": 17,
+    "U": 59
+  },
+  "sigkill": {
+    "certified_sigkill_enforceable": 4,
+    "certified_sigkill_not_enforceable": 257,
+    "not_applicable_unavailable": 17,
+    "uncertain": 82
+  },
+  "sigkill_enforcement_states": {
+    "E": 4,
+    "N": 257,
+    "NA": 17,
+    "U": 82
+  },
+  "total_syscall_table_entries": 360,
+  "unavailable_syscalls": 17
+}

@@ -1,0 +1,11 @@
+ARG SOURCE_DATE_EPOCH=0
+FROM ubuntu@sha256:eb29ed27b0821dca09c2e28b39135e185fc1302036427d5f4d70a41ce8fd7659
+LABEL org.opencontainers.image.title="SYGMA-Q3 operator local artifact" \
+      org.opencontainers.image.version="artifact-v1" \
+      org.opencontainers.image.created="1970-01-01T00:00:00Z"
+
+COPY .local-image/manager /manager
+RUN chmod 0755 /manager
+
+USER 0
+ENTRYPOINT ["/manager"]

@@ -1,0 +1,17 @@
+- __do_sys_kexec_file_load
+  - capable
+    - ns_capable
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - mutex_trylock
+  - mutex_unlock
+    - __mutex_unlock_fast@/workspace/git/linux-v5.15-analysis-src/kernel/locking/mutex.c#1388581115
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+      - atomic_long_try_cmpxchg_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#1720955514
+        - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796
+          - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104
+          - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313
+        - arch_atomic_long_try_cmpxchg_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#378130855
+          - arch_atomic64_try_cmpxchg@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#2510706812
+        - arch_atomic_long_try_cmpxchg_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#378130855
+          - arch_atomic64_try_cmpxchg@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#2510706812 [dp_skip=revisited]
+  - kimage_free

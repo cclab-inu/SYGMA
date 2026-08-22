@@ -1,0 +1,4 @@
+- __do_sys_epoll_ctl
+  - ep_op_has_event@/workspace/git/linux-v5.15-analysis-src/include/linux/eventpoll.h#1184535395
+  - do_epoll_ctl
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488

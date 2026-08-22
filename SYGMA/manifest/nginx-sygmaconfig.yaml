@@ -1,0 +1,23 @@
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: nginx-sygma-config
+  namespace: default
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          app: nginx
+        name: nginx
+        namespace: default
+      spec:
+        containers:
+        - name: nginx
+          image: nginx:1.24.0
+          imagePullPolicy: Always
+  policy:
+    # Evaluation-only wildcard; init and main still exercise policy lookup.
+    allowAll: true

@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=us-central1-docker.pkg.dev/google-samples/microservices-demo/shippingservice@sha256:b0125be448f9eb042214fec6eebda79a900a1a4c307f8e1bdb56f35e403969dd
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Base ENTRYPOINT is fully self-sufficient (CMD is null); reproduce it
+# verbatim after "--" so gap-launch's child argv is unchanged.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "boutique-shipping", "--", "/src/shippingservice"]

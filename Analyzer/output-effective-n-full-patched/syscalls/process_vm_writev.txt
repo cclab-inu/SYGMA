@@ -1,0 +1,9 @@
+- __do_sys_process_vm_writev
+  - process_vm_rw@/workspace/git/linux-v5.15-analysis-src/mm/process_vm_access.c#2729509173
+    - import_iovec
+      - __import_iovec
+        - iovec_from_user
+        - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+      - in_compat_syscall@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/compat.h#2510512485
+    - iov_iter_count@/workspace/git/linux-v5.15-analysis-src/include/linux/uio.h#708197886
+    - kfree

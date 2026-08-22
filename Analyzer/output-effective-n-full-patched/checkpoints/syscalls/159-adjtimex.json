@@ -1,0 +1,505 @@
+{
+  "number": 159,
+  "abi": "common",
+  "name": "adjtimex",
+  "entry": "sys_adjtimex",
+  "start": "__do_sys_adjtimex",
+  "linked_symbol": "__x64_sys_adjtimex",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_adjtimex",
+    "copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902",
+    "do_adjtimex",
+    "timekeeping_validate_timex@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2850166355",
+    "copy_to_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#1016656226",
+    "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_adjtimex",
+    "copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902",
+    "do_adjtimex",
+    "timekeeping_validate_timex@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2850166355",
+    "copy_to_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#1016656226",
+    "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484"
+  ],
+  "success_path_functions": [
+    "__do_sys_adjtimex",
+    "copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902",
+    "do_adjtimex",
+    "timekeeping_validate_timex@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2850166355",
+    "copy_to_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#1016656226",
+    "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484"
+  ],
+  "call_tree_file": "syscalls/adjtimex.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "uncertain",
+    "hooks": null,
+    "success_path_hook_sets": [
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "do_adjtimex",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484"
+    ],
+    "hook_proof_paths": {},
+    "reasons": [
+      "do_adjtimex: unplaced CFG callsite callsite:15",
+      "do_adjtimex: unplaced CFG callsite callsite:16",
+      "do_adjtimex: unplaced CFG callsite callsite:39",
+      "do_adjtimex: unplaced CFG callsite callsite:40",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:35",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:36",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:57",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:58",
+      "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448: indirect call may affect LSM denial propagation: clock-\u003eread",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: callee denial propagation is unresolved: tk_clock_read",
+      "do_adjtimex: callee denial propagation is unresolved: timekeeping_advance",
+      "__do_sys_adjtimex: callee denial propagation is unresolved: do_adjtimex"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_adjtimex",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_adjtimex",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_adjtimex",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "timekeeping_advance",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_adjtimex",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_rwlock_preemptible",
+        "detail": "the event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_adjtimex",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_spinlock_preemptible",
+        "detail": "the event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "lsm",
+        "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "tk_clock_read",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_rwlock_preemptible",
+        "detail": "the event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "lsm",
+        "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_spinlock_preemptible",
+        "detail": "the event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "lsm",
+        "caller": "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "clock-\u003eread",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "do_adjtimex",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484"
+    ],
+    "check_proof_paths": {},
+    "reasons": [
+      "do_adjtimex: unplaced CFG callsite callsite:15",
+      "do_adjtimex: unplaced CFG callsite callsite:16",
+      "do_adjtimex: unplaced CFG callsite callsite:39",
+      "do_adjtimex: unplaced CFG callsite callsite:40",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:35",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:36",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:57",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:58",
+      "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448: indirect signal target set is open: clock-\u003eread",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: signal-abort propagation is unresolved: tk_clock_read",
+      "do_adjtimex: signal-abort propagation is unresolved: timekeeping_advance",
+      "__do_sys_adjtimex: signal-abort propagation is unresolved: do_adjtimex"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_adjtimex",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_adjtimex",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_adjtimex",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_rwlock_preemptible",
+        "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_adjtimex",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_spinlock_preemptible",
+        "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_adjtimex",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "timekeeping_advance",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_rwlock_preemptible",
+        "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+        "kind": "cfg_event_unplaced",
+        "category": "frontend_cfg_extraction",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__seqprop_spinlock_preemptible",
+        "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "tk_clock_read",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "clock-\u003eread",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "do_adjtimex: unplaced CFG callsite callsite:15",
+        "do_adjtimex: unplaced CFG callsite callsite:16",
+        "do_adjtimex: unplaced CFG callsite callsite:39",
+        "do_adjtimex: unplaced CFG callsite callsite:40",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:35",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:36",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:57",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:58",
+        "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448: indirect call may affect LSM denial propagation: clock-\u003eread",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: callee denial propagation is unresolved: tk_clock_read",
+        "do_adjtimex: callee denial propagation is unresolved: timekeeping_advance",
+        "__do_sys_adjtimex: callee denial propagation is unresolved: do_adjtimex",
+        "success path 1 has no hook with certified final syscall-error propagation"
+      ]
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "do_adjtimex: unplaced CFG callsite callsite:15",
+        "do_adjtimex: unplaced CFG callsite callsite:16",
+        "do_adjtimex: unplaced CFG callsite callsite:39",
+        "do_adjtimex: unplaced CFG callsite callsite:40",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:35",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:36",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:57",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:58",
+        "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448: indirect signal target set is open: clock-\u003eread",
+        "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: signal-abort propagation is unresolved: tk_clock_read",
+        "do_adjtimex: signal-abort propagation is unresolved: timekeeping_advance",
+        "__do_sys_adjtimex: signal-abort propagation is unresolved: do_adjtimex"
+      ]
+    }
+  },
+  "lsm_classification": "uncertain",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "U",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [
+      "do_adjtimex: unplaced CFG callsite callsite:15",
+      "do_adjtimex: unplaced CFG callsite callsite:16",
+      "do_adjtimex: unplaced CFG callsite callsite:39",
+      "do_adjtimex: unplaced CFG callsite callsite:40",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:35",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:36",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:57",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:58",
+      "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448: indirect call may affect LSM denial propagation: clock-\u003eread",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: callee denial propagation is unresolved: tk_clock_read",
+      "do_adjtimex: callee denial propagation is unresolved: timekeeping_advance",
+      "__do_sys_adjtimex: callee denial propagation is unresolved: do_adjtimex",
+      "success path 1 has no hook with certified final syscall-error propagation"
+    ],
+    "sigkill": [
+      "do_adjtimex: unplaced CFG callsite callsite:15",
+      "do_adjtimex: unplaced CFG callsite callsite:16",
+      "do_adjtimex: unplaced CFG callsite callsite:39",
+      "do_adjtimex: unplaced CFG callsite callsite:40",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:35",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:36",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:57",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: unplaced CFG callsite callsite:58",
+      "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448: indirect signal target set is open: clock-\u003eread",
+      "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484: signal-abort propagation is unresolved: tk_clock_read",
+      "do_adjtimex: signal-abort propagation is unresolved: timekeeping_advance",
+      "__do_sys_adjtimex: signal-abort propagation is unresolved: do_adjtimex"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "lsm",
+      "caller": "__do_sys_adjtimex",
+      "kind": "callee_denial_propagation_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "do_adjtimex",
+      "detail": "at least one callee denial-propagation alternative remains unresolved"
+    },
+    {
+      "domain": "lsm",
+      "caller": "do_adjtimex",
+      "kind": "callee_denial_propagation_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "timekeeping_advance",
+      "detail": "at least one callee denial-propagation alternative remains unresolved"
+    },
+    {
+      "domain": "lsm",
+      "caller": "do_adjtimex",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_rwlock_preemptible",
+      "detail": "the event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "lsm",
+      "caller": "do_adjtimex",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_spinlock_preemptible",
+      "detail": "the event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "lsm",
+      "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+      "kind": "callee_denial_propagation_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "tk_clock_read",
+      "detail": "at least one callee denial-propagation alternative remains unresolved"
+    },
+    {
+      "domain": "lsm",
+      "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_rwlock_preemptible",
+      "detail": "the event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "lsm",
+      "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_spinlock_preemptible",
+      "detail": "the event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "lsm",
+      "caller": "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448",
+      "kind": "indirect_coverage_edge_unresolved",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "clock-\u003eread",
+      "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_adjtimex",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "do_adjtimex",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_adjtimex",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_rwlock_preemptible",
+      "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_adjtimex",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_spinlock_preemptible",
+      "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_adjtimex",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "timekeeping_advance",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_rwlock_preemptible",
+      "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+      "kind": "cfg_event_unplaced",
+      "category": "frontend_cfg_extraction",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__seqprop_spinlock_preemptible",
+      "detail": "a signal-relevant event cannot be assigned to one CFG block without guessing"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "timekeeping_advance@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2345820484",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "tk_clock_read",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "tk_clock_read@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2739668448",
+      "kind": "indirect_signal_target_set_unproven",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "clock-\u003eread",
+      "detail": "the runtime function-pointer target set is not statically closed"
+    }
+  ]
+}

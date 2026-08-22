@@ -1,0 +1,11 @@
+clone
+clone3
+finit_module
+flock
+fork
+init_module
+io_getevents
+io_pgetevents
+kexec_load
+msgsnd
+vfork

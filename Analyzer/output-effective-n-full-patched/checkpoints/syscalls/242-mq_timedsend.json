@@ -1,0 +1,345 @@
+{
+  "number": 242,
+  "abi": "common",
+  "name": "mq_timedsend",
+  "entry": "sys_mq_timedsend",
+  "start": "__do_sys_mq_timedsend",
+  "linked_symbol": "__x64_sys_mq_timedsend",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "load_msg"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_msg_msg_alloc"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_msg_msg_alloc"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_msg_msg_alloc"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_msg_msg_alloc"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_mq_timedsend",
+    "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+    "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+    "load_msg"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_mq_timedsend",
+    "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+    "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+    "load_msg"
+  ],
+  "success_path_functions": [
+    "__do_sys_mq_timedsend",
+    "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+    "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+    "load_msg"
+  ],
+  "call_tree_file": "syscalls/mq_timedsend.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_msg_msg_alloc"
+  ],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [
+    {
+      "hook": "security_msg_msg_alloc",
+      "bpf_hook": "msg_msg_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "load_msg"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "unknown",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_msg_msg_alloc",
+        "load_msg",
+        "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+        "__do_sys_mq_timedsend"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_msg_msg_alloc",
+          "function": "load_msg",
+          "source_function": "load_msg",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c",
+          "source_line": 107,
+          "source_column": 8,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "uncertain",
+    "hooks": [
+      "security_msg_msg_alloc"
+    ],
+    "success_path_hook_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+      "load_msg"
+    ],
+    "hook_proof_paths": {
+      "security_msg_msg_alloc": [
+        "security_msg_msg_alloc",
+        "load_msg",
+        "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+        "__do_sys_mq_timedsend"
+      ]
+    },
+    "reasons": [
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "load_msg: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327: callee denial propagation is unresolved: load_msg",
+      "__do_sys_mq_timedsend: callee denial propagation is unresolved: do_mq_timedsend"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_mq_timedsend",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_mq_timedsend",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "load_msg",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "load_msg",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_mq_timedsend",
+      "prepare_timeout@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#7477156",
+      "prepare_timeout@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#7477156#cfg-block-1",
+      "__do_sys_mq_timedsend#cfg-block-4[res=false]",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+      "load_msg",
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482#cfg-block-13[msg==NULL=false]",
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482#cfg-block-2",
+      "load_msg#cfg-block-19[msg==NULL=false]",
+      "load_msg#cfg-block-2",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327#cfg-block-38[IS_ERR(msg_ptr)=false]",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-53",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-52",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-51",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-48",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-45",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-44",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-43",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-40",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-38",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-36",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-35",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-34",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-33",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-32",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-30",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-29",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-28",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-25",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-23",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-22",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-21",
+      "wq_sleep@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#628769712#cfg-block-1",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327#cfg-block-4[ret=false]",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327#cfg-block-1",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327#callsite:21[zero]",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available",
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482#callsite:1[nonnull]",
+      "load_msg#callsite:1[nonnull]",
+      "security_msg_msg_alloc#cfg-block-3[unlikely(rc)=false]",
+      "security_msg_msg_alloc#cfg-block-1",
+      "load_msg#callsite:5[zero]",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327#callsite:12[valid_pointer]",
+      "__do_sys_mq_timedsend#cfg-block-1",
+      "__do_sys_mq_timedsend#callsite:1[zero]",
+      "__do_sys_mq_timedsend#callsite:2"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "load_msg: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327: callee denial propagation is unresolved: load_msg",
+        "__do_sys_mq_timedsend: callee denial propagation is unresolved: do_mq_timedsend",
+        "success path 1 has no hook with certified final syscall-error propagation",
+        "success path 2 has no hook with certified final syscall-error propagation"
+      ]
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "uncertain",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "U",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [
+      "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "load_msg: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327: callee denial propagation is unresolved: load_msg",
+      "__do_sys_mq_timedsend: callee denial propagation is unresolved: do_mq_timedsend",
+      "success path 1 has no hook with certified final syscall-error propagation",
+      "success path 2 has no hook with certified final syscall-error propagation"
+    ],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "lsm",
+      "caller": "__do_sys_mq_timedsend",
+      "kind": "callee_denial_propagation_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "do_mq_timedsend",
+      "detail": "at least one callee denial-propagation alternative remains unresolved"
+    },
+    {
+      "domain": "lsm",
+      "caller": "alloc_msg@/workspace/git/linux-v5.15-analysis-src/ipc/msgutil.c#3288745482",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "lsm",
+      "caller": "do_mq_timedsend@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#1739779327",
+      "kind": "callee_denial_propagation_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "load_msg",
+      "detail": "at least one callee denial-propagation alternative remains unresolved"
+    },
+    {
+      "domain": "lsm",
+      "caller": "load_msg",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    }
+  ]
+}

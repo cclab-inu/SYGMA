@@ -1,0 +1,6 @@
+- __do_sys_reboot
+  - task_active_pid_ns
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - ns_capable
+    - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - reboot_pid_ns

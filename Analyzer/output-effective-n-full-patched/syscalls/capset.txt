@@ -1,0 +1,3 @@
+- __do_sys_capset [direct_lsm=security_capset | success_lsm=security_capset]
+  - cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693
+  - prepare_creds [direct_lsm=security_prepare_creds | success_lsm=security_prepare_creds]

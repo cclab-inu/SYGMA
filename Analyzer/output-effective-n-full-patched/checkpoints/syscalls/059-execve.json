@@ -1,0 +1,1161 @@
+{
+  "number": 59,
+  "abi": "64",
+  "name": "execve",
+  "entry": "sys_execve",
+  "start": "__do_sys_execve",
+  "linked_symbol": "__x64_sys_execve",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+    "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+    "rw_verify_area"
+  ],
+  "direct_signal_functions": [
+    "__get_user_pages_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4282717142",
+    "__get_user_pages@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4187230534",
+    "follow_hugetlb_page",
+    "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638"
+  ],
+  "reachable_lsm_hooks": [
+    "security_bprm_creds_for_exec",
+    "security_file_alloc",
+    "security_bprm_check",
+    "security_file_permission"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": [
+    {
+      "check": "fatal_signal_pending",
+      "callsite_id": "callsite:2",
+      "category": "fatal-pending",
+      "sigkill_relevance": "proven_relevant",
+      "subject": "current-task",
+      "traversal": "cfg-path",
+      "function": "follow_hugetlb_page",
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "unknown",
+      "failure_encoding": "unknown",
+      "abort_effect": "unknown",
+      "proof_path": [
+        "fatal_signal_pending",
+        "follow_hugetlb_page",
+        "__get_user_pages@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4187230534",
+        "__get_user_pages_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4282717142",
+        "__gup_longterm_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#65676827",
+        "__get_user_pages_remote@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#2302094763",
+        "get_user_pages_remote",
+        "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+        "copy_string_kernel",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ]
+    },
+    {
+      "check": "fatal_signal_pending",
+      "callsite_id": "callsite:9",
+      "category": "fatal-pending",
+      "sigkill_relevance": "proven_relevant",
+      "subject": "current-task",
+      "traversal": "cfg-path",
+      "function": "__get_user_pages@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4187230534",
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "unknown",
+      "failure_encoding": "unknown",
+      "abort_effect": "unknown",
+      "proof_path": [
+        "fatal_signal_pending",
+        "__get_user_pages@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4187230534",
+        "__get_user_pages_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4282717142",
+        "__gup_longterm_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#65676827",
+        "__get_user_pages_remote@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#2302094763",
+        "get_user_pages_remote",
+        "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+        "copy_string_kernel",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ]
+    }
+  ],
+  "always_lsm_hooks": [
+    "security_bprm_creds_for_exec",
+    "security_file_alloc",
+    "security_bprm_check",
+    "security_file_permission"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_bprm_creds_for_exec",
+    "security_file_alloc",
+    "security_bprm_check",
+    "security_file_permission"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_bprm_creds_for_exec",
+    "security_file_alloc",
+    "security_bprm_check",
+    "security_file_permission"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_execve",
+    "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+    "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "getname",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+    "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+    "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+    "rw_verify_area",
+    "kernel_read",
+    "prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_execve",
+    "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+    "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "getname",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+    "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+    "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+    "rw_verify_area",
+    "kernel_read",
+    "prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003"
+  ],
+  "success_path_functions": [
+    "__do_sys_execve",
+    "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+    "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "getname",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+    "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+    "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+    "rw_verify_area",
+    "kernel_read",
+    "prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003"
+  ],
+  "call_tree_file": "syscalls/execve.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_bprm_creds_for_exec",
+    "security_bprm_check",
+    "security_file_permission"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_bprm_check"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "bprm_check_security"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_bprm_creds_for_exec",
+      "bpf_hook": "bprm_creds_for_exec",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_bprm_creds_for_exec",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_bprm_creds_for_exec",
+          "function": "bprm_execve",
+          "source_function": "bprm_execve",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/exec.c",
+          "source_line": 1831,
+          "source_column": 11,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/exec.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_file_alloc",
+      "bpf_hook": "file_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "unknown",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "path_openat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1188270535",
+        "do_filp_open",
+        "do_open_execat@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#3992039377",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_alloc",
+          "function": "__alloc_file",
+          "source_function": "__alloc_file",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c",
+          "source_line": 106,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_bprm_check",
+      "bpf_hook": "bprm_check_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_bprm_check",
+        "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+        "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_bprm_check",
+          "function": "bprm_execve",
+          "source_function": "search_binary_handler",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/exec.c",
+          "source_line": 1713,
+          "source_column": 11,
+          "inlined_at_functions": [
+            "exec_binprm",
+            "bprm_execve"
+          ],
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/exec.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_file_permission",
+      "bpf_hook": "file_permission",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "rw_verify_area"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_permission",
+        "rw_verify_area",
+        "kernel_read",
+        "prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003",
+        "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+        "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_permission",
+          "function": "rw_verify_area",
+          "source_function": "rw_verify_area",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/read_write.c",
+          "source_line": 389,
+          "source_column": 9,
+          "result_used": true,
+          "controls_branch": false,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "must-preserve-nonnegative-success",
+            "must-return-negative-on-error",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "phi",
+            "return"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/read_write.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_bprm_creds_for_exec",
+      "security_bprm_check",
+      "security_file_permission"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_bprm_check"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check"
+    ],
+    "proof_functions": [
+      "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+      "__do_sys_execve",
+      "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+      "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+      "rw_verify_area",
+      "kernel_read",
+      "prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003"
+    ],
+    "hook_proof_paths": {
+      "security_bprm_check": [
+        "security_bprm_check",
+        "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+        "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ],
+      "security_bprm_creds_for_exec": [
+        "security_bprm_creds_for_exec",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ],
+      "security_file_permission": [
+        "security_file_permission",
+        "rw_verify_area",
+        "kernel_read",
+        "prepare_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#4233663003",
+        "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+        "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+        "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "__do_sys_execve"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_execve",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_execve",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_execve",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_bprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#1844540644",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_empty_file",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "capable",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "alloc_empty_file",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_open_execat",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "prepare_bprm_creds",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "copy_string_kernel",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "get_arg_page",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "copy_string_kernel",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "strnlen",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_execveat_common",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "bprm_execve",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "copy_string_kernel",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_filp_open",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "path_openat",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_filp_open",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_open_execat@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#3992039377",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_filp_open",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "do_open_execat@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#3992039377",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "get_user_pages_remote",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "getname",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "getname_flags",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "kasprintf",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "kvasprintf",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "path_openat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1188270535",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "alloc_empty_file",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "path_openat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1188270535",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419",
+        "kind": "direct_call_unresolved",
+        "category": "symbol_or_definition_resolution",
+        "resolution_scope": "configured_input_ambiguity",
+        "symbol": "__real_strnlen",
+        "detail": "the call can influence syscall termination, so it cannot be removed from the LSM proof cone"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+      "kvasprintf",
+      "mm_init@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3855403615",
+      "pgd_alloc",
+      "bprm_mm_init@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#127350989",
+      "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419",
+      "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+      "__get_user_pages_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4282717142",
+      "find_extend_vma",
+      "__get_user_pages@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#4187230534",
+      "follow_hugetlb_page",
+      "pagecache_get_page",
+      "__alloc_pages_node@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#3295947166",
+      "hugetlbfs_pagecache_present@/workspace/git/linux-v5.15-analysis-src/mm/hugetlb.c#1697689885",
+      "follow_pmd_mask@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#3405059807",
+      "follow_page_pte@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#197668589",
+      "vm_normal_page",
+      "__pte_alloc",
+      "follow_pud_mask@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#2798903191",
+      "__gup_longterm_locked@/workspace/git/linux-v5.15-analysis-src/mm/gup.c#65676827",
+      "copy_string_kernel",
+      "prepare_creds",
+      "prepare_exec_creds",
+      "bprm_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#985062638",
+      "do_filp_open",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "path_openat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1188270535",
+      "step_into@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#542703840",
+      "pick_link@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2976674130",
+      "open_last_lookups@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#702449017",
+      "__d_lookup",
+      "lookup_fast@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2609433568",
+      "__d_lookup_rcu",
+      "lookup_open@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#918124841",
+      "atomic_open@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2935845983",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "d_alloc",
+      "d_alloc_parallel",
+      "do_open_execat@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#3992039377",
+      "exec_binprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#200008118",
+      "__kernel_read",
+      "search_binary_handler@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#31721526",
+      "getname_flags"
+    ],
+    "check_proof_paths": {},
+    "unproven_bypass_path": [
+      "__do_sys_execve",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722#cfg-block-25",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125#cfg-block-1",
+      "getname",
+      "getname_flags",
+      "getname_flags#cfg-block-19[result=true]",
+      "getname_flags#cfg-block-18",
+      "getname#cfg-block-1",
+      "__do_sys_execve#cfg-block-1"
+    ],
+    "reasons": [
+      "kvasprintf: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "kasprintf: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint",
+      "alloc_bprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#1844540644: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419: signal-relevant call target is typed_target_incomplete: __real_strnlen",
+      "copy_string_kernel: signal-abort propagation is unresolved: strnlen",
+      "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157: signal-abort propagation is unresolved: get_user_pages_remote",
+      "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "copy_string_kernel: signal-abort propagation is unresolved: get_arg_page",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: signal-abort propagation is unresolved: copy_string_kernel",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: signal-abort propagation is unresolved: bprm_execve",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125: signal-abort propagation is unresolved: do_execveat_common",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_execve: signal-abort propagation is unresolved: do_execve",
+      "getname_flags: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "getname: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_execve: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_execve",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_execve",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_execve",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "alloc_bprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#1844540644",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "copy_string_kernel",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "get_arg_page",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "copy_string_kernel",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "strnlen",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_execveat_common",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "bprm_execve",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "copy_string_kernel",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "get_user_pages_remote",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "getname",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "getname_flags",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "kasprintf",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "kvasprintf",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419",
+        "kind": "direct_call_unresolved",
+        "category": "symbol_or_definition_resolution",
+        "resolution_scope": "configured_input_ambiguity",
+        "symbol": "__real_strnlen",
+        "detail": "the call may contain a current-task checkpoint and cannot be resolved without guessing"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "kvasprintf: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "kasprintf: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint",
+        "alloc_bprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#1844540644: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419: signal-relevant call target is typed_target_incomplete: __real_strnlen",
+        "copy_string_kernel: signal-abort propagation is unresolved: strnlen",
+        "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157: signal-abort propagation is unresolved: get_user_pages_remote",
+        "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "copy_string_kernel: signal-abort propagation is unresolved: get_arg_page",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: signal-abort propagation is unresolved: copy_string_kernel",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: signal-abort propagation is unresolved: bprm_execve",
+        "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125: signal-abort propagation is unresolved: do_execveat_common",
+        "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_execve: signal-abort propagation is unresolved: do_execve",
+        "getname_flags: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "getname: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_execve: a checkpoint-free potential return is not proven to be a normal successful operation return"
+      ]
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "kvasprintf: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "kasprintf: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint",
+      "alloc_bprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#1844540644: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419: signal-relevant call target is typed_target_incomplete: __real_strnlen",
+      "copy_string_kernel: signal-abort propagation is unresolved: strnlen",
+      "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157: signal-abort propagation is unresolved: get_user_pages_remote",
+      "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "copy_string_kernel: signal-abort propagation is unresolved: get_arg_page",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: signal-abort propagation is unresolved: copy_string_kernel",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: signal-abort propagation is unresolved: bprm_execve",
+      "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125: signal-abort propagation is unresolved: do_execveat_common",
+      "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_execve: signal-abort propagation is unresolved: do_execve",
+      "getname_flags: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "getname: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_execve: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_execve",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "do_execve",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_execve",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "alloc_bprm@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#1844540644",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "copy_string_kernel",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "get_arg_page",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "copy_string_kernel",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "strnlen",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "do_execveat_common",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_execve@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2179467125",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "bprm_execve",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "copy_string_kernel",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "do_execveat_common@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2633331722",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "get_user_pages_remote",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "get_arg_page@/workspace/git/linux-v5.15-analysis-src/fs/exec.c#2984813157",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "getname",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "getname_flags",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "kasprintf",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "kvasprintf",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "strnlen@/workspace/git/linux-v5.15-analysis-src/include/linux/fortify-string.h#155648419",
+      "kind": "direct_call_unresolved",
+      "category": "symbol_or_definition_resolution",
+      "resolution_scope": "configured_input_ambiguity",
+      "symbol": "__real_strnlen",
+      "detail": "the call may contain a current-task checkpoint and cannot be resolved without guessing"
+    }
+  ]
+}

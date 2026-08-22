@@ -1,0 +1,5 @@
+- __do_sys_setdomainname
+  - ns_capable
+    - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902

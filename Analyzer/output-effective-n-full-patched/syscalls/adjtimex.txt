@@ -1,0 +1,5 @@
+- __do_sys_adjtimex
+  - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902
+  - do_adjtimex
+    - timekeeping_validate_timex@/workspace/git/linux-v5.15-analysis-src/kernel/time/timekeeping.c#2850166355
+  - copy_to_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#1016656226

@@ -1,0 +1,7 @@
+- __do_sys_getresuid
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+  - from_kuid_munged
+    - from_kuid
+      - map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889
+      - __kuid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#93167911
+  - might_fault@/workspace/git/linux-v5.15-analysis-src/include/linux/kernel.h#2973240269

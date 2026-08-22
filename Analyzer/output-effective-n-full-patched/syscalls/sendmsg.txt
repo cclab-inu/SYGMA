@@ -1,0 +1,7 @@
+- __do_sys_sendmsg
+  - __sys_sendmsg
+    - sockfd_lookup_light@/workspace/git/linux-v5.15-analysis-src/net/socket.c#658373155
+    - ___sys_sendmsg@/workspace/git/linux-v5.15-analysis-src/net/socket.c#2196917076
+      - ____sys_sendmsg@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3460209528
+      - ____sys_sendmsg@/workspace/git/linux-v5.15-analysis-src/net/socket.c#3460209528
+        - sock_sendmsg [direct_lsm=security_socket_sendmsg | success_lsm=security_socket_sendmsg | validated_lsm=security_socket_sendmsg]

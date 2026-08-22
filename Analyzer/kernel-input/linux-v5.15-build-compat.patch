@@ -1,0 +1,86 @@
+diff --git a/drivers/usb/dwc2/hcd_queue.c b/drivers/usb/dwc2/hcd_queue.c
+index 89a788326..24beff610 100644
+--- a/drivers/usb/dwc2/hcd_queue.c
++++ b/drivers/usb/dwc2/hcd_queue.c
+@@ -59,7 +59,7 @@
+ #define DWC2_UNRESERVE_DELAY (msecs_to_jiffies(5))
+ 
+ /* If we get a NAK, wait this long before retrying */
+-#define DWC2_RETRY_WAIT_DELAY (1 * 1E6L)
++#define DWC2_RETRY_WAIT_DELAY (1 * NSEC_PER_MSEC)
+ 
+ /**
+  * dwc2_periodic_channel_available() - Checks that a channel is available for a
+diff --git a/include/linux/string.h b/include/linux/string.h
+index 5e96d656b..d68097b4f 100644
+--- a/include/linux/string.h
++++ b/include/linux/string.h
+@@ -262,23 +262,8 @@ void __write_overflow(void) __compiletime_error("detected write beyond size of o
+ #include <linux/fortify-string.h>
+ #endif
+ 
+-/**
+- * memcpy_and_pad - Copy one buffer to another with padding
+- * @dest: Where to copy to
+- * @dest_len: The destination buffer size
+- * @src: Where to copy from
+- * @count: The number of bytes to copy
+- * @pad: Character to use for padding if space is left in destination.
+- */
+-static inline void memcpy_and_pad(void *dest, size_t dest_len,
+-				  const void *src, size_t count, int pad)
+-{
+-	if (dest_len > count) {
+-		memcpy(dest, src, count);
+-		memset(dest + count, pad,  dest_len - count);
+-	} else
+-		memcpy(dest, src, dest_len);
+-}
++void memcpy_and_pad(void *dest, size_t dest_len, const void *src, size_t count,
++		    int pad);
+ 
+ /**
+  * str_has_prefix - Test if a string has a given prefix
+diff --git a/lib/string_helpers.c b/lib/string_helpers.c
+index 3806a52ce..35e231f42 100644
+--- a/lib/string_helpers.c
++++ b/lib/string_helpers.c
+@@ -696,3 +696,23 @@ void kfree_strarray(char **array, size_t n)
+ 	kfree(array);
+ }
+ EXPORT_SYMBOL_GPL(kfree_strarray);
++
++/**
++ * memcpy_and_pad - Copy one buffer to another with padding
++ * @dest: Where to copy to
++ * @dest_len: The destination buffer size
++ * @src: Where to copy from
++ * @count: The number of bytes to copy
++ * @pad: Character to use for padding if space is left in destination.
++ */
++void memcpy_and_pad(void *dest, size_t dest_len, const void *src, size_t count,
++		    int pad)
++{
++	if (dest_len > count) {
++		memcpy(dest, src, count);
++		memset(dest + count, pad, dest_len - count);
++	} else {
++		memcpy(dest, src, dest_len);
++	}
++}
++EXPORT_SYMBOL(memcpy_and_pad);
+diff --git a/scripts/link-vmlinux.sh b/scripts/link-vmlinux.sh
+index d74cee5c4..bde9732c9 100755
+--- a/scripts/link-vmlinux.sh
++++ b/scripts/link-vmlinux.sh
+@@ -227,6 +227,9 @@ gen_btf()
+ 	if [ "${pahole_ver}" -ge "121" ]; then
+ 		extra_paholeopt="${extra_paholeopt} --btf_gen_floats"
+ 	fi
++	if [ "${pahole_ver}" -ge "124" ]; then
++		extra_paholeopt="${extra_paholeopt} --skip_encoding_btf_enum64"
++	fi
+ 
+ 	info "BTF" ${2}
+ 	LLVM_OBJCOPY="${OBJCOPY}" ${PAHOLE} -J ${extra_paholeopt} ${1}
+

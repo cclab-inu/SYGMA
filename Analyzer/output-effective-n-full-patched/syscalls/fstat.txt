@@ -1,0 +1,5 @@
+- __do_sys_newfstat
+  - vfs_fstat
+    - fdget_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#968566192
+    - vfs_getattr [direct_lsm=security_inode_getattr | success_lsm=security_inode_getattr | validated_lsm=security_inode_getattr]
+    - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

@@ -1,0 +1,20 @@
+- __do_sys_kcmp
+  - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+    - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+  - find_task_by_vpid
+  - find_task_by_vpid
+  - get_task_struct@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/task.h#440629896
+  - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+    - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+      - rcu_read_unlock_strict
+  - kcmp_lock@/workspace/git/linux-v5.15-analysis-src/kernel/kcmp.c#1064091168
+    - down_read_killable
+      - __cond_resched
+      - __down_read_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1629009507
+        - __down_read_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1099009593
+          - rwsem_read_trylock@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1536680509
+  - put_task_struct@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/task.h#2570507136
+    - refcount_dec_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/refcount.h#256000737
+  - put_task_struct@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/task.h#2570507136
+    - refcount_dec_and_test@/workspace/git/linux-v5.15-analysis-src/include/linux/refcount.h#256000737 [dp_skip=revisited]
+  - ptrace_may_access

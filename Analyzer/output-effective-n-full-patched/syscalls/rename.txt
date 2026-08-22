@@ -1,0 +1,9 @@
+- __do_sys_rename
+  - do_renameat2 [direct_lsm=security_path_rename | success_lsm=security_path_rename]
+    - putname
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+    - putname
+      - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+  - getname
+    - getname_flags
+      - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037

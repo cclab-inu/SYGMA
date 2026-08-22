@@ -1,0 +1,6 @@
+- __do_sys_getgid
+  - from_kgid_munged
+    - from_kgid
+      - map_id_up@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#1102117889
+      - __kgid_val@/workspace/git/linux-v5.15-analysis-src/include/linux/uidgid.h#4192978335
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

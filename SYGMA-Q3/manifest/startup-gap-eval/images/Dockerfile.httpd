@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/library/httpd@sha256:374766f5bc5977c9b72fdb8ae3ed05b7fc89060e7edc88fcbf142d6988e58eeb
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because adding ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "httpd", "--"]
+CMD ["httpd-foreground"]

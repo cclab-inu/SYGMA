@@ -1,0 +1,4 @@
+- __do_sys_mq_notify
+  - do_mq_notify@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#781889750
+    - audit_mq_notify@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3625116582
+      - audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724

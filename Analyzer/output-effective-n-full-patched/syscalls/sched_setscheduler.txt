@@ -1,0 +1,13 @@
+- __do_sys_sched_setscheduler
+  - do_sched_setscheduler@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#4193326850
+    - copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902
+    - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+      - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+    - find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035
+    - rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650
+      - __rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162
+        - rcu_read_unlock_strict
+    - sched_setscheduler
+      - _sched_setscheduler@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#213544623
+        - __sched_setscheduler@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#3456367419 [direct_lsm=security_task_setscheduler]
+        - __sched_setscheduler@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#3456367419 [direct_lsm=security_task_setscheduler | success_lsm=security_task_setscheduler]

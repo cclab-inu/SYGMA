@@ -1,0 +1,2 @@
+- __do_sys_ftruncate
+  - do_sys_ftruncate [direct_lsm=security_path_truncate | success_lsm=security_path_truncate]

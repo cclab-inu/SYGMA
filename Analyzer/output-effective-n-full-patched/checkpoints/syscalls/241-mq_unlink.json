@@ -1,0 +1,1235 @@
+{
+  "number": 241,
+  "abi": "common",
+  "name": "mq_unlink",
+  "entry": "sys_mq_unlink",
+  "start": "__do_sys_mq_unlink",
+  "linked_symbol": "__x64_sys_mq_unlink",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "vfs_unlink"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_inode_permission",
+    "security_inode_unlink"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_inode_permission",
+    "security_inode_unlink"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_inode_permission",
+    "security_inode_unlink"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_inode_permission",
+    "security_inode_unlink"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_mq_unlink",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "getname",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "vfs_unlink"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_mq_unlink",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "getname",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "vfs_unlink"
+  ],
+  "success_path_functions": [
+    "__do_sys_mq_unlink",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "getname",
+    "getname_flags",
+    "audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "vfs_unlink"
+  ],
+  "call_tree_file": "syscalls/mq_unlink.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_inode_unlink"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_inode_unlink"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "inode_unlink"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_inode_permission",
+      "bpf_hook": "inode_permission",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "inode_permission"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "unknown",
+      "failure_encoding": "unknown",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_inode_permission",
+        "inode_permission",
+        "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997",
+        "lookup_one_len",
+        "__do_sys_mq_unlink"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_inode_permission",
+          "function": "inode_permission",
+          "source_function": "inode_permission",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/namei.c",
+          "source_line": 532,
+          "source_column": 9,
+          "result_used": true,
+          "controls_branch": false,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "must-preserve-nonnegative-success",
+            "must-return-negative-on-error",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "phi",
+            "return"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/namei.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_inode_unlink",
+      "bpf_hook": "inode_unlink",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "vfs_unlink"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_inode_unlink",
+        "vfs_unlink",
+        "__do_sys_mq_unlink"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_inode_unlink",
+          "function": "vfs_unlink",
+          "source_function": "vfs_unlink",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/namei.c",
+          "source_line": 4097,
+          "source_column": 11,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/namei.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_inode_unlink"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_inode_unlink"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check"
+    ],
+    "proof_functions": [
+      "vfs_unlink",
+      "__do_sys_mq_unlink"
+    ],
+    "hook_proof_paths": {
+      "security_inode_unlink": [
+        "security_inode_unlink",
+        "vfs_unlink",
+        "__do_sys_mq_unlink"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "HAS_UNMAPPED_ID@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2855586580",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "dentry-\u003ed_op-\u003ed_init",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__d_lookup",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_same_name",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__d_lookup",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__d_lookup_rcu",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "parent-\u003ed_op-\u003ed_compare",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__d_lookup_rcu",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_mq_unlink",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "lookup_one_len",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_mq_unlink",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_alloc_parallel",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "inode-\u003ei_op-\u003elookup",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_alloc",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__d_alloc",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_alloc",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_alloc_parallel",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__d_lookup_rcu",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_alloc_parallel",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_alloc",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_alloc_parallel",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_same_name",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_alloc_parallel",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_lookup",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__d_lookup",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_lookup",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "parent-\u003ed_op-\u003ed_compare",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "inode_permission",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_lookup",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997",
+        "kind": "indirect_coverage_edge_unresolved",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "base-\u003ed_op-\u003ed_hash",
+        "detail": "strict coverage does not assume a complete runtime function-pointer target set"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_one_len",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__lookup_slow",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_one_len",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "lookup_dcache",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_one_len",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "lookup_one_common",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "lookup_one_len",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "vfs_unlink",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_mq_unlink",
+      "__d_lookup",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "d_alloc",
+      "__d_lookup_rcu",
+      "d_alloc_parallel",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431"
+    ],
+    "check_proof_paths": {},
+    "unproven_bypass_path": [
+      "__do_sys_mq_unlink",
+      "getname",
+      "getname#cfg-block-2",
+      "getname#cfg-block-1",
+      "getname_flags",
+      "getname_flags#cfg-block-20",
+      "getname_flags#cfg-block-19",
+      "getname_flags#cfg-block-17",
+      "kmem_cache_alloc#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "getname_flags#cfg-block-15",
+      "getname_flags#cfg-block-13",
+      "getname_flags#cfg-block-12",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "getname_flags#cfg-block-10",
+      "getname_flags#cfg-block-8",
+      "getname_flags#cfg-block-6",
+      "getname_flags#cfg-block-5",
+      "getname_flags#cfg-block-3",
+      "getname_flags#cfg-block-1",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available",
+      "getname_flags#callsite:10[nonnull]",
+      "strncpy_from_user#cfg-block-7",
+      "getname_flags#callsite:14[zero]",
+      "getname#callsite:1",
+      "__do_sys_mq_unlink#cfg-block-14[IS_ERR(name)=false]",
+      "mnt_want_write",
+      "__mnt_want_write#cfg-block-1",
+      "mnt_want_write#callsite:2[zero]",
+      "mnt_want_write#cfg-block-3[ret=false]",
+      "mnt_want_write#cfg-block-1",
+      "__do_sys_mq_unlink#cfg-block-12[err=false]",
+      "lookup_one_len",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#cfg-block-17",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#cfg-block-16",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#cfg-block-14",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#cfg-block-9",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#cfg-block-4",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#cfg-block-1",
+      "inode_permission",
+      "inode_permission#cfg-block-13",
+      "inode_permission#cfg-block-12",
+      "inode_permission#cfg-block-10",
+      "inode_permission#cfg-block-5",
+      "do_inode_permission@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2382806985",
+      "do_inode_permission@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2382806985#cfg-block-6",
+      "do_inode_permission@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2382806985#cfg-block-5",
+      "do_inode_permission@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2382806985#cfg-block-1",
+      "generic_permission",
+      "generic_permission#cfg-block-18",
+      "generic_permission#cfg-block-17",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-22",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-21",
+      "i_uid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2001425440",
+      "i_uid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2001425440#cfg-block-2",
+      "i_uid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2001425440#cfg-block-1",
+      "kuid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#976547431",
+      "kuid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#976547431#cfg-block-2",
+      "kuid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#976547431#cfg-block-1",
+      "make_kuid",
+      "make_kuid#cfg-block-2",
+      "make_kuid#cfg-block-1",
+      "map_id_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#2286615260",
+      "map_id_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#2286615260#cfg-block-2",
+      "map_id_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#2286615260#cfg-block-1",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034#cfg-block-8",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034#cfg-block-7",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034#cfg-block-6",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034#cfg-block-4",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034#cfg-block-3",
+      "map_id_range_down@/workspace/git/linux-v5.15-analysis-src/kernel/user_namespace.c#3681038034#cfg-block-1",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-19",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-17",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-16",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-11",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-7",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-4",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-3",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-1",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-4[mask\u0026~mode=false]",
+      "generic_permission#cfg-block-16",
+      "posix_acl_permission#cfg-block-2",
+      "check_acl@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1802890487#callsite:7",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#callsite:6",
+      "do_inode_permission@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2382806985#callsite:6",
+      "inode_permission#cfg-block-3",
+      "devcgroup_inode_permission@/workspace/git/linux-v5.15-analysis-src/include/linux/device_cgroup.h#1223592207",
+      "devcgroup_inode_permission@/workspace/git/linux-v5.15-analysis-src/include/linux/device_cgroup.h#1223592207#cfg-block-13",
+      "devcgroup_inode_permission@/workspace/git/linux-v5.15-analysis-src/include/linux/device_cgroup.h#1223592207#cfg-block-12",
+      "devcgroup_inode_permission@/workspace/git/linux-v5.15-analysis-src/include/linux/device_cgroup.h#1223592207#cfg-block-11",
+      "inode_permission#cfg-block-1",
+      "security_inode_permission",
+      "security_inode_permission#cfg-block-32",
+      "security_inode_permission#cfg-block-31",
+      "security_inode_permission#cfg-block-30",
+      "inode_permission#callsite:5[zero]",
+      "inode_permission#callsite:6",
+      "lookup_one_common@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#2512637997#callsite:4",
+      "lookup_one_len#cfg-block-6[err=false]",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+      "d_lookup",
+      "__d_lookup",
+      "__d_lookup#cfg-block-1",
+      "d_lookup#cfg-block-4[dentry=false]",
+      "d_lookup#cfg-block-1",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097#cfg-block-6[dentry=false]",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097#cfg-block-1",
+      "lookup_one_len#cfg-block-4[dentry=false]",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431#cfg-block-11",
+      "lookup_one_len#cfg-block-1",
+      "__do_sys_mq_unlink#cfg-block-10[IS_ERR(dentry)=false]",
+      "__do_sys_mq_unlink#cfg-block-8[!inode=false]",
+      "vfs_unlink",
+      "vfs_unlink#cfg-block-18",
+      "vfs_unlink#cfg-block-17",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-54",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-53",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-50",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-39",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-37",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-26",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-25",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-24",
+      "i_gid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#3578762705",
+      "i_gid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#3578762705#cfg-block-2",
+      "i_gid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#3578762705#cfg-block-1",
+      "kgid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#704431257",
+      "kgid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#704431257#cfg-block-2",
+      "kgid_into_mnt@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#704431257#cfg-block-1",
+      "make_kgid",
+      "make_kgid#cfg-block-2",
+      "make_kgid#cfg-block-1",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-22",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-21",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-15[mask\u0026~mode=true]",
+      "acl_permission_check@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1232040793#cfg-block-12",
+      "inode_permission#callsite:4[nonzero]",
+      "inode_permission#cfg-block-5[retval=true]",
+      "inode_permission#cfg-block-4",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#callsite:12[nonzero]",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#callsite:12",
+      "vfs_unlink#cfg-block-16",
+      "may_delete@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#4082145751#cfg-block-22[error=true]",
+      "vfs_unlink#callsite:1[nonzero]",
+      "vfs_unlink#callsite:1",
+      "__do_sys_mq_unlink#cfg-block-4[inode=false]",
+      "__do_sys_mq_unlink#cfg-block-1"
+    ],
+    "reasons": [
+      "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712: indirect signal target set is open: parent-\u003ed_op-\u003ed_compare",
+      "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__d_lookup: signal-abort propagation is unresolved: d_same_name",
+      "__d_lookup: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_lookup: signal-abort propagation is unresolved: __d_lookup",
+      "d_lookup: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097: signal-abort propagation is unresolved: d_lookup",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "lookup_one_len: signal-abort propagation is unresolved: lookup_dcache",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517: indirect signal target set is open: dentry-\u003ed_op-\u003ed_init",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_alloc: signal-abort propagation is unresolved: __d_alloc",
+      "d_alloc: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_alloc_parallel: signal-abort propagation is unresolved: d_alloc",
+      "__d_lookup_rcu: indirect signal target set is open: parent-\u003ed_op-\u003ed_compare",
+      "__d_lookup_rcu: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_alloc_parallel: signal-abort propagation is unresolved: __d_lookup_rcu",
+      "d_alloc_parallel: signal-abort propagation is unresolved: d_same_name",
+      "d_alloc_parallel: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: signal-abort propagation is unresolved: d_alloc_parallel",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: indirect signal target set is open: inode-\u003ei_op-\u003elookup",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "lookup_one_len: signal-abort propagation is unresolved: __lookup_slow",
+      "lookup_one_len: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_mq_unlink: signal-abort propagation is unresolved: lookup_one_len",
+      "__do_sys_mq_unlink: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "dentry-\u003ed_op-\u003ed_init",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__d_lookup",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_same_name",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__d_lookup",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__d_lookup_rcu",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "parent-\u003ed_op-\u003ed_compare",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__d_lookup_rcu",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_mq_unlink",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "lookup_one_len",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_mq_unlink",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "inode-\u003ei_op-\u003elookup",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_alloc_parallel",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_alloc",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__d_alloc",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_alloc",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_alloc_parallel",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__d_lookup_rcu",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_alloc_parallel",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_alloc",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_alloc_parallel",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_same_name",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_alloc_parallel",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_lookup",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__d_lookup",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_lookup",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712",
+        "kind": "indirect_signal_target_set_unproven",
+        "category": "open_function_pointer_target_set",
+        "resolution_scope": "static_analysis_limit",
+        "expression": "parent-\u003ed_op-\u003ed_compare",
+        "detail": "the runtime function-pointer target set is not statically closed"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "d_lookup",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "lookup_one_len",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "__lookup_slow",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "lookup_one_len",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "lookup_dcache",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      },
+      {
+        "domain": "sigkill",
+        "caller": "lookup_one_len",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712: indirect signal target set is open: parent-\u003ed_op-\u003ed_compare",
+        "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__d_lookup: signal-abort propagation is unresolved: d_same_name",
+        "__d_lookup: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "d_lookup: signal-abort propagation is unresolved: __d_lookup",
+        "d_lookup: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097: signal-abort propagation is unresolved: d_lookup",
+        "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "lookup_one_len: signal-abort propagation is unresolved: lookup_dcache",
+        "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517: indirect signal target set is open: dentry-\u003ed_op-\u003ed_init",
+        "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "d_alloc: signal-abort propagation is unresolved: __d_alloc",
+        "d_alloc: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "d_alloc_parallel: signal-abort propagation is unresolved: d_alloc",
+        "__d_lookup_rcu: indirect signal target set is open: parent-\u003ed_op-\u003ed_compare",
+        "__d_lookup_rcu: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "d_alloc_parallel: signal-abort propagation is unresolved: __d_lookup_rcu",
+        "d_alloc_parallel: signal-abort propagation is unresolved: d_same_name",
+        "d_alloc_parallel: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: signal-abort propagation is unresolved: d_alloc_parallel",
+        "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: indirect signal target set is open: inode-\u003ei_op-\u003elookup",
+        "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "lookup_one_len: signal-abort propagation is unresolved: __lookup_slow",
+        "lookup_one_len: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_mq_unlink: signal-abort propagation is unresolved: lookup_one_len",
+        "__do_sys_mq_unlink: a checkpoint-free potential return is not proven to be a normal successful operation return"
+      ]
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712: indirect signal target set is open: parent-\u003ed_op-\u003ed_compare",
+      "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__d_lookup: signal-abort propagation is unresolved: d_same_name",
+      "__d_lookup: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_lookup: signal-abort propagation is unresolved: __d_lookup",
+      "d_lookup: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097: signal-abort propagation is unresolved: d_lookup",
+      "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "lookup_one_len: signal-abort propagation is unresolved: lookup_dcache",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517: indirect signal target set is open: dentry-\u003ed_op-\u003ed_init",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_alloc: signal-abort propagation is unresolved: __d_alloc",
+      "d_alloc: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_alloc_parallel: signal-abort propagation is unresolved: d_alloc",
+      "__d_lookup_rcu: indirect signal target set is open: parent-\u003ed_op-\u003ed_compare",
+      "__d_lookup_rcu: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "d_alloc_parallel: signal-abort propagation is unresolved: __d_lookup_rcu",
+      "d_alloc_parallel: signal-abort propagation is unresolved: d_same_name",
+      "d_alloc_parallel: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: signal-abort propagation is unresolved: d_alloc_parallel",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: indirect signal target set is open: inode-\u003ei_op-\u003elookup",
+      "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "lookup_one_len: signal-abort propagation is unresolved: __lookup_slow",
+      "lookup_one_len: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_mq_unlink: signal-abort propagation is unresolved: lookup_one_len",
+      "__do_sys_mq_unlink: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "sigkill",
+      "caller": "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "kind": "indirect_signal_target_set_unproven",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "dentry-\u003ed_op-\u003ed_init",
+      "detail": "the runtime function-pointer target set is not statically closed"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__d_lookup",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "d_same_name",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__d_lookup",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__d_lookup_rcu",
+      "kind": "indirect_signal_target_set_unproven",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "parent-\u003ed_op-\u003ed_compare",
+      "detail": "the runtime function-pointer target set is not statically closed"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__d_lookup_rcu",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_mq_unlink",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "lookup_one_len",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_mq_unlink",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+      "kind": "indirect_signal_target_set_unproven",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "inode-\u003ei_op-\u003elookup",
+      "detail": "the runtime function-pointer target set is not statically closed"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "d_alloc_parallel",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__lookup_slow@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#118055431",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_alloc",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__d_alloc",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_alloc",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_alloc_parallel",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__d_lookup_rcu",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_alloc_parallel",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "d_alloc",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_alloc_parallel",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "d_same_name",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_alloc_parallel",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_lookup",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__d_lookup",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_lookup",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712",
+      "kind": "indirect_signal_target_set_unproven",
+      "category": "open_function_pointer_target_set",
+      "resolution_scope": "static_analysis_limit",
+      "expression": "parent-\u003ed_op-\u003ed_compare",
+      "detail": "the runtime function-pointer target set is not statically closed"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "d_same_name@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#2260543712",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "d_lookup",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "lookup_dcache@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#3132416097",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "lookup_one_len",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "__lookup_slow",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "lookup_one_len",
+      "kind": "signal_abort_effect_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "lookup_dcache",
+      "detail": "at least one child checkpoint propagation alternative remains unresolved"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "lookup_one_len",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    }
+  ]
+}

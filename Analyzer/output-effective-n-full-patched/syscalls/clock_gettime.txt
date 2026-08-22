@@ -1,0 +1,2 @@
+- __do_sys_clock_gettime [indirect=kc->clock_get_timespec]
+  - clockid_to_kclock@/workspace/git/linux-v5.15-analysis-src/kernel/time/posix-timers.c#923764587

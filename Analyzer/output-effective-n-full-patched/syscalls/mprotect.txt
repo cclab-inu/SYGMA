@@ -1,0 +1,3 @@
+- __do_sys_mprotect
+  - do_mprotect_pkey@/workspace/git/linux-v5.15-analysis-src/mm/mprotect.c#2898279400 [direct_lsm=security_file_mprotect | indirect=vma->vm_ops->mprotect]
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

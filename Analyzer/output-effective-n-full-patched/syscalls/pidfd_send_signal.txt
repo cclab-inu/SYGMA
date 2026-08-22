@@ -1,0 +1,7 @@
+- __do_sys_pidfd_send_signal
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - pidfd_to_pid@/workspace/git/linux-v5.15-analysis-src/kernel/signal.c#3261295278
+    - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+  - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+  - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791
+  - kill_pid_info

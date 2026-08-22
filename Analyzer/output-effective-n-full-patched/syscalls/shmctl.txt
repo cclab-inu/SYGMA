@@ -1,0 +1,3 @@
+- __do_sys_shmctl
+  - ksys_shmctl@/workspace/git/linux-v5.15-analysis-src/ipc/shm.c#1518949713
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

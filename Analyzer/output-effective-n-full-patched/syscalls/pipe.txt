@@ -1,0 +1,16 @@
+- __do_sys_pipe
+  - do_pipe2@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#1321799794
+    - __do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562
+      - create_pipe_files
+        - get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916
+          - new_inode_pseudo
+            - alloc_inode@/workspace/git/linux-v5.15-analysis-src/fs/inode.c#1837674685 [indirect=ops->alloc_inode,ops->destroy_inode]
+        - alloc_file_pseudo
+          - alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084
+            - alloc_empty_file
+              - __alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006 [direct_lsm=security_file_alloc | success_lsm=security_file_alloc]
+    - __do_pipe_flags@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#2442992562
+      - create_pipe_files [dp_skip=revisited]
+      - create_pipe_files
+        - get_pipe_inode@/workspace/git/linux-v5.15-analysis-src/fs/pipe.c#955634916 [dp_skip=revisited]
+        - alloc_file_pseudo [dp_skip=revisited]

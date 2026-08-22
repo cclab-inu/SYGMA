@@ -1,0 +1,5 @@
+- __do_sys_fstatfs
+  - fd_statfs
+    - fdget_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#968566192
+    - vfs_statfs
+      - statfs_by_dentry@/workspace/git/linux-v5.15-analysis-src/fs/statfs.c#2953711141 [direct_lsm=security_sb_statfs | success_lsm=security_sb_statfs | validated_lsm=security_sb_statfs | indirect=dentry->d_sb->s_op->statfs]

@@ -1,0 +1,4 @@
+- __do_sys_fgetxattr
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - getxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#2996024010
+    - vfs_getxattr [direct_lsm=security_inode_getxattr | success_lsm=security_inode_getxattr]

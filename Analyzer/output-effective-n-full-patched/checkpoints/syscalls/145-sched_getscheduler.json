@@ -1,0 +1,232 @@
+{
+  "number": 145,
+  "abi": "common",
+  "name": "sched_getscheduler",
+  "entry": "sys_sched_getscheduler",
+  "start": "__do_sys_sched_getscheduler",
+  "linked_symbol": "__x64_sys_sched_getscheduler",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "__do_sys_sched_getscheduler"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_task_getscheduler"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_task_getscheduler"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_task_getscheduler"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_task_getscheduler"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_sched_getscheduler",
+    "rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072",
+    "__rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297",
+    "find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035",
+    "rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650",
+    "__rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162",
+    "rcu_read_unlock_strict"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_sched_getscheduler",
+    "rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072",
+    "__rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297",
+    "find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035",
+    "rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650",
+    "__rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162",
+    "rcu_read_unlock_strict"
+  ],
+  "success_path_functions": [
+    "__do_sys_sched_getscheduler",
+    "rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072",
+    "__rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297",
+    "find_process_by_pid@/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c#2600326035",
+    "rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#1153835650",
+    "__rcu_read_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#951526162",
+    "rcu_read_unlock_strict"
+  ],
+  "call_tree_file": "syscalls/sched_getscheduler.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_task_getscheduler"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_task_getscheduler"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "task_getscheduler"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_task_getscheduler",
+      "bpf_hook": "task_getscheduler",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__do_sys_sched_getscheduler"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_task_getscheduler",
+        "__do_sys_sched_getscheduler"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_task_getscheduler",
+          "function": "__se_sys_sched_getscheduler",
+          "source_function": "__do_sys_sched_getscheduler",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c",
+          "source_line": 7763,
+          "source_column": 12,
+          "inlined_at_functions": [
+            "__se_sys_sched_getscheduler"
+          ],
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/sched/core.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_task_getscheduler"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_task_getscheduler"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_sched_getscheduler"
+    ],
+    "hook_proof_paths": {
+      "security_task_getscheduler": [
+        "security_task_getscheduler",
+        "__do_sys_sched_getscheduler"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "closed_effect_source_absence"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "unproven_bypass_path": [
+      "__do_sys_sched_getscheduler"
+    ],
+    "reasons": [
+      "the closed function cone contains no effective current-task SIGKILL checkpoint, but a normal successful operation return is not proven"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_sched_getscheduler",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "the closed function cone contains no effective current-task SIGKILL checkpoint, but a normal successful operation return is not proven"
+      ]
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "the closed function cone contains no effective current-task SIGKILL checkpoint, but a normal successful operation return is not proven"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_sched_getscheduler",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    }
+  ]
+}

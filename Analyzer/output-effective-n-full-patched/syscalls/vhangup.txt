@@ -1,0 +1,18 @@
+- __do_sys_vhangup
+  - capable
+    - ns_capable
+      - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - tty_vhangup_self
+    - get_current_tty
+      - _raw_spin_lock_irqsave
+      - spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+      - tty_kref_get@/workspace/git/linux-v5.15-analysis-src/include/linux/tty.h#1394145967
+      - spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773
+        - _raw_spin_unlock_irqrestore
+          - __raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143
+            - do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415
+              - queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032
+                - pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143
+            - arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976
+              - arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247

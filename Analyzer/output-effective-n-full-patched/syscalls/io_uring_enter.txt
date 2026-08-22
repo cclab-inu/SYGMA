@@ -1,0 +1,4 @@
+- __do_sys_io_uring_enter
+  - io_run_task_work@/workspace/git/linux-v5.15-analysis-src/fs/io_uring.c#2226833606
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

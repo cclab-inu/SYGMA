@@ -1,0 +1,4 @@
+- __do_sys_flistxattr
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349
+    - vfs_listxattr [direct_lsm=security_inode_listxattr,security_inode_listsecurity | success_lsm=security_inode_listxattr | validated_lsm=security_inode_listxattr | indirect=inode->i_op->listxattr]

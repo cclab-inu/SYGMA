@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1
+FROM golang:1.24.7-alpine AS builder
+
+RUN apk add --no-cache git gcc musl-dev linux-headers
+
+WORKDIR /build
+
+#  go.mod, go.sum 
+COPY go.mod go.sum ./
+RUN go mod download
+
+# OCI Hook  
+COPY oci-hook/main.go .
+
+# 
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o phalanx-hook main.go
+
+# --- Runtime stage ---
+FROM alpine:3.19
+RUN apk add --no-cache ca-certificates
+
+COPY --from=builder /build/phalanx-hook /phalanx-hook
+
+COPY <<'EOF' /install-hook.sh
+#!/bin/sh
+set -e
+
+echo "[*] Installing Phalanx OCI Hook..."
+mkdir -p /host/usr/local/bin
+cp /phalanx-hook /host/usr/local/bin/phalanx-hook
+chmod +x /host/usr/local/bin/phalanx-hook
+
+echo "[+] Installed to /usr/local/bin/phalanx-hook"
+tail -f /dev/null
+EOF
+
+RUN chmod +x /install-hook.sh
+CMD ["/install-hook.sh"]

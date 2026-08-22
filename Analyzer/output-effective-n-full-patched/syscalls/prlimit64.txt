@@ -1,0 +1,5 @@
+- __do_sys_prlimit64
+  - rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#3075168072
+    - __rcu_read_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/rcupdate.h#2394033297
+  - check_prlimit_permission@/workspace/git/linux-v5.15-analysis-src/kernel/sys.c#2200184187 [direct_lsm=security_task_prlimit]
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

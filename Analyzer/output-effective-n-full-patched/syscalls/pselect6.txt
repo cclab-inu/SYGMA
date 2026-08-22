@@ -1,0 +1,3 @@
+- __do_sys_pselect6
+  - get_sigset_argpack@/workspace/git/linux-v5.15-analysis-src/fs/select.c#338044073
+  - do_pselect@/workspace/git/linux-v5.15-analysis-src/fs/select.c#1872170386

@@ -1,0 +1,161 @@
+read: security_file_permission
+write: security_file_permission
+open: security_file_alloc
+stat: security_inode_getattr
+fstat: security_inode_getattr
+lstat: security_inode_getattr
+mmap: security_mmap_file, security_mmap_addr
+ioctl: security_file_ioctl
+pread64: security_file_permission
+pwrite64: security_file_permission
+access: security_inode_permission
+pipe: security_inode_alloc, security_file_alloc
+shmat: security_shm_shmat, security_mmap_file, security_ipc_permission, security_file_alloc, security_mmap_addr
+socket: security_socket_create, security_socket_post_create, security_inode_alloc, security_file_alloc
+connect: security_socket_connect
+accept: security_socket_accept, security_inode_alloc, security_file_alloc
+sendto: security_socket_sendmsg
+recvfrom: security_socket_recvmsg
+sendmsg: security_socket_sendmsg
+recvmsg: security_socket_recvmsg
+shutdown: security_socket_shutdown
+bind: security_socket_bind
+listen: security_socket_listen
+getsockname: security_socket_getsockname
+getpeername: security_socket_getpeername
+socketpair: security_socket_socketpair, security_socket_create, security_socket_post_create, security_inode_alloc, security_file_alloc
+setsockopt: security_socket_setsockopt
+getsockopt: security_socket_getsockopt
+clone: security_task_alloc, security_prepare_creds
+fork: security_task_alloc, security_prepare_creds
+vfork: security_task_alloc, security_prepare_creds
+execve: security_bprm_creds_for_exec, security_file_alloc, security_bprm_check, security_file_permission
+semop: security_sem_semop, security_ipc_permission
+msgsnd: security_msg_queue_msgsnd, security_msg_msg_alloc, security_ipc_permission
+msgrcv: security_ipc_permission, security_msg_msg_free
+fcntl: security_file_fcntl
+flock: security_file_lock
+truncate: security_path_truncate, security_inode_permission, security_inode_setattr
+ftruncate: security_path_truncate, security_inode_setattr
+getdents: security_file_permission
+chdir: security_inode_permission
+fchdir: security_inode_permission
+rename: security_path_rename
+mkdir: security_path_mkdir, security_inode_mkdir, security_inode_permission
+rmdir: security_path_rmdir, security_inode_rmdir, security_inode_permission
+creat: security_file_alloc
+link: security_path_link, security_inode_link, security_inode_permission
+unlink: security_path_unlink, security_inode_unlink, security_inode_permission
+symlink: security_path_symlink, security_inode_symlink, security_inode_permission
+chmod: security_path_chmod
+fchmod: security_path_chmod
+chown: security_path_chown
+fchown: security_path_chown
+lchown: security_path_chown
+syslog: security_syslog
+setuid: security_task_fix_setuid, security_prepare_creds, security_capable
+setgid: security_task_fix_setgid, security_prepare_creds, security_capable
+setpgid: security_task_setpgid
+setreuid: security_task_fix_setuid, security_prepare_creds
+setregid: security_task_fix_setgid, security_prepare_creds
+setgroups: security_capable, security_prepare_creds
+setresuid: security_task_fix_setuid, security_prepare_creds, security_capable
+setresgid: security_task_fix_setgid, security_prepare_creds, security_capable
+capset: security_capset, security_prepare_creds
+mknod: security_path_mknod
+ustat: security_sb_statfs
+statfs: security_sb_statfs
+fstatfs: security_sb_statfs
+sched_setparam: security_task_setscheduler
+sched_getparam: security_task_getscheduler
+sched_setscheduler: security_task_setscheduler
+sched_getscheduler: security_task_getscheduler
+sched_rr_get_interval: security_task_getscheduler
+vhangup: security_capable
+pivot_root: security_sb_pivotroot, security_capable
+chroot: security_path_chroot, security_inode_permission, security_capable
+acct: security_capable
+settimeofday: security_settime64
+mount: security_sb_mount, security_capable
+umount2: security_capable, security_sb_umount
+swapon: security_capable, security_file_alloc
+swapoff: security_capable, security_file_alloc
+reboot: security_capable
+sethostname: security_capable
+setdomainname: security_capable
+init_module: security_capable, security_kernel_load_data, security_kernel_post_load_data
+delete_module: security_capable
+setxattr: security_inode_setxattr
+lsetxattr: security_inode_setxattr
+fsetxattr: security_inode_setxattr
+getxattr: security_inode_getxattr
+lgetxattr: security_inode_getxattr
+fgetxattr: security_inode_getxattr
+listxattr: security_inode_listxattr
+llistxattr: security_inode_listxattr
+flistxattr: security_inode_listxattr
+removexattr: security_inode_removexattr
+lremovexattr: security_inode_removexattr
+fremovexattr: security_inode_removexattr
+sched_setaffinity: security_task_setscheduler
+sched_getaffinity: security_task_getscheduler
+io_setup: security_inode_alloc, security_file_alloc
+epoll_create: security_file_alloc
+remap_file_pages: security_mmap_addr
+getdents64: security_file_permission
+mq_open: security_file_alloc, security_inode_permission
+mq_unlink: security_inode_permission, security_inode_unlink
+mq_timedsend: security_msg_msg_alloc
+mq_timedreceive: security_msg_msg_free
+kexec_load: security_kernel_load_data, security_locked_down, security_capable
+inotify_init: security_file_alloc
+inotify_add_watch: security_path_notify, security_inode_permission
+migrate_pages: security_task_movememory
+openat: security_file_alloc
+mkdirat: security_path_mkdir, security_inode_mkdir, security_inode_permission
+mknodat: security_path_mknod
+fchownat: security_path_chown
+newfstatat: security_inode_getattr
+renameat: security_path_rename
+linkat: security_path_link, security_inode_link, security_inode_permission
+symlinkat: security_path_symlink, security_inode_symlink, security_inode_permission
+fchmodat: security_path_chmod
+faccessat: security_inode_permission
+timerfd_create: security_file_alloc
+eventfd: security_file_alloc
+fallocate: security_file_permission
+accept4: security_socket_accept, security_inode_alloc, security_file_alloc
+eventfd2: security_file_alloc
+epoll_create1: security_file_alloc
+pipe2: security_inode_alloc, security_file_alloc
+inotify_init1: security_file_alloc
+perf_event_open: security_perf_event_open, security_perf_event_alloc, security_file_alloc
+fanotify_init: security_file_alloc, security_capable
+fanotify_mark: security_capable
+open_by_handle_at: security_file_alloc, security_capable
+finit_module: security_capable
+sched_setattr: security_task_setscheduler
+sched_getattr: security_task_getscheduler
+renameat2: security_path_rename
+memfd_create: security_file_alloc
+kexec_file_load: security_capable
+bpf: security_bpf
+execveat: security_bprm_creds_for_exec, security_file_alloc, security_bprm_check, security_file_permission
+userfaultfd: security_inode_init_security_anon, security_inode_alloc, security_file_alloc
+copy_file_range: security_file_permission
+statx: security_inode_getattr
+io_uring_setup: security_capable, security_socket_create, security_socket_post_create, security_inode_alloc, security_file_alloc
+open_tree: security_file_alloc
+move_mount: security_move_mount, security_capable
+fsopen: security_capable, security_file_alloc
+fsmount: security_capable
+fspick: security_capable, security_file_alloc
+pidfd_open: security_file_alloc
+clone3: security_task_alloc, security_prepare_creds
+openat2: security_file_alloc
+faccessat2: security_inode_permission
+process_madvise: security_capable
+mount_setattr: security_capable
+quotactl_fd: security_quotactl
+landlock_restrict_self: security_prepare_creds
+memfd_secret: security_inode_alloc, security_file_alloc

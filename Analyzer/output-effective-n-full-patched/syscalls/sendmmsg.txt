@@ -1,0 +1,3 @@
+- __do_sys_sendmmsg
+  - __sys_sendmmsg
+    - sockfd_lookup_light@/workspace/git/linux-v5.15-analysis-src/net/socket.c#658373155

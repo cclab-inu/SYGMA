@@ -1,0 +1,235 @@
+{
+  "number": 196,
+  "abi": "common",
+  "name": "flistxattr",
+  "entry": "sys_flistxattr",
+  "start": "__do_sys_flistxattr",
+  "linked_symbol": "__x64_sys_flistxattr",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "vfs_listxattr"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_inode_listxattr"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_inode_listxattr"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_inode_listxattr"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_inode_listxattr"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_flistxattr",
+    "fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488",
+    "vfs_listxattr",
+    "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_flistxattr",
+    "fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488",
+    "vfs_listxattr",
+    "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349"
+  ],
+  "success_path_functions": [
+    "__do_sys_flistxattr",
+    "fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488",
+    "vfs_listxattr",
+    "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349"
+  ],
+  "call_tree_file": "syscalls/flistxattr.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_inode_listxattr"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_inode_listxattr"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "inode_listxattr"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_inode_listxattr",
+      "bpf_hook": "inode_listxattr",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "vfs_listxattr"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_inode_listxattr",
+        "vfs_listxattr",
+        "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349",
+        "__do_sys_flistxattr"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_inode_listxattr",
+          "function": "vfs_listxattr",
+          "source_function": "vfs_listxattr",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/xattr.c",
+          "source_line": 442,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-negative-on-error",
+            "must-return-nonnegative-on-positive",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/xattr.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_inode_listxattr"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_inode_listxattr"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_flistxattr",
+      "vfs_listxattr",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349"
+    ],
+    "hook_proof_paths": {
+      "security_inode_listxattr": [
+        "security_inode_listxattr",
+        "vfs_listxattr",
+        "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349",
+        "__do_sys_flistxattr"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "cfg_effect_free_success_witness",
+      "cfg_effect_free_fast_success_path+llvm_ssa_nonnegative_success_preservation"
+    ],
+    "proof_functions": null,
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_flistxattr",
+      "__do_sys_flistxattr#cfg-block-4",
+      "__do_sys_flistxattr#cfg-block-3",
+      "__do_sys_flistxattr#cfg-block-1",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349#cfg-block-14",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349#cfg-block-13",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349#cfg-block-8",
+      "vfs_listxattr",
+      "vfs_listxattr#cfg-block-10",
+      "vfs_listxattr#cfg-block-9",
+      "security_inode_listxattr",
+      "security_inode_listxattr#cfg-block-32",
+      "security_inode_listxattr#cfg-block-31",
+      "security_inode_listxattr#cfg-block-30",
+      "vfs_listxattr#cfg-block-7",
+      "vfs_listxattr#cfg-block-4",
+      "security_inode_listsecurity",
+      "security_inode_listsecurity#cfg-block-32",
+      "security_inode_listsecurity#cfg-block-31",
+      "security_inode_listsecurity#cfg-block-30",
+      "vfs_listxattr#cfg-block-1",
+      "vfs_listxattr#callsite:2",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349#cfg-block-4",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349#cfg-block-1",
+      "listxattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#435930349#callsite:2[nonpositive]",
+      "__do_sys_flistxattr#callsite:3"
+    ],
+    "bypass_proof_method": "cfg_effect_free_fast_success_path+llvm_ssa_nonnegative_success_preservation",
+    "reasons": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "a proven normal successful operation path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

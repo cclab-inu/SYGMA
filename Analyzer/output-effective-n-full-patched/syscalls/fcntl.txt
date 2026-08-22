@@ -1,0 +1,2 @@
+- __do_sys_fcntl [direct_lsm=security_file_fcntl | success_lsm=security_file_fcntl]
+  - fdget_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#968566192

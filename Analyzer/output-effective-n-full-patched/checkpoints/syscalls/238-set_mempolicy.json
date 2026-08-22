@@ -1,0 +1,205 @@
+{
+  "number": 238,
+  "abi": "common",
+  "name": "set_mempolicy",
+  "entry": "sys_set_mempolicy",
+  "start": "__do_sys_set_mempolicy",
+  "linked_symbol": "__x64_sys_set_mempolicy",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_set_mempolicy",
+    "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322",
+    "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151",
+    "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+    "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_set_mempolicy",
+    "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322",
+    "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151",
+    "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+    "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014"
+  ],
+  "success_path_functions": [
+    "__do_sys_set_mempolicy",
+    "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322",
+    "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151",
+    "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+    "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014"
+  ],
+  "call_tree_file": "syscalls/set_mempolicy.txt",
+  "contains_lsm_hook": false,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "non_enforcing",
+    "hooks": null,
+    "success_path_hook_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014"
+    ],
+    "hook_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_set_mempolicy",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322",
+      "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151",
+      "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151#cfg-block-1",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#cfg-block-5[err=false]",
+      "get_nodes@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2032585723",
+      "get_nodes@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2032585723#cfg-block-16",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#cfg-block-3[err=false]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available[lsm-effect-free-fast-path]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-11[!scratch=false]",
+      "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+      "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547#cfg-block-17",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-9[IS_ERR(new)=false]",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502#cfg-block-11",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502#cfg-block-10",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502#cfg-block-8",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-7[ret=false]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-1",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#callsite:1[nonnull]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#callsite:2[valid_pointer]",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#cfg-block-1",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#callsite:2[zero]",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#callsite:3",
+      "__do_sys_set_mempolicy#cfg-block-1",
+      "__do_sys_set_mempolicy#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every syscall-terminating LSM denial"
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_set_mempolicy",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322",
+      "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151",
+      "sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151#cfg-block-1",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#cfg-block-5[err=false]",
+      "get_nodes@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2032585723",
+      "get_nodes@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2032585723#cfg-block-16",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#cfg-block-3[err=false]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-11[!scratch=false]",
+      "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547",
+      "mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547#cfg-block-17",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-9[IS_ERR(new)=false]",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502#cfg-block-11",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502#cfg-block-10",
+      "mpol_set_nodemask@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#271680502#cfg-block-8",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-7[ret=false]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#cfg-block-1",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#callsite:1[nonnull]",
+      "do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014#callsite:2[valid_pointer]",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#cfg-block-1",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#callsite:2[zero]",
+      "kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322#callsite:3",
+      "__do_sys_set_mempolicy#cfg-block-1",
+      "__do_sys_set_mempolicy#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_not_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "N",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [
+      "at least one modeled feasible success path bypasses every syscall-terminating LSM denial"
+    ],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

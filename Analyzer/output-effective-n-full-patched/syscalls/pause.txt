@@ -1,0 +1,1 @@
+- __do_sys_pause [direct_signal=signal_pending]

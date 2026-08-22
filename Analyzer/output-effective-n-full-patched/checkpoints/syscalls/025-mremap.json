@@ -1,0 +1,460 @@
+{
+  "number": 25,
+  "abi": "common",
+  "name": "mremap",
+  "entry": "sys_mremap",
+  "start": "__do_sys_mremap",
+  "linked_symbol": "__x64_sys_mremap",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": null,
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_mremap",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable",
+    "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_mremap",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable",
+    "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625"
+  ],
+  "success_path_functions": [
+    "__do_sys_mremap",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable",
+    "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625"
+  ],
+  "call_tree_file": "syscalls/mremap.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "none",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "none",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_enforcing_lsm_hooks": [],
+  "certified_bpf_lsm_hooks": null,
+  "lsm_error_effects": [],
+  "lsm_path_coverage": {
+    "status": "uncertain",
+    "hooks": [
+      "security_capable"
+    ],
+    "success_path_hook_sets": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_mremap",
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "capable",
+      "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625",
+        "__do_sys_mremap"
+      ]
+    },
+    "unproven_bypass_path": [
+      "__do_sys_mremap",
+      "mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320",
+      "mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320#cfg-block-2",
+      "mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320#cfg-block-1",
+      "down_write_killable",
+      "down_write_killable#cfg-block-11",
+      "down_write_killable#cfg-block-9",
+      "down_write_killable#cfg-block-8",
+      "down_write_killable#cfg-block-6",
+      "down_write_killable#cfg-block-5",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259#cfg-block-2",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259#cfg-block-1",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564#cfg-block-5",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564#cfg-block-4",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564#cfg-block-1",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259#callsite:1",
+      "down_write_killable#cfg-block-1",
+      "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625",
+      "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625#cfg-block-36[!vma=false]",
+      "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625#cfg-block-1",
+      "__do_sys_mremap#cfg-block-24[IS_ERR(vma)=false]",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825#cfg-block-9",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825#cfg-block-8",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825#cfg-block-7",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960#cfg-block-2",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960#cfg-block-1",
+      "__vma_adjust",
+      "__vma_adjust#cfg-block-87",
+      "__vma_adjust#cfg-block-86",
+      "__vma_adjust#cfg-block-65",
+      "vma_adjust_trans_huge",
+      "vma_adjust_trans_huge#cfg-block-3",
+      "vma_adjust_trans_huge#cfg-block-2",
+      "__vma_adjust#cfg-block-60",
+      "__vma_adjust#cfg-block-57",
+      "__vma_adjust#cfg-block-54",
+      "__vma_adjust#cfg-block-51",
+      "__vma_adjust#cfg-block-49",
+      "__vma_adjust#cfg-block-47",
+      "__vma_adjust#cfg-block-45",
+      "__vma_adjust#cfg-block-41",
+      "__vma_adjust#cfg-block-35",
+      "__vma_adjust#cfg-block-33",
+      "__vma_adjust#cfg-block-31",
+      "__vma_adjust#cfg-block-26",
+      "__vma_adjust#cfg-block-22",
+      "__vma_adjust#cfg-block-19",
+      "__vma_adjust#cfg-block-6",
+      "__vma_adjust#cfg-block-2",
+      "__vma_adjust#cfg-block-1",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960#callsite:1",
+      "__do_sys_mremap#cfg-block-1"
+    ],
+    "reasons": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "ns_capable: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "capable: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_mremap: callee denial propagation is unresolved: vma_to_resize",
+      "__do_sys_mremap: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_mremap",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "vma_to_resize",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_mremap",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "uncertain",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_mremap"
+    ],
+    "check_proof_paths": {},
+    "unproven_bypass_path": [
+      "__do_sys_mremap",
+      "mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320",
+      "mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320#cfg-block-2",
+      "mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320#cfg-block-1",
+      "down_write_killable",
+      "down_write_killable#cfg-block-11",
+      "down_write_killable#cfg-block-9",
+      "down_write_killable#cfg-block-8",
+      "down_write_killable#cfg-block-6",
+      "down_write_killable#cfg-block-5",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259#cfg-block-2",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259#cfg-block-1",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564#cfg-block-5",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564#cfg-block-4",
+      "__down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564#cfg-block-1",
+      "__down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259#callsite:1",
+      "down_write_killable#cfg-block-1",
+      "__do_sys_mremap#cfg-block-24[IS_ERR(vma)=false]",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825#cfg-block-9",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825#cfg-block-8",
+      "vma_expandable@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#590429825#cfg-block-7",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960#cfg-block-2",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960#cfg-block-1",
+      "__vma_adjust",
+      "__vma_adjust#cfg-block-87",
+      "__vma_adjust#cfg-block-86",
+      "__vma_adjust#cfg-block-65",
+      "vma_adjust_trans_huge",
+      "vma_adjust_trans_huge#cfg-block-3",
+      "vma_adjust_trans_huge#cfg-block-2",
+      "__vma_adjust#cfg-block-60",
+      "__vma_adjust#cfg-block-57",
+      "__vma_adjust#cfg-block-54",
+      "__vma_adjust#cfg-block-51",
+      "__vma_adjust#cfg-block-49",
+      "__vma_adjust#cfg-block-47",
+      "__vma_adjust#cfg-block-45",
+      "__vma_adjust#cfg-block-41",
+      "__vma_adjust#cfg-block-35",
+      "__vma_adjust#cfg-block-33",
+      "__vma_adjust#cfg-block-31",
+      "__vma_adjust#cfg-block-26",
+      "__vma_adjust#cfg-block-22",
+      "__vma_adjust#cfg-block-19",
+      "__vma_adjust#cfg-block-6",
+      "__vma_adjust#cfg-block-2",
+      "__vma_adjust#cfg-block-1",
+      "vma_adjust@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3900771960#callsite:1",
+      "__do_sys_mremap#cfg-block-1"
+    ],
+    "reasons": [
+      "__do_sys_mremap: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ],
+    "unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_mremap",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "ns_capable: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "capable: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "__do_sys_mremap: callee denial propagation is unresolved: vma_to_resize",
+        "__do_sys_mremap: a checkpoint-free potential return is not proven to be a normal successful operation return",
+        "success path 1 has no hook with certified final syscall-error propagation",
+        "success path 2 has no hook with certified final syscall-error propagation",
+        "success path 3 has no hook with certified final syscall-error propagation",
+        "success path 4 has no hook with certified final syscall-error propagation",
+        "success path 5 has no hook with certified final syscall-error propagation",
+        "success path 6 has no hook with certified final syscall-error propagation",
+        "success path 7 has no hook with certified final syscall-error propagation",
+        "success path 8 has no hook with certified final syscall-error propagation",
+        "success path 9 has no hook with certified final syscall-error propagation",
+        "success path 10 has no hook with certified final syscall-error propagation",
+        "success path 11 has no hook with certified final syscall-error propagation",
+        "success path 12 has no hook with certified final syscall-error propagation",
+        "success path 13 has no hook with certified final syscall-error propagation",
+        "success path 14 has no hook with certified final syscall-error propagation",
+        "success path 15 has no hook with certified final syscall-error propagation"
+      ]
+    },
+    "sigkill": {
+      "status": "incomplete",
+      "positive_proof": false,
+      "negative_proof": false,
+      "reasons": [
+        "__do_sys_mremap: a checkpoint-free potential return is not proven to be a normal successful operation return"
+      ]
+    }
+  },
+  "lsm_classification": "uncertain",
+  "sigkill_classification": "uncertain",
+  "lsm_enforcement_state": "U",
+  "sigkill_enforcement_state": "U",
+  "negative_reasons": {
+    "lsm": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "ns_capable: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "capable: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "__do_sys_mremap: callee denial propagation is unresolved: vma_to_resize",
+      "__do_sys_mremap: a checkpoint-free potential return is not proven to be a normal successful operation return",
+      "success path 1 has no hook with certified final syscall-error propagation",
+      "success path 2 has no hook with certified final syscall-error propagation",
+      "success path 3 has no hook with certified final syscall-error propagation",
+      "success path 4 has no hook with certified final syscall-error propagation",
+      "success path 5 has no hook with certified final syscall-error propagation",
+      "success path 6 has no hook with certified final syscall-error propagation",
+      "success path 7 has no hook with certified final syscall-error propagation",
+      "success path 8 has no hook with certified final syscall-error propagation",
+      "success path 9 has no hook with certified final syscall-error propagation",
+      "success path 10 has no hook with certified final syscall-error propagation",
+      "success path 11 has no hook with certified final syscall-error propagation",
+      "success path 12 has no hook with certified final syscall-error propagation",
+      "success path 13 has no hook with certified final syscall-error propagation",
+      "success path 14 has no hook with certified final syscall-error propagation",
+      "success path 15 has no hook with certified final syscall-error propagation"
+    ],
+    "sigkill": [
+      "__do_sys_mremap: a checkpoint-free potential return is not proven to be a normal successful operation return"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": [
+    {
+      "domain": "lsm",
+      "caller": "__do_sys_mremap",
+      "kind": "callee_denial_propagation_unresolved",
+      "category": "termination_or_error_propagation",
+      "resolution_scope": "implementation_improvable",
+      "symbol": "vma_to_resize",
+      "detail": "at least one callee denial-propagation alternative remains unresolved"
+    },
+    {
+      "domain": "lsm",
+      "caller": "__do_sys_mremap",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "lsm",
+      "caller": "capable",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "lsm",
+      "caller": "ns_capable",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "lsm",
+      "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "lsm",
+      "caller": "vma_to_resize@/workspace/git/linux-v5.15-analysis-src/mm/mremap.c#644780625",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    },
+    {
+      "domain": "sigkill",
+      "caller": "__do_sys_mremap",
+      "kind": "successful_execution_unproven",
+      "category": "success_value_or_path_feasibility",
+      "resolution_scope": "implementation_improvable",
+      "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+    }
+  ]
+}

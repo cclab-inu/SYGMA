@@ -1,0 +1,21 @@
+- __do_sys_syncfs
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - down_read
+    - __cond_resched
+    - __down_read@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#224801309
+      - __down_read_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1099009593
+        - rwsem_read_trylock@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1536680509
+  - sync_filesystem
+    - rwsem_is_locked@/workspace/git/linux-v5.15-analysis-src/include/linux/rwsem.h#734306334
+    - sb_rdonly@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#2708976500
+  - up_read
+    - __up_read@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#4289677836
+      - rwsem_clear_reader_owned@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#926222405
+      - atomic_long_add_return_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#829596247
+        - instrument_atomic_read_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#1369692796
+          - kasan_check_write@/workspace/git/linux-v5.15-analysis-src/include/linux/kasan-checks.h#25079104
+          - kcsan_check_access@/workspace/git/linux-v5.15-analysis-src/include/linux/kcsan-checks.h#1844935313
+        - arch_atomic_long_add_return_release@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-long.h#2721143868
+          - arch_atomic64_add_return@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic64_64.h#1249281518
+  - errseq_check_and_advance
+  - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

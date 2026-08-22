@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/library/mysql@sha256:c6812f0dcd978b589d9d3b90c20bd5e4a799deab4fd492985e0a076c5be1ee40
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because replacing ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "mysql", "--", "docker-entrypoint.sh"]
+CMD ["mysqld"]

@@ -1,0 +1,4 @@
+- __do_sys_select
+  - kern_select@/workspace/git/linux-v5.15-analysis-src/fs/select.c#2613891625
+    - core_sys_select [direct_signal=signal_pending]
+    - poll_select_finish@/workspace/git/linux-v5.15-analysis-src/fs/select.c#875807735

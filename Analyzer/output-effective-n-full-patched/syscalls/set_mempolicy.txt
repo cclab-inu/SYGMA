@@ -1,0 +1,5 @@
+- __do_sys_set_mempolicy
+  - kernel_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#596193322
+    - sanitize_mpol_flags@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#3083581151
+    - do_set_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1305981014
+      - mpol_new@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#2843110547

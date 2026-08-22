@@ -1,0 +1,19 @@
+apiVersion: security.security.io/v1
+kind: SYGMAConfig
+metadata:
+  name: sygmaconfig-allow-all-evaluation
+spec:
+  collection:
+    yamlContent: |
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: sygma-allow-all-workload
+      spec:
+        restartPolicy: Never
+        containers:
+        - name: nginx
+          image: nginx:1.27
+  policy:
+    # Evaluation only: this synthesizes full init and one-state main policies.
+    allowAll: true

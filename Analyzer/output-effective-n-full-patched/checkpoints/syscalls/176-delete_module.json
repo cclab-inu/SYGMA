@@ -1,0 +1,276 @@
+{
+  "number": 176,
+  "abi": "common",
+  "name": "delete_module",
+  "entry": "sys_delete_module",
+  "start": "__do_sys_delete_module",
+  "linked_symbol": "__x64_sys_delete_module",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_capable"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_capable"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capable"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capable"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_delete_module",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "strncpy_from_user",
+    "audit_log_kern_module@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#418631205",
+    "audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724",
+    "mutex_lock_interruptible",
+    "__cond_resched",
+    "__mutex_trylock_fast@/workspace/git/linux-v5.15-analysis-src/kernel/locking/mutex.c#2485577",
+    "find_module"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_delete_module",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "strncpy_from_user",
+    "audit_log_kern_module@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#418631205",
+    "audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724",
+    "mutex_lock_interruptible",
+    "__cond_resched",
+    "__mutex_trylock_fast@/workspace/git/linux-v5.15-analysis-src/kernel/locking/mutex.c#2485577",
+    "find_module"
+  ],
+  "success_path_functions": [
+    "__do_sys_delete_module",
+    "capable",
+    "ns_capable",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "strncpy_from_user",
+    "audit_log_kern_module@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#418631205",
+    "audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724",
+    "mutex_lock_interruptible",
+    "__cond_resched",
+    "__mutex_trylock_fast@/workspace/git/linux-v5.15-analysis-src/kernel/locking/mutex.c#2485577",
+    "find_module"
+  ],
+  "call_tree_file": "syscalls/delete_module.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_capable"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "capable"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capable",
+      "bpf_hook": "capable",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "__do_sys_delete_module"
+      ],
+      "llvm_verification": "unknown",
+      "llvm_evidence": [
+        {
+          "hook": "security_capable",
+          "function": "ns_capable_common",
+          "source_function": "ns_capable_common",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c",
+          "source_line": 375,
+          "source_column": 12,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-preserve-nonnegative-success",
+            "must-return-nonnegative-on-positive",
+            "must-return-nonnegative-on-zero",
+            "return"
+          ],
+          "verification": "must_preserve_success",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_capable"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "capable",
+      "__do_sys_delete_module"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "__do_sys_delete_module"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      },
+      {
+        "domain": "lsm",
+        "caller": "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "kind": "successful_execution_unproven",
+        "category": "success_value_or_path_feasibility",
+        "resolution_scope": "implementation_improvable",
+        "detail": "a checkpoint-free path reaches a potential return, but a normal successful operation return is not proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "__do_sys_delete_module"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_delete_module",
+      "strncpy_from_user",
+      "strncpy_from_user#cfg-block-7",
+      "mutex_lock_interruptible",
+      "mutex_lock_interruptible#cfg-block-7",
+      "mutex_lock_interruptible#cfg-block-5",
+      "mutex_lock_interruptible#cfg-block-4",
+      "mutex_lock_interruptible#cfg-block-3",
+      "mutex_lock_interruptible#cfg-block-2",
+      "__do_sys_delete_module#cfg-block-25[!mod=false]",
+      "try_stop_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3263229696",
+      "try_stop_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3263229696#cfg-block-1",
+      "__do_sys_delete_module#cfg-block-6[ret!=0=false]",
+      "__do_sys_delete_module#cfg-block-2",
+      "__do_sys_delete_module#cfg-block-2[outcome=signed_integer:2]"
+    ],
+    "bypass_proof_method": "return_outcome_constrained_success",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

@@ -1,0 +1,4 @@
+- __do_sys_sync_file_range
+  - ksys_sync_file_range
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+    - fdput@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#4086398791

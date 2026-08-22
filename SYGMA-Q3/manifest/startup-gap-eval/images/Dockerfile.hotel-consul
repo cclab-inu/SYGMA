@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=docker.io/hashicorp/consul@sha256:56a8d0fdbfcb35836c4ce2fc8a5d34eac48594ef067bbe4af7d5ceb9fb08c28d
+FROM ${BASE_IMAGE}
+
+COPY --chmod=0755 build/gap-probe /opt/gap/gap-launch
+
+# Re-declare the pinned base CMD because replacing ENTRYPOINT resets its CMD.
+ENTRYPOINT ["/opt/gap/gap-launch", "--application", "hotel-consul", "--", "docker-entrypoint.sh"]
+CMD ["agent","-dev","-client","0.0.0.0"]

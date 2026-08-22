@@ -1,0 +1,3 @@
+- __do_sys_fsync
+  - do_fsync@/workspace/git/linux-v5.15-analysis-src/fs/sync.c#3759125544
+    - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488

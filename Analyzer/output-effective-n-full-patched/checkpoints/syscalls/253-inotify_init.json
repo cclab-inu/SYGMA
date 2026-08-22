@@ -1,0 +1,358 @@
+{
+  "number": 253,
+  "abi": "common",
+  "name": "inotify_init",
+  "entry": "sys_inotify_init",
+  "start": "__do_sys_inotify_init",
+  "linked_symbol": "__x64_sys_inotify_init",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_inotify_init",
+    "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+    "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958",
+    "fsnotify_alloc_user_group",
+    "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282",
+    "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303",
+    "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+    "anon_inode_getfd"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_inotify_init",
+    "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+    "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958",
+    "fsnotify_alloc_user_group",
+    "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282",
+    "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303",
+    "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+    "anon_inode_getfd"
+  ],
+  "success_path_functions": [
+    "__do_sys_inotify_init",
+    "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+    "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958",
+    "fsnotify_alloc_user_group",
+    "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282",
+    "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303",
+    "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+    "IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+    "anon_inode_getfd"
+  ],
+  "call_tree_file": "syscalls/inotify_init.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "file_alloc_security"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_file_alloc",
+      "bpf_hook": "file_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+        "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+        "anon_inode_getfd",
+        "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+        "__do_sys_inotify_init"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_alloc",
+          "function": "__alloc_file",
+          "source_function": "__alloc_file",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c",
+          "source_line": 106,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_file_alloc"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_file_alloc"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "alloc_file_pseudo",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+      "anon_inode_getfd",
+      "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+      "__do_sys_inotify_init"
+    ],
+    "hook_proof_paths": {
+      "security_file_alloc": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+        "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+        "anon_inode_getfd",
+        "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+        "__do_sys_inotify_init"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_inotify_init",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_inotify_init",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958",
+      "alloc_ucounts",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "alloc_file_pseudo",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_inotify_init",
+      "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527",
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958",
+      "fsnotify_alloc_user_group",
+      "fsnotify_alloc_user_group#cfg-block-2",
+      "fsnotify_alloc_user_group#cfg-block-1",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-16",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-15",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-13",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-11",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-10",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-9",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-7",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-6",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-5",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-3",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-2",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#cfg-block-1",
+      "kzalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#63396303#runtime-resource-available",
+      "__fsnotify_alloc_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/group.c#2051034282#callsite:1[nonnull]",
+      "fsnotify_alloc_user_group#callsite:1",
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958#cfg-block-21[IS_ERR(group)=false]",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958#cfg-block-19[unlikely(!oevent)=false]",
+      "inc_ucount",
+      "alloc_ucounts",
+      "alloc_ucounts#cfg-block-9[!ucounts=false]",
+      "alloc_ucounts#cfg-block-3[overflow=false]",
+      "alloc_ucounts#cfg-block-1",
+      "inc_ucount#cfg-block-6",
+      "alloc_ucounts#callsite:6[nonnull]",
+      "find_ucounts@/workspace/git/linux-v5.15-analysis-src/kernel/ucount.c#99262053#cfg-block-1",
+      "alloc_ucounts#callsite:9[null]",
+      "alloc_ucounts#cfg-block-6[ucounts=false]",
+      "alloc_ucounts#cfg-block-8[!new=false]",
+      "alloc_ucounts#cfg-block-4",
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958#cfg-block-1",
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958#callsite:1[valid_pointer]",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available",
+      "inotify_new_group@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#2140171958#callsite:3[nonnull]",
+      "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527#cfg-block-5[IS_ERR(group)=false]",
+      "anon_inode_getfd",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679",
+      "get_unused_fd_flags",
+      "__get_unused_fd_flags",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276#cfg-block-1",
+      "__get_unused_fd_flags#cfg-block-1",
+      "get_unused_fd_flags#cfg-block-1",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-6[error\u003c0=false]",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224#cfg-block-1",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-4[IS_ERR(file)=false]",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-2",
+      "__anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679#cfg-block-2[outcome=signed_integer:6]",
+      "anon_inode_getfd#cfg-block-1",
+      "anon_inode_getfd#callsite:1",
+      "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527#cfg-block-3[ret\u003c0=false]",
+      "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527#cfg-block-1",
+      "do_inotify_init@/workspace/git/linux-v5.15-analysis-src/fs/notify/inotify/inotify_user.c#3683962527#callsite:6",
+      "__do_sys_inotify_init#cfg-block-1",
+      "__do_sys_inotify_init#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_inotify_init",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_inotify_init",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

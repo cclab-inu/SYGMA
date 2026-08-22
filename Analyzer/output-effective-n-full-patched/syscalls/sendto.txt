@@ -1,0 +1,4 @@
+- __do_sys_sendto
+  - __sys_sendto
+    - import_single_range
+    - sock_sendmsg [direct_lsm=security_socket_sendmsg | success_lsm=security_socket_sendmsg | validated_lsm=security_socket_sendmsg]

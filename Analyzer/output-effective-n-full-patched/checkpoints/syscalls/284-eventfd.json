@@ -1,0 +1,431 @@
+{
+  "number": 284,
+  "abi": "common",
+  "name": "eventfd",
+  "entry": "sys_eventfd",
+  "start": "__do_sys_eventfd",
+  "linked_symbol": "__x64_sys_eventfd",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_eventfd",
+    "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+    "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+    "kref_init@/workspace/git/linux-v5.15-analysis-src/include/linux/kref.h#3683931454",
+    "refcount_set@/workspace/git/linux-v5.15-analysis-src/include/linux/refcount.h#3867018466",
+    "atomic_set@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#3159755372",
+    "instrument_atomic_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#972338627",
+    "arch_atomic_set@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#3199521930",
+    "__init_waitqueue_head",
+    "spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395",
+    "INIT_LIST_HEAD@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#3692415878",
+    "ida_alloc_range",
+    "_raw_spin_lock_irqsave",
+    "xas_find_marked",
+    "xa_is_value@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#1374893488",
+    "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+    "_raw_spin_unlock_irqrestore",
+    "__raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976",
+    "arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247",
+    "xas_nomem",
+    "xas_error@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#465576112",
+    "get_unused_fd_flags",
+    "__get_unused_fd_flags",
+    "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490",
+    "__raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "anon_inode_getfile"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_eventfd",
+    "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+    "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+    "kref_init@/workspace/git/linux-v5.15-analysis-src/include/linux/kref.h#3683931454",
+    "refcount_set@/workspace/git/linux-v5.15-analysis-src/include/linux/refcount.h#3867018466",
+    "atomic_set@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#3159755372",
+    "instrument_atomic_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#972338627",
+    "arch_atomic_set@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#3199521930",
+    "__init_waitqueue_head",
+    "spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395",
+    "INIT_LIST_HEAD@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#3692415878",
+    "ida_alloc_range",
+    "_raw_spin_lock_irqsave",
+    "xas_find_marked",
+    "xa_is_value@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#1374893488",
+    "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+    "_raw_spin_unlock_irqrestore",
+    "__raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976",
+    "arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247",
+    "xas_nomem",
+    "xas_error@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#465576112",
+    "get_unused_fd_flags",
+    "__get_unused_fd_flags",
+    "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490",
+    "__raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "anon_inode_getfile"
+  ],
+  "success_path_functions": [
+    "__do_sys_eventfd",
+    "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+    "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+    "kref_init@/workspace/git/linux-v5.15-analysis-src/include/linux/kref.h#3683931454",
+    "refcount_set@/workspace/git/linux-v5.15-analysis-src/include/linux/refcount.h#3867018466",
+    "atomic_set@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#3159755372",
+    "instrument_atomic_write@/workspace/git/linux-v5.15-analysis-src/include/linux/instrumented.h#972338627",
+    "arch_atomic_set@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/atomic.h#3199521930",
+    "__init_waitqueue_head",
+    "spinlock_check@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#229506395",
+    "INIT_LIST_HEAD@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#3692415878",
+    "ida_alloc_range",
+    "_raw_spin_lock_irqsave",
+    "xas_find_marked",
+    "xa_is_value@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#1374893488",
+    "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+    "_raw_spin_unlock_irqrestore",
+    "__raw_spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#3921363143",
+    "do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415",
+    "queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032",
+    "pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143",
+    "arch_local_irq_restore@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#2430091976",
+    "arch_irqs_disabled_flags@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/irqflags.h#1727525247",
+    "xas_nomem",
+    "xas_error@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#465576112",
+    "get_unused_fd_flags",
+    "__get_unused_fd_flags",
+    "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+    "get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587",
+    "spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028",
+    "_raw_spin_lock",
+    "__raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451",
+    "do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452",
+    "queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875",
+    "atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744",
+    "spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490",
+    "__raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185",
+    "rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742",
+    "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+    "alloc_empty_file",
+    "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+    "alloc_file_pseudo",
+    "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+    "anon_inode_getfile"
+  ],
+  "call_tree_file": "syscalls/eventfd.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_file_alloc"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "file_alloc_security"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_file_alloc",
+      "bpf_hook": "file_alloc_security",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+        "anon_inode_getfile",
+        "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+        "__do_sys_eventfd"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_file_alloc",
+          "function": "__alloc_file",
+          "source_function": "__alloc_file",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c",
+          "source_line": 106,
+          "source_column": 10,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/fs/file_table.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_file_alloc"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_file_alloc"
+      ]
+    ],
+    "proof_methods": [
+      "kernel_errno_success_gate",
+      "clang_reachable_cross_check",
+      "kernel_gate_invalidates_cfg_bypass"
+    ],
+    "proof_functions": [
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+      "alloc_file_pseudo",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "anon_inode_getfile",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+      "__do_sys_eventfd"
+    ],
+    "hook_proof_paths": {
+      "security_file_alloc": [
+        "security_file_alloc",
+        "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+        "alloc_empty_file",
+        "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084",
+        "alloc_file_pseudo",
+        "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+        "anon_inode_getfile",
+        "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+        "__do_sys_eventfd"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_eventfd",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_eventfd",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__d_alloc@/workspace/git/linux-v5.15-analysis-src/fs/dcache.c#1283757517",
+      "alloc_file_pseudo",
+      "__alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006",
+      "alloc_empty_file",
+      "alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_eventfd",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066",
+      "kmalloc@/workspace/git/linux-v5.15-analysis-src/include/linux/slab.h#1215822066#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518#cfg-block-12[!ctx=false]",
+      "ida_alloc_range",
+      "ida_alloc_range#cfg-block-53",
+      "ida_alloc_range#cfg-block-52",
+      "ida_alloc_range#cfg-block-50",
+      "ida_alloc_range#cfg-block-48",
+      "ida_alloc_range#cfg-block-45",
+      "ida_alloc_range#cfg-block-44",
+      "ida_alloc_range#cfg-block-43",
+      "ida_alloc_range#cfg-block-42",
+      "ida_alloc_range#cfg-block-40",
+      "ida_alloc_range#cfg-block-38",
+      "ida_alloc_range#cfg-block-26",
+      "ida_alloc_range#cfg-block-19",
+      "ida_alloc_range#cfg-block-18",
+      "ida_alloc_range#cfg-block-12",
+      "ida_alloc_range#cfg-block-11",
+      "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773",
+      "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773#cfg-block-4",
+      "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773#cfg-block-2",
+      "spin_unlock_irqrestore@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#4144478773#cfg-block-1",
+      "xas_nomem",
+      "xas_nomem#cfg-block-11",
+      "xas_nomem#cfg-block-10",
+      "xas_nomem#cfg-block-8",
+      "xas_nomem#cfg-block-6",
+      "kmem_cache_alloc#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "xas_nomem#cfg-block-4",
+      "xas_nomem#cfg-block-2",
+      "xas_nomem#cfg-block-1",
+      "ida_alloc_range#cfg-block-9",
+      "ida_alloc_range#cfg-block-7",
+      "ida_alloc_range#cfg-block-6",
+      "xa_err@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#2606009954#cfg-block-1",
+      "xas_error@/workspace/git/linux-v5.15-analysis-src/include/linux/xarray.h#465576112#cfg-block-1",
+      "ida_alloc_range#callsite:24",
+      "get_unused_fd_flags",
+      "__get_unused_fd_flags",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276",
+      "alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276#cfg-block-1",
+      "__get_unused_fd_flags#cfg-block-1",
+      "get_unused_fd_flags#cfg-block-1",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518#cfg-block-6[fd\u003c0=false]",
+      "anon_inode_getfile",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224",
+      "__anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224#cfg-block-12",
+      "anon_inode_getfile#cfg-block-1",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518#cfg-block-4[IS_ERR(file)=false]",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518#cfg-block-2",
+      "do_eventfd@/workspace/git/linux-v5.15-analysis-src/fs/eventfd.c#3549348518#cfg-block-2[outcome=signed_integer:6]",
+      "__do_sys_eventfd#cfg-block-1",
+      "__do_sys_eventfd#callsite:1"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ],
+    "covered_unresolved_edges": [
+      {
+        "domain": "sigkill",
+        "caller": "__do_sys_eventfd",
+        "kind": "signal_abort_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "do_eventfd",
+        "detail": "at least one child checkpoint propagation alternative remains unresolved"
+      }
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

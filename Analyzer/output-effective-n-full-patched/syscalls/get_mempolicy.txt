@@ -1,0 +1,4 @@
+- __do_sys_get_mempolicy
+  - kernel_get_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1387430277
+    - do_get_mempolicy@/workspace/git/linux-v5.15-analysis-src/mm/mempolicy.c#1717582984 [indirect=vma->vm_ops->get_policy]
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

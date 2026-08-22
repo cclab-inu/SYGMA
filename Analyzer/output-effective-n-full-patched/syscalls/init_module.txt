@@ -1,0 +1,6 @@
+- __do_sys_init_module
+  - may_init_module@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#1902286261
+    - capable
+      - ns_capable
+        - ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145 [direct_lsm=security_capable | success_lsm=security_capable]
+  - copy_module_from_user@/workspace/git/linux-v5.15-analysis-src/kernel/module.c#3051616147 [direct_lsm=security_kernel_load_data,security_kernel_post_load_data | success_lsm=security_kernel_load_data,security_kernel_post_load_data | validated_lsm=security_kernel_load_data]

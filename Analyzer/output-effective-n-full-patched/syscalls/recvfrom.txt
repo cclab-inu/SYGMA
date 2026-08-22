@@ -1,0 +1,4 @@
+- __do_sys_recvfrom
+  - __sys_recvfrom
+    - import_single_range
+    - sock_recvmsg [direct_lsm=security_socket_recvmsg | success_lsm=security_socket_recvmsg | validated_lsm=security_socket_recvmsg]

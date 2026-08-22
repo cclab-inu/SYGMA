@@ -1,0 +1,9 @@
+- __do_sys_openat
+  - do_sys_open
+    - build_open_how@/workspace/git/linux-v5.15-analysis-src/fs/open.c#2511942887
+    - do_sys_openat2@/workspace/git/linux-v5.15-analysis-src/fs/open.c#770182076
+      - build_open_flags@/workspace/git/linux-v5.15-analysis-src/fs/open.c#2795251861
+      - do_filp_open
+        - path_openat@/workspace/git/linux-v5.15-analysis-src/fs/namei.c#1188270535
+          - alloc_empty_file
+            - __alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006 [direct_lsm=security_file_alloc | success_lsm=security_file_alloc]

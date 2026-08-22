@@ -1,0 +1,316 @@
+{
+  "number": 126,
+  "abi": "common",
+  "name": "capset",
+  "entry": "sys_capset",
+  "start": "__do_sys_capset",
+  "linked_symbol": "__x64_sys_capset",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "__do_sys_capset",
+    "prepare_creds"
+  ],
+  "direct_signal_functions": [],
+  "reachable_lsm_hooks": [
+    "security_capset",
+    "security_prepare_creds"
+  ],
+  "reachable_signal_checks": [],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "signal_check_paths": null,
+  "always_lsm_hooks": [
+    "security_capset",
+    "security_prepare_creds"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_capset",
+    "security_prepare_creds"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_capset",
+    "security_prepare_creds"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_capset",
+    "cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693",
+    "prepare_creds"
+  ],
+  "strong_sig_checks": [],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [],
+  "reachable_functions": [
+    "__do_sys_capset",
+    "cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693",
+    "prepare_creds"
+  ],
+  "success_path_functions": [
+    "__do_sys_capset",
+    "cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693",
+    "prepare_creds"
+  ],
+  "call_tree_file": "syscalls/capset.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": false,
+  "lsm_reachability": "always",
+  "signal_reachability": "none",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "none",
+  "has_sigkill_related_checks": false,
+  "effective_enforcing_lsm_hooks": [
+    "security_capset"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_capset"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "capset"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_capset",
+      "bpf_hook": "capset",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "__do_sys_capset"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_capset",
+        "__do_sys_capset"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_capset",
+          "function": "__se_sys_capset",
+          "source_function": "__do_sys_capset",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c",
+          "source_line": 269,
+          "source_column": 8,
+          "inlined_at_functions": [
+            "__se_sys_capset"
+          ],
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": true,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "must-return-negative-on-error",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "must_return_negative",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/capability.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_prepare_creds",
+      "bpf_hook": "cred_prepare",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "prepare_creds"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_prepare_creds",
+        "prepare_creds",
+        "__do_sys_capset"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_prepare_creds",
+          "function": "prepare_creds",
+          "source_function": "prepare_creds",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/cred.c",
+          "source_line": 291,
+          "source_column": 6,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": false,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare"
+          ],
+          "verification": "controls_branch",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/cred.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capset"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_capset"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "__do_sys_capset",
+      "prepare_creds"
+    ],
+    "hook_proof_paths": {
+      "security_capset": [
+        "security_capset",
+        "__do_sys_capset"
+      ]
+    },
+    "reasons": null,
+    "covered_unresolved_edges": [
+      {
+        "domain": "lsm",
+        "caller": "__do_sys_capset",
+        "kind": "callee_denial_propagation_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "prepare_creds",
+        "detail": "at least one callee denial-propagation alternative remains unresolved"
+      },
+      {
+        "domain": "lsm",
+        "caller": "prepare_creds",
+        "kind": "lsm_denial_effect_unresolved",
+        "category": "termination_or_error_propagation",
+        "resolution_scope": "implementation_improvable",
+        "symbol": "security_prepare_creds",
+        "detail": "the hook result is present but operation blocking and syscall termination are not both proven"
+      }
+    ]
+  },
+  "sigkill_path_coverage": {
+    "status": "non_enforcing",
+    "checks": null,
+    "success_path_check_sets": [
+      null,
+      null
+    ],
+    "proof_methods": [
+      "clang_cfg_bypass_witness",
+      "early_exit_short_circuit"
+    ],
+    "proof_functions": [
+      "__do_sys_capset"
+    ],
+    "check_proof_paths": {},
+    "bypass_proof_path": [
+      "__do_sys_capset",
+      "cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693",
+      "cap_validate_magic@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2637911693#cfg-block-1",
+      "__do_sys_capset#cfg-block-32[ret!=0=false]",
+      "copy_from_user@/workspace/git/linux-v5.15-analysis-src/include/linux/uaccess.h#2190524902",
+      "_copy_from_user#cfg-block-3[unlikely(res)=false]",
+      "_copy_from_user#cfg-block-1",
+      "prepare_creds",
+      "prepare_creds#cfg-block-17",
+      "prepare_creds#cfg-block-16",
+      "kmem_cache_alloc#runtime-resource-available[sigkill-effect-free-fast-path]",
+      "prepare_creds#cfg-block-13",
+      "prepare_creds#cfg-block-7",
+      "prepare_creds#cfg-block-6",
+      "prepare_creds#cfg-block-4",
+      "security_prepare_creds",
+      "security_prepare_creds#cfg-block-34",
+      "security_prepare_creds#cfg-block-33",
+      "lsm_cred_alloc@/workspace/git/linux-v5.15-analysis-src/security/security.c#2572610173",
+      "lsm_cred_alloc@/workspace/git/linux-v5.15-analysis-src/security/security.c#2572610173#cfg-block-6",
+      "lsm_cred_alloc@/workspace/git/linux-v5.15-analysis-src/security/security.c#2572610173#cfg-block-5",
+      "lsm_cred_alloc@/workspace/git/linux-v5.15-analysis-src/security/security.c#2572610173#cfg-block-4",
+      "security_prepare_creds#cfg-block-31",
+      "security_prepare_creds#cfg-block-29",
+      "security_prepare_creds#cfg-block-28",
+      "security_prepare_creds#cfg-block-19",
+      "security_prepare_creds#cfg-block-18",
+      "security_prepare_creds#cfg-block-4",
+      "security_prepare_creds#cfg-block-3",
+      "security_prepare_creds#cfg-block-1",
+      "security_prepare_creds#cfg-block-3[unlikely(rc)=false]",
+      "prepare_creds#cfg-block-2",
+      "kmem_cache_alloc#runtime-resource-available",
+      "prepare_creds#callsite:3[nonnull]",
+      "prepare_creds#cfg-block-16[!new=false]",
+      "__do_sys_capset#cfg-block-14[!new=false]",
+      "__do_sys_capset#cfg-block-8[ret\u003c0=false]",
+      "commit_creds",
+      "commit_creds#llvm-function-return-summary",
+      "__do_sys_capset#cfg-block-2",
+      "security_capset#call_int_hook-default[0]",
+      "__do_sys_capset#callsite:8[nonnegative]",
+      "__do_sys_capset#callsite:7[nonnull]",
+      "__do_sys_capset#callsite:14"
+    ],
+    "bypass_proof_method": "direct_forwarded_success_return",
+    "reasons": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "complete",
+      "positive_proof": false,
+      "negative_proof": true,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_not_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "N",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": [
+      "at least one modeled feasible success path bypasses every effective current-task SIGKILL checkpoint"
+    ]
+  },
+  "unresolved_edges_in_proof_cone": null
+}

@@ -1,0 +1,391 @@
+{
+  "number": 435,
+  "abi": "common",
+  "name": "clone3",
+  "entry": "sys_clone3",
+  "start": "__do_sys_clone3",
+  "linked_symbol": "__x64_sys_clone3",
+  "linked_symbol_type": "T",
+  "availability": "implemented",
+  "start_found": true,
+  "direct_lsm_functions": [
+    "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145"
+  ],
+  "direct_signal_functions": [
+    "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064"
+  ],
+  "reachable_lsm_hooks": [
+    "security_task_alloc",
+    "security_prepare_creds"
+  ],
+  "reachable_signal_checks": [
+    "task_sigpending"
+  ],
+  "reachable_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": [
+      "task_sigpending"
+    ]
+  },
+  "signal_check_paths": [
+    {
+      "check": "task_sigpending",
+      "callsite_id": "callsite:22",
+      "category": "generic-pending",
+      "sigkill_relevance": "proven_relevant",
+      "subject": "current-task",
+      "traversal": "cfg-path",
+      "function": "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "abort_effect": "guaranteed",
+      "proof_path": [
+        "task_sigpending",
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+        "kernel_clone",
+        "__do_sys_clone3"
+      ]
+    }
+  ],
+  "always_lsm_hooks": [
+    "security_task_alloc",
+    "security_prepare_creds"
+  ],
+  "always_signal_checks": [],
+  "always_signal_check_categories": {
+    "group_exit": [],
+    "fatal_pending": [],
+    "generic_pending": []
+  },
+  "validated_lsm_hooks": [
+    "security_task_alloc",
+    "security_prepare_creds"
+  ],
+  "validated_signal_checks": [],
+  "must_pass_lsm_hooks": [
+    "security_task_alloc",
+    "security_prepare_creds"
+  ],
+  "inactive_config_lsm_hooks": [],
+  "optional_lsm_hooks": null,
+  "normal_path_functions": [
+    "__do_sys_clone3",
+    "copy_clone_args_from_user@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3807743422",
+    "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+    "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+    "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+    "___slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#35280599",
+    "__alloc_pages_node@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#3295947166",
+    "allocate_slab@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#2088123877",
+    "kmem_cache_alloc_node",
+    "alloc_thread_stack_node@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#925133665",
+    "__vmalloc_node_range",
+    "alloc_vmap_area@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#2042134854",
+    "__get_vm_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#4071339454",
+    "__vmalloc_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#1508074865",
+    "__p4d_alloc",
+    "__pud_alloc",
+    "pmd_alloc_one@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/pgalloc.h#3548393205",
+    "__pmd_alloc",
+    "vmap_pages_range@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#234895889",
+    "dup_task_struct@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3021601261",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable",
+    "__mpol_dup",
+    "kernel_clone"
+  ],
+  "strong_sig_checks": [
+    "task_sigpending"
+  ],
+  "conditional_lsm_hooks": null,
+  "conditional_signal_checks": [
+    "task_sigpending"
+  ],
+  "reachable_functions": [
+    "__do_sys_clone3",
+    "copy_clone_args_from_user@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3807743422",
+    "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+    "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+    "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+    "___slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#35280599",
+    "__alloc_pages_node@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#3295947166",
+    "allocate_slab@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#2088123877",
+    "kmem_cache_alloc_node",
+    "alloc_thread_stack_node@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#925133665",
+    "__vmalloc_node_range",
+    "alloc_vmap_area@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#2042134854",
+    "__get_vm_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#4071339454",
+    "__vmalloc_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#1508074865",
+    "__p4d_alloc",
+    "__pud_alloc",
+    "pmd_alloc_one@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/pgalloc.h#3548393205",
+    "__pmd_alloc",
+    "vmap_pages_range@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#234895889",
+    "dup_task_struct@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3021601261",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable",
+    "__mpol_dup",
+    "kernel_clone"
+  ],
+  "success_path_functions": [
+    "__do_sys_clone3",
+    "copy_clone_args_from_user@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3807743422",
+    "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+    "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+    "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+    "___slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#35280599",
+    "__alloc_pages_node@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#3295947166",
+    "allocate_slab@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#2088123877",
+    "kmem_cache_alloc_node",
+    "alloc_thread_stack_node@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#925133665",
+    "__vmalloc_node_range",
+    "alloc_vmap_area@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#2042134854",
+    "__get_vm_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#4071339454",
+    "__vmalloc_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#1508074865",
+    "__p4d_alloc",
+    "__pud_alloc",
+    "pmd_alloc_one@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/pgalloc.h#3548393205",
+    "__pmd_alloc",
+    "vmap_pages_range@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#234895889",
+    "dup_task_struct@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3021601261",
+    "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+    "ns_capable",
+    "capable",
+    "__mpol_dup",
+    "kernel_clone"
+  ],
+  "call_tree_file": "syscalls/clone3.txt",
+  "contains_lsm_hook": true,
+  "contains_signal_checks": true,
+  "lsm_reachability": "always",
+  "signal_reachability": "conditional",
+  "validated_lsm_reachability": "conditional",
+  "validated_signal_reachability": "conditional",
+  "has_sigkill_related_checks": true,
+  "effective_enforcing_lsm_hooks": [
+    "security_task_alloc",
+    "security_capable"
+  ],
+  "certified_enforcing_lsm_hooks": [
+    "security_task_alloc"
+  ],
+  "certified_bpf_lsm_hooks": [
+    "task_alloc"
+  ],
+  "lsm_error_effects": [
+    {
+      "hook": "security_task_alloc",
+      "bpf_hook": "task_alloc",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064"
+      ],
+      "blocks_operation": "guaranteed",
+      "terminates_syscall": "guaranteed",
+      "errno_propagation": "exact",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_task_alloc",
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+        "kernel_clone",
+        "__do_sys_clone3"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_task_alloc",
+          "function": "copy_process",
+          "source_function": "copy_process",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/fork.c",
+          "source_line": 2176,
+          "source_column": 11,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": true,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare",
+            "phi",
+            "return",
+            "ssa-transform"
+          ],
+          "verification": "controls_branch_and_reaches_return",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/fork.c"
+        }
+      ]
+    },
+    {
+      "hook": "security_prepare_creds",
+      "bpf_hook": "cred_prepare",
+      "hook_kind": "error-return",
+      "callsite_functions": [
+        "prepare_creds"
+      ],
+      "blocks_operation": "unknown",
+      "terminates_syscall": "unknown",
+      "errno_propagation": "normalized",
+      "failure_encoding": "errno",
+      "overwrite_sites": [],
+      "proof_path": [
+        "security_prepare_creds",
+        "prepare_creds",
+        "copy_creds",
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+        "kernel_clone",
+        "__do_sys_clone3"
+      ],
+      "llvm_verification": "corroborated",
+      "llvm_evidence": [
+        {
+          "hook": "security_prepare_creds",
+          "function": "prepare_creds",
+          "source_function": "prepare_creds",
+          "source_file": "/workspace/git/linux-v5.15-analysis-src/kernel/cred.c",
+          "source_line": 291,
+          "source_column": 6,
+          "result_used": true,
+          "controls_branch": true,
+          "reaches_return": false,
+          "must_return_exact": false,
+          "must_return_negative_on_error": false,
+          "must_return_negative_on_false": false,
+          "must_return_negative_on_true": false,
+          "use_kinds": [
+            "branch",
+            "compare"
+          ],
+          "verification": "controls_branch",
+          "module": "/workspace/git/linux-v5.15-analysis-src/kernel/cred.c"
+        }
+      ]
+    }
+  ],
+  "lsm_path_coverage": {
+    "status": "enforcing",
+    "hooks": [
+      "security_capable",
+      "security_task_alloc"
+    ],
+    "success_path_hook_sets": [
+      [
+        "security_task_alloc"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+      "slab_pre_alloc_hook@/workspace/git/linux-v5.15-analysis-src/mm/slab.h#2651199658",
+      "slab_alloc_node@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#1163234935",
+      "___slab_alloc@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#35280599",
+      "__alloc_pages_node@/workspace/git/linux-v5.15-analysis-src/include/linux/gfp.h#3295947166",
+      "allocate_slab@/workspace/git/linux-v5.15-analysis-src/mm/slub.c#2088123877",
+      "kmem_cache_alloc_node",
+      "alloc_thread_stack_node@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#925133665",
+      "__vmalloc_node_range",
+      "alloc_vmap_area@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#2042134854",
+      "__get_vm_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#4071339454",
+      "__vmalloc_area_node@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#1508074865",
+      "__p4d_alloc",
+      "__pud_alloc",
+      "pmd_alloc_one@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/pgalloc.h#3548393205",
+      "__pmd_alloc",
+      "vmap_pages_range@/workspace/git/linux-v5.15-analysis-src/mm/vmalloc.c#234895889",
+      "dup_task_struct@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#3021601261",
+      "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+      "ns_capable",
+      "capable",
+      "__mpol_dup",
+      "kernel_clone",
+      "__do_sys_clone3"
+    ],
+    "hook_proof_paths": {
+      "security_capable": [
+        "security_capable",
+        "ns_capable_common@/workspace/git/linux-v5.15-analysis-src/kernel/capability.c#2070030145",
+        "ns_capable",
+        "capable",
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+        "kernel_clone",
+        "__do_sys_clone3"
+      ],
+      "security_task_alloc": [
+        "security_task_alloc",
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+        "kernel_clone",
+        "__do_sys_clone3"
+      ]
+    },
+    "reasons": null
+  },
+  "sigkill_path_coverage": {
+    "status": "enforcing",
+    "checks": [
+      "task_sigpending"
+    ],
+    "success_path_check_sets": [
+      [
+        "task_sigpending"
+      ]
+    ],
+    "proof_methods": [
+      "clang_cfg_coverage"
+    ],
+    "proof_functions": [
+      "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+      "kernel_clone",
+      "__do_sys_clone3"
+    ],
+    "check_proof_paths": {
+      "task_sigpending": [
+        "task_sigpending",
+        "copy_process@/workspace/git/linux-v5.15-analysis-src/kernel/fork.c#2634994064",
+        "kernel_clone",
+        "__do_sys_clone3"
+      ]
+    },
+    "reasons": null
+  },
+  "unproven_lsm_candidates": [],
+  "current_task_reachable_signal_checks": [
+    "task_sigpending"
+  ],
+  "current_task_always_signal_checks": [],
+  "unknown_subject_signal_checks": [],
+  "always_signal_check_paths": [],
+  "proof_eligibility": {
+    "lsm": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    },
+    "sigkill": {
+      "status": "positive_only",
+      "positive_proof": true,
+      "negative_proof": false,
+      "reasons": []
+    }
+  },
+  "lsm_classification": "certified_bpf_lsm_enforceable",
+  "sigkill_classification": "certified_sigkill_enforceable",
+  "lsm_enforcement_state": "E",
+  "sigkill_enforcement_state": "E",
+  "negative_reasons": {
+    "lsm": [],
+    "sigkill": []
+  },
+  "unresolved_edges_in_proof_cone": null
+}

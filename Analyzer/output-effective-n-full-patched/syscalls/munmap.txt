@@ -1,0 +1,26 @@
+- __do_sys_munmap
+  - profile_munmap
+    - blocking_notifier_call_chain
+  - __vm_munmap@/workspace/git/linux-v5.15-analysis-src/mm/mmap.c#1423894233
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - mmap_write_lock_killable@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#634180320
+      - __mmap_lock_trace_start_locking@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#3403134037
+        - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666
+      - down_write_killable
+        - __cond_resched
+        - __down_write_killable@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1900128259
+          - __down_write_common@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#1880757564
+            - rwsem_write_trylock@/workspace/git/linux-v5.15-analysis-src/kernel/locking/rwsem.c#843547107
+      - __mmap_lock_trace_acquire_returned@/workspace/git/linux-v5.15-analysis-src/include/linux/mmap_lock.h#4272582625
+        - static_key_false@/workspace/git/linux-v5.15-analysis-src/include/linux/jump_label.h#4260871666 [dp_skip=revisited]
+    - __do_munmap
+      - test_ti_thread_flag@/workspace/git/linux-v5.15-analysis-src/include/linux/thread_info.h#1795458630
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - arch_unmap@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/mmu_context.h#2361845288
+      - find_vma_intersection@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3861378079
+    - userfaultfd_unmap_complete
+    - __do_munmap
+      - test_ti_thread_flag@/workspace/git/linux-v5.15-analysis-src/include/linux/thread_info.h#1795458630 [dp_skip=revisited]
+      - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+      - arch_unmap@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/mmu_context.h#2361845288 [dp_skip=revisited]
+      - find_vma_intersection@/workspace/git/linux-v5.15-analysis-src/include/linux/mm.h#3861378079 [dp_skip=revisited]

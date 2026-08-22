@@ -1,0 +1,36 @@
+- __do_sys_pidfd_open
+  - find_get_pid
+    - get_pid@/workspace/git/linux-v5.15-analysis-src/include/linux/pid.h#3409815448
+  - pidfd_create
+    - pid_has_task@/workspace/git/linux-v5.15-analysis-src/include/linux/pid.h#3296970946 [ambiguous=hlist_empty@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#1886718963,hlist_empty@/workspace/git/linux-v5.15-analysis-src/include/linux/list.h#3695616574]
+    - anon_inode_getfd
+      - __anon_inode_getfd@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2239912679
+        - get_unused_fd_flags
+          - __get_unused_fd_flags
+            - alloc_fd@/workspace/git/linux-v5.15-analysis-src/fs/file.c#1686225276
+              - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+              - spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#2930738028
+                - _raw_spin_lock
+                  - __raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#122287451
+                    - do_raw_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#1107190452
+                      - queued_spin_lock@/workspace/git/linux-v5.15-analysis-src/include/asm-generic/qspinlock.h#3266943875
+                        - atomic_try_cmpxchg_acquire@/workspace/git/linux-v5.15-analysis-src/include/linux/atomic/atomic-instrumented.h#4190760744
+              - spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#881648490
+                - __raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock_api_smp.h#2039614185
+                  - do_raw_spin_unlock@/workspace/git/linux-v5.15-analysis-src/include/linux/spinlock.h#3430082415
+                    - queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/qspinlock.h#2569338032
+                      - pv_queued_spin_unlock@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/paravirt.h#768710143
+          - rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#427907742 [ambiguous=task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2368167491,task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2435533354,task_rlimit@/workspace/git/linux-v5.15-analysis-src/include/linux/sched/signal.h#2287110434]
+            - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+        - __anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224
+          - alloc_file_pseudo
+            - alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#1469062084
+              - alloc_empty_file
+                - __alloc_file@/workspace/git/linux-v5.15-analysis-src/fs/file_table.c#2400363006 [direct_lsm=security_file_alloc | success_lsm=security_file_alloc]
+              - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587 [dp_skip=revisited]
+              - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+        - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557 [dp_skip=revisited]
+        - __anon_inode_getfile@/workspace/git/linux-v5.15-analysis-src/fs/anon_inodes.c#2877709224
+          - alloc_file_pseudo [dp_skip=revisited]
+    - get_pid@/workspace/git/linux-v5.15-analysis-src/include/linux/pid.h#3409815448 [dp_skip=revisited]
+  - put_pid

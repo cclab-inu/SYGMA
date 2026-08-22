@@ -1,0 +1,2 @@
+- __do_sys_remap_file_pages
+  - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587

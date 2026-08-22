@@ -1,0 +1,5 @@
+- __do_sys_fremovexattr
+  - fdget@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#3773297488
+  - removexattr@/workspace/git/linux-v5.15-analysis-src/fs/xattr.c#2539681639
+    - vfs_removexattr
+      - __vfs_removexattr_locked [direct_lsm=security_inode_removexattr | success_lsm=security_inode_removexattr]

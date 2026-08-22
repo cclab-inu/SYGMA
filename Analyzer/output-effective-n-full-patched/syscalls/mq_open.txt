@@ -1,0 +1,10 @@
+- __do_sys_mq_open
+  - do_mq_open@/workspace/git/linux-v5.15-analysis-src/ipc/mqueue.c#2980306260
+    - get_current@/workspace/git/linux-v5.15-analysis-src/arch/x86/include/asm/current.h#3539903587
+    - audit_mq_open@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3470865221
+      - audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724
+    - IS_ERR@/workspace/git/linux-v5.15-analysis-src/include/linux/err.h#2448705557
+    - getname
+      - getname_flags
+        - audit_reusename@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#3547261037
+          - audit_dummy_context@/workspace/git/linux-v5.15-analysis-src/include/linux/audit.h#5373724 [dp_skip=revisited]

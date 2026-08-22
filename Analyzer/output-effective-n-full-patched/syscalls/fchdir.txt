@@ -1,0 +1,4 @@
+- __do_sys_fchdir
+  - fdget_raw@/workspace/git/linux-v5.15-analysis-src/include/linux/file.h#968566192
+  - file_permission@/workspace/git/linux-v5.15-analysis-src/include/linux/fs.h#3043936407
+    - inode_permission [direct_lsm=security_inode_permission | success_lsm=security_inode_permission]
